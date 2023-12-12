@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
+  get '/hello', to: 'application#hello_world'
+  post "/signup", to: "users#create"
+  get "/me", to: "users#show"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+
+  resources :users, only: [:index, :create]
   resources :ingredients
   resources :foodstuffs, only: [:create]
   resources :recipes, only: [:create]
   resources :pantry_items
-  resources :users
-  get '/hello', to: 'application#hello_world'
 
   get '*path',
       to: 'fallback#index',

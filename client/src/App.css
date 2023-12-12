@@ -1,38 +1,76 @@
 .App {
   text-align: center;
+  background-color: rgb(0, 0, 0);
+  color: rgba(233, 232, 236, 0.822);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+a {
+  line-height: 1em;
+  margin: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.column {
+  float: left;
+  width: 33%;
+  padding: 2px 10px;
+}
+
+.row {margin: 2px 5px;}
+
+/* .row:after {
+  content: "";
+  display: table;
+  clear: both;
+} */
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0);
+  padding: 16px;
+  text-align: center;
+  background-color: #232541;
+}
+
+
+body {background-color: black;}
+
+#button {
+  line-height: 12px;
+  width: 18px;
+  font-size: 8pt;
+  font-family: tahoma;
+  margin-top: 1px;
+  margin-right: 2px;
+  position:absolute;
+  top:0;
+  right:0;
+}
+
+.logoutButton {
+  position: absolute;
+  top: 10px; right: 30px;
+  background-color: purple;
+  width: 125px;
+  font-size: 15px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 3px solid grey;
   color: white;
+  text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+.header-title {
+  float: left;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: left;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.chordimage {
+  height: 250px;
+  width: 250px;
 }
