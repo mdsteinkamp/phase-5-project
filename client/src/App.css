@@ -1,12 +1,27 @@
 .App {
   text-align: center;
   background-color: rgb(0, 0, 0);
-  color: rgba(233, 232, 236, 0.822);
+  color: rgba(233, 232, 236, 0.952);
+}
+
+html, body {
+  margin: 0px;
 }
 
 * {
   box-sizing: border-box;
 }
+
+.header {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 100px;
+  background-color: #f6a192;
+  text-align: left;
+  width: 100%;
+}
+
 
 a {
   line-height: 1em;
@@ -62,13 +77,6 @@ body {background-color: black;}
   text-align: center;
 }
 
-.header-title {
-  float: left;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  text-align: left;
-  width: 100%;
-}
 
 .chordimage {
   height: 250px;
