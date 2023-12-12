@@ -21,6 +21,7 @@ export default function Signup() {
       ...formData,
       [name]: value
     })
+    console.log(formData)
   }
 
   function handleSubmit(e) {
@@ -35,7 +36,7 @@ export default function Signup() {
     .then((resp) => {
       if (resp.ok) {
         resp.json().then((user) => setUser(user))
-        navigate("/chords")
+        navigate("/")
       } else {
         resp.json().then(e => {
           setErrors(e.errors)

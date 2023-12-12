@@ -6,6 +6,15 @@ class UsersController < ApplicationController
     render json: users
   end
 
+  def show
+    user = @current_user
+    if user
+      render json: user
+    else
+      render json: { error: "User not found" }, status: :not_found
+    end
+  end
+
   def create 
     user = User.create!(user_params)
     session[:user_id] = user.id
