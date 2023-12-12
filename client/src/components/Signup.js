@@ -50,6 +50,7 @@ export default function Signup() {
     <StyledLogin>
       <h1>Signup Here</h1>
         <form onSubmit={handleSubmit}>
+          <h3>Username</h3>
           <input
             type="text"
             name="username"
@@ -58,6 +59,7 @@ export default function Signup() {
             onChange={handleChange}
           />
           <br />
+          <h3>Password</h3>
           <input
             type="password"
             name="password"
@@ -66,6 +68,7 @@ export default function Signup() {
             onChange={handleChange}
           />
           <br />
+          <h3>Confirm Password</h3>
           <input
             type="password"
             name="passwordConfirmation"
@@ -76,6 +79,7 @@ export default function Signup() {
           <br />
           <button>Signup</button>
         </form>
+        <button>Cancel</button>
         {errors.length > 0 &&
             <ul>{errors.map(e => (
               <ul key={e}>
