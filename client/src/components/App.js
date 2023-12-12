@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
+import { UserContext } from "./UserContext"
 import '../App.css'
 import Header from "./Header"
 import Home from "./Home"
