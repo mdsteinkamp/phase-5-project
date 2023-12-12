@@ -71,9 +71,9 @@ export default function Signup() {
           <h3>Confirm Password</h3>
           <input
             type="password"
-            name="passwordConfirmation"
+            name="password_confirmation"
             placeholder="Confirm Password"
-            value={formData.passwordConfirmation}
+            value={formData.password_confirmation}
             onChange={handleChange}
           />
           <br />
