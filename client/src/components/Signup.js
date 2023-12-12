@@ -7,7 +7,7 @@ export default function Signup() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    passwordConfirmation: ""
+    password_confirmation: ""
   })
   const [errors, setErrors] = useState([])
   const {setUser} = useContext(UserContext)
