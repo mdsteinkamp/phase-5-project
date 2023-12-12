@@ -2,6 +2,10 @@ import { useState, useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
 import '../App.css'
 import Header from "./Header"
+import Home from "./Home"
+import { StyledAppContainer } from "./styles/App.Container.styled"
+import Login from "./Login"
+import Signup from "./Signup"
 
 export default function App() {
   const [count, setCount] = useState(0)
@@ -13,11 +17,13 @@ export default function App() {
   }, [])
 
   return (
-    <div className="App">
+    <StyledAppContainer>
       <Header />
       <Routes>
-
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
-    </div>
+      </StyledAppContainer>
   );
 }

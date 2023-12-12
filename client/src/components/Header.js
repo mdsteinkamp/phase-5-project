@@ -1,8 +1,10 @@
+import { StyledHeader } from "./styles/Header.styled"
+
 export default function Header() {
 
   return (
-    <div className="header">
+    <StyledHeader>
       <h1>Pantron 5000</h1>
-    </div>
+    </StyledHeader>
   )
 }
