@@ -35,7 +35,7 @@ export default function Login() {
       if (resp.ok) {
         resp.json().then((user) => {
         setUser(user)
-        navigate("/")
+        navigate("/pantry_items")
       })} else {
         resp.json().then(e => {
           setErrors(e.errors)

@@ -21,7 +21,7 @@ export default function Header() {
     <StyledHeader>
       <h1>Pantron 5000</h1>
       {user ?
-        <div>
+        <div className="button-div">
           <button onClick={handleLogout}>Log Out</button> 
         </div>
         : 

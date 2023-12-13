@@ -8,6 +8,7 @@ import { StyledAppContainer } from "./styles/App.Container.styled"
 import Login from "./Login"
 import Signup from "./Signup"
 import NavBar from "./NavBar"
+import UserPantry from "./UserPantry"
 
 export default function App() {
   const [count, setCount] = useState(0)
@@ -24,15 +25,12 @@ export default function App() {
   return (
     <StyledAppContainer>
       <Header />
-      {user ?
-        <NavBar />
-        : 
-        null
-      }
+      {user ? <NavBar /> : null }
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/pantry_items" element={<UserPantry />} />
       </Routes>
       </StyledAppContainer>
   );

@@ -34,4 +34,9 @@ export const StyledHeader = styled.header`
     }
   }
 
+  .button-div {
+    position: absolute;
+    right: 0px;
+  }
+
 `

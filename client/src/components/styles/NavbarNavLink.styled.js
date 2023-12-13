@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from "styled-components"
+import { Link } from "react-router-dom"
 
-export const HeaderNavLink = styled(Link)`
- text-align: center;
+export const NavbarNavLink = styled(Link)`
+  text-align: center;
+  text-decoration: none;
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
@@ -13,5 +14,4 @@ export const HeaderNavLink = styled(Link)`
   outline: 0;
   text-transform: uppercase;
   cursor: pointer;
-
 `

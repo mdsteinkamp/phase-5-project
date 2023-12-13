@@ -1,5 +1,5 @@
 import { StyledNavbar } from "./styles/Navbar.styled"
-import { HeaderNavLink } from "./styles/HeaderNavLink.styled"
+import { NavbarNavLink } from "./styles/NavbarNavLink.styled"
 
 export default function NavBar() {
 
@@ -7,10 +7,10 @@ export default function NavBar() {
   return (
     <StyledNavbar>
       <div>
-        <HeaderNavLink to="/login">Pantry</HeaderNavLink>
+        <NavbarNavLink to="/pantry_items">Pantry</NavbarNavLink>
       </div>
       <div>
-        <HeaderNavLink to="/signup">Recipes</HeaderNavLink>
+        <NavbarNavLink to="/signup">Recipes</NavbarNavLink>
       </div>
     </StyledNavbar>
   )
