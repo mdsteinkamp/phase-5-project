@@ -7,8 +7,6 @@ export default function Header() {
   const {user, setUser} = useContext(UserContext)
   const navigate = useNavigate()
 
-  console.log(user)
-
   function handleLogout() {
     fetch(("/logout"), {
       method: "DELETE",

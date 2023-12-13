@@ -1,15 +1,14 @@
 import { StyledAddFoodstuffOrPantryItem } from "./styles/AddFoodstuff.styled"
 import { useState, useContext } from "react"
 import { UserContext } from "./UserContext"
-import { useNavigate } from "react-router-dom"
-import Autocomplete from '@mui/joy/Autocomplete';
-import Input from '@mui/joy/Input';
+import Select from 'react-select'
 import { FoodstuffsContext } from "./FoodstuffsContext"
 import PantryAutocomplete from "./PantryAutocomplete";
 
 export default function AddPantryItem() {
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const {user, setUser} = useContext(UserContext)
+  const [selectedOption, setSelectedOption] = useState(null)
   const [formData, setFormData] = useState({
     name: "",
     unit: "",
@@ -18,10 +17,8 @@ export default function AddPantryItem() {
   })
   const [errors, setErrors] = useState([])
 
-  console.log(foodstuffs)
-  
-  
-  const navigate = useNavigate()
+  if (!foodstuffs) return <h1>Loading...</h1>
+  let options = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, category: foodstuff.category}))
 
   function handleChange(e) {
     const name = e.target.name
@@ -67,7 +64,12 @@ export default function AddPantryItem() {
       <div>
         <h1>Add Pantry Item</h1>
       </div>
-      <Autocomplete />
+      <Select
+        defaultValue={selectedOption}
+        onChange={setSelectedOption}
+        options={options}
+        placeholder="Name"
+      />
       <div>
         <form onSubmit={handleSubmit}>
             <h3>Name</h3>
