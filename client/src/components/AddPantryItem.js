@@ -4,15 +4,17 @@ import { UserContext } from "./UserContext"
 import { useNavigate } from "react-router-dom"
 import { FoodstuffsContext } from "./FoodstuffsContext"
 
-export default function AddFoodstuff() {
+export default function AddPantryItem() {
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
+  const {user, setUser} = useContext(UserContext)
   const [formData, setFormData] = useState({
     name: "",
     unit: "",
+    quantity: "",
     category: ""
   })
   const [errors, setErrors] = useState([])
-  const {user, setUser} = useContext(UserContext)
+
   console.log(foodstuffs)
 
   const navigate = useNavigate()
@@ -59,7 +61,7 @@ export default function AddFoodstuff() {
   return (
     <StyledAddFoodstuffOrPantryItem>
       <div>
-        <h1>Add Food Item</h1>
+        <h1>Add Pantry Item</h1>
       </div>
       <div>
         <form onSubmit={handleSubmit}>
@@ -78,6 +80,15 @@ export default function AddFoodstuff() {
               name="unit"
               placeholder="Unit"
               value={formData.unit}
+              onChange={handleChange}
+            />
+            <br />
+            <h3>Quantity</h3>
+            <input
+              type="number"
+              name="quantity"
+              placeholder="Quantity"
+              value={formData.quantity}
               onChange={handleChange}
             />
             <br />

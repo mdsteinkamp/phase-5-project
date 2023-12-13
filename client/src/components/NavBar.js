@@ -12,6 +12,9 @@ export default function NavBar() {
       <div>
         <NavbarNavLink to="/signup">Recipes</NavbarNavLink>
       </div>
+      <div>
+        <NavbarNavLink to="/foodstuffs/new">Add Ingredient</NavbarNavLink>
+      </div>
     </StyledNavbar>
   )
 }

@@ -20,7 +20,7 @@ export default function UserPantry() {
       <h1>My Pantry</h1>
       <div className="three-columns">
         <div>
-          <PantryNavlink to="/foodstuffs/new">Add Item</PantryNavlink>
+          <PantryNavlink to="/pantry_items/new">Add Item</PantryNavlink>
         </div>
         <div>
           <PantryNavlink to="/pantry_items">Scan Item</PantryNavlink>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledAddFoodstuff = styled.div`
+export const StyledAddFoodstuffOrPantryItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
