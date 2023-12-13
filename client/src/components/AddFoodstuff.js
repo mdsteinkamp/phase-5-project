@@ -40,9 +40,12 @@ export default function AddFoodstuff() {
         resp.json().then((foodstuff) => {
           const newFoodstuffs = [...foodstuffs, foodstuff]
           setFoodstuffs(newFoodstuffs)
-          console.log(foodstuffs)
         })
-        navigate("/foodstuffs/new")
+        setFormData({
+          name: "",
+          unit: "",
+          category: ""
+        })
         setErrors([])
       } else {
         resp.json().then(e => {
