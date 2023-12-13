@@ -7,6 +7,7 @@ import { FoodstuffsContext } from "./FoodstuffsContext"
 export default function AddPantryItem() {
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const {user, setUser} = useContext(UserContext)
+  const [filteredFoodstuffs, setFilteredFoodstuffs] = useState([])
   const [formData, setFormData] = useState({
     name: "",
     unit: "",
