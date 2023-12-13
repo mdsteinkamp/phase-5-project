@@ -5,9 +5,6 @@ import { Link } from "react-router-dom"
 
 export default function Home() {
 
-
-
-
   return (
     <StyledHome>
       <h1>PANTRON 5000</h1>

@@ -19,12 +19,3 @@ function FoodstuffsProvider({ children }) {
 }
 
 export { FoodstuffsContext, FoodstuffsProvider }
-
-
-// useEffect(() => {
-//   fetch("/me").then((resp) => {
-//     if (resp.ok) {
-//       resp.json().then((user) => setUser(user));
-//     }
-//   });
-// }, []);

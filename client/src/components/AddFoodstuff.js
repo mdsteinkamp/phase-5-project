@@ -2,8 +2,10 @@ import { StyledAddFoodstuff } from "./styles/AddFoodstuff.styled"
 import { useState, useContext } from "react"
 import { UserContext } from "./UserContext"
 import { useNavigate } from "react-router-dom"
+import { FoodstuffsContext } from "./FoodstuffsContext"
 
 export default function AddFoodstuff() {
+  const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const [formData, setFormData] = useState({
     name: "",
     unit: "",
@@ -11,6 +13,7 @@ export default function AddFoodstuff() {
   })
   const [errors, setErrors] = useState([])
   const {user, setUser} = useContext(UserContext)
+  console.log(foodstuffs)
 
   const navigate = useNavigate()
 
@@ -34,7 +37,11 @@ export default function AddFoodstuff() {
     })
     .then((resp) => {
       if (resp.ok) {
-        resp.json().then((foodstuff) => console.log(foodstuff, errors))
+        resp.json().then((foodstuff) => {
+          const newFoodstuffs = [...foodstuffs, foodstuff]
+          setFoodstuffs(newFoodstuffs)
+          console.log(foodstuffs)
+        })
         navigate("/foodstuffs/new")
         setErrors([])
       } else {
