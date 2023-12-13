@@ -1,7 +1,18 @@
 import { StyledUserPantry } from "./styles/UserPantry.styled"
 import { PantryNavlink } from "./styles/PantryNavLink.styled"
+import { useContext } from "react"
+import { UserContext } from "./UserContext"
+import { FoodstuffsContext } from "./FoodstuffsContext"
+
 
 export default function UserPantry() {
+  // const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
+  const {user, setUser} = useContext(UserContext)
+  const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
+
+
+  console.log(user, foodstuffs)
+  
 
 
   return (

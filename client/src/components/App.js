@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useContext } from "react"
 import { Routes, Route } from "react-router-dom"
 import { UserContext } from "./UserContext"
 import '../App.css'
@@ -17,11 +17,7 @@ export default function App() {
 
   console.log(user)
 
-  useEffect(() => {
-    fetch('/foodstuffs')
-    .then(resp => resp.json())
-    .then(foodstuffs => console.log(foodstuffs))
-  }, [])
+
 
   return (
     <StyledAppContainer>
