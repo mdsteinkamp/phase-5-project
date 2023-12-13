@@ -12,20 +12,35 @@ export const StyledUserPantry = styled.div`
     line-height: normal;
   }
 
+  h3 {
+    color: white;
+  }
+
   /* container */
-.responsive-three-columns {
-    display:flex;
-    flex-wrap:wrap;
-}
+  .responsive-three-columns {
+      display:flex;
+      flex-wrap:wrap;
+  }
 
-/* container */
-.three-columns {
-    display:flex;
-}
+  /* container */
+  .three-columns {
+      display:flex;
+  }
 
-/* columns */
-.three-columns > * {
-    width:calc(100% / 3);
-    padding:1rem;
-}
+  /* columns */
+  .three-columns > * {
+      width:calc(100% / 3);
+      padding:1rem;
+  }
+
+  /* container */
+  .four-columns {
+      display:flex;
+  }
+
+  /* columns */
+  .four-columns > * {
+      width:calc(100% / 4);
+      padding:1rem;
+  }
 `
