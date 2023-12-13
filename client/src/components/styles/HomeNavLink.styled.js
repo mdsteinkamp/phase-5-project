@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const NavLink = styled(Link)`
+export const HomeNavLink = styled(Link)`
   display: flex;
   width: 190px;
   height: 45px;
