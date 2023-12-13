@@ -3,7 +3,6 @@ import { useState, useContext } from "react"
 import { UserContext } from "./UserContext"
 import Select from 'react-select'
 import { FoodstuffsContext } from "./FoodstuffsContext"
-import PantryAutocomplete from "./PantryAutocomplete";
 
 export default function AddPantryItem() {
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
@@ -17,8 +16,10 @@ export default function AddPantryItem() {
   })
   const [errors, setErrors] = useState([])
 
+  console.log(selectedOption)
+
   if (!foodstuffs) return <h1>Loading...</h1>
-  let options = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, category: foodstuff.category}))
+  let options = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit, category: foodstuff.category}))
 
   function handleChange(e) {
     const name = e.target.name
@@ -28,6 +29,18 @@ export default function AddPantryItem() {
       [name]: value
     })
   }
+
+  function handleSelectOption(option) {
+    setSelectedOption(option)
+    setFormData({
+      name: option.label,
+      units: option.units, 
+      quantity: "",
+      category: option.category
+    })
+  }
+
+  console.log(formData)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -64,21 +77,15 @@ export default function AddPantryItem() {
       <div>
         <h1>Add Pantry Item</h1>
       </div>
-      <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={options}
-        placeholder="Name"
-      />
+
       <div>
         <form onSubmit={handleSubmit}>
             <h3>Name</h3>
-            <input
-              type="text"
-              name="name"
-              placeholder="name"
-              value={formData.name}
-              onChange={handleChange}
+              <Select
+              defaultValue={selectedOption}
+              onChange={option => handleSelectOption(option)}
+              options={options}
+              placeholder="Name"
             />
             <br />
             <h3>Units</h3>
@@ -86,7 +93,7 @@ export default function AddPantryItem() {
               type="text"
               name="unit"
               placeholder="Unit"
-              value={formData.unit}
+              value={!selectedOption ? formData.unit : selectedOption.unit}
               onChange={handleChange}
             />
             <br />
@@ -104,7 +111,7 @@ export default function AddPantryItem() {
               type="text"
               name="category"
               placeholder="Category"
-              value={formData.category}
+              value={!selectedOption ? formData.unit : selectedOption.category}
               onChange={handleChange}
             />
             <br />
