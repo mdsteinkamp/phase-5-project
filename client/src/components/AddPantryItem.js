@@ -34,7 +34,7 @@ export default function AddPantryItem() {
     setSelectedOption(option)
     setFormData({
       name: option.label,
-      units: option.units, 
+      unit: option.unit, 
       quantity: "",
       category: option.category
     })
