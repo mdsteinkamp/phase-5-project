@@ -17,11 +17,11 @@ export default function App() {
 
   console.log(user)
 
-  // useEffect(() => {
-  //   fetch("/hello")
-  //     .then((r) => r.json())
-  //     .then((data) => setCount(data.count))
-  // }, [])
+  useEffect(() => {
+    fetch('/foodstuffs')
+    .then(resp => resp.json())
+    .then(foodstuffs => console.log(foodstuffs))
+  }, [])
 
   return (
     <StyledAppContainer>

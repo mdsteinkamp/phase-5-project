@@ -4,7 +4,7 @@ export const StyledAddFoodstuff = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
+  flex-direction: column;
 
   h1 {
     color: #EF6351;
@@ -12,6 +12,6 @@ export const StyledAddFoodstuff = styled.div`
 
   h3 {
     color: #EF6351;
+    text-align: center;
   }
-
 `

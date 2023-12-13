@@ -1,3 +1,3 @@
 class FoodstuffSerializer < ActiveModel::Serializer
-  attributes :id, :name, :unit, :type
+  attributes :id, :name, :unit, :category
 end
