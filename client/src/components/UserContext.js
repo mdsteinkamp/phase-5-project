@@ -11,7 +11,7 @@ function UserProvider({ children }) {
         resp.json().then((user) => setUser(user));
       }
     });
-  }, []);
+  }, [])
 
 
 

@@ -10,6 +10,11 @@ export const StyledAddFoodstuffOrPantryItem = styled.div`
     color: #EF6351;
   }
 
+  h2 {
+    color: #EF6351;
+    text-align: center;
+  }
+
   h3 {
     color: #EF6351;
     text-align: center;

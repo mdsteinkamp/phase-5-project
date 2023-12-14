@@ -7,20 +7,27 @@ import { FoodstuffsContext } from "./FoodstuffsContext"
 export default function AddPantryItem() {
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const {user, setUser} = useContext(UserContext)
-  const [selectedOption, setSelectedOption] = useState(null)
+  const [selectedNameOption, setSelectedNameOption] = useState(null)
+  const [selectedUnit, setSelectedUnit] = useState("")
   const [formData, setFormData] = useState({
-    name: "",
-    unit: "",
     quantity: "",
-    category: ""
+    user_id: "",
+    foodstuff_id: "",
   })
   const [errors, setErrors] = useState([])
 
-  console.log(selectedOption)
+  console.log(selectedNameOption, selectedUnit)
 
   if (!foodstuffs) return <h1>Loading...</h1>
-  let options = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit, category: foodstuff.category}))
-
+  const pantryItemNameOptions = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit}))
+  const pantryItemUnitOptions = [
+    {label: "Oz", value: "Oz"},
+    {label: "Lb", value: "Lb"}, 
+    {label: "Tbsp", value: "Tbsp"}, 
+    {label: "Tsp", value: "Tsp"}, 
+    {label: "Amount", value: "Oz"}, 
+  ]
+    
   function handleChange(e) {
     const name = e.target.name
     const value = e.target.value
@@ -30,21 +37,24 @@ export default function AddPantryItem() {
     })
   }
 
-  function handleSelectOption(option) {
-    setSelectedOption(option)
-    setFormData({
-      name: option.label,
-      unit: option.unit, 
-      quantity: "",
-      category: option.category
-    })
+  function handleSelectNameOption(option) {
+    setSelectedNameOption(option)
+    setSelectedUnit(option.unit)
+    setFormData({...formData,
+      user_id: user.id,
+      foodstuff_id: option.value})
   }
+
+  // function handleSelectUnitOption(option) {
+  //   setSelectedUnitOption(option)
+  //   setFormData({...formData, unit: option.label})
+  // }
 
   console.log(formData)
 
   function handleSubmit(e) {
     e.preventDefault()
-    fetch("/foodstuffs", {
+    fetch("/pantry_items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,14 +63,12 @@ export default function AddPantryItem() {
     })
     .then((resp) => {
       if (resp.ok) {
-        resp.json().then((foodstuff) => {
-          const newFoodstuffs = [...foodstuffs, foodstuff]
-          setFoodstuffs(newFoodstuffs)
-        })
+        resp.json().then((pantryItem) => console.log(pantryItem))
         setFormData({
           name: "",
           unit: "",
-          category: ""
+          quantity: "",
+          foodstuff_id: "",
         })
         setErrors([])
       } else {
@@ -75,27 +83,21 @@ export default function AddPantryItem() {
   return (
     <StyledAddFoodstuffOrPantryItem>
       <div>
-        <h1>Add Pantry Item</h1>
+        <h1>Add Pantry Item</h1>git 
       </div>
 
       <div>
         <form onSubmit={handleSubmit}>
             <h3>Name</h3>
               <Select
-              defaultValue={selectedOption}
-              onChange={option => handleSelectOption(option)}
-              options={options}
+              defaultValue={selectedNameOption}
+              onChange={option => handleSelectNameOption(option)}
+              options={pantryItemNameOptions}
               placeholder="Name"
             />
             <br />
             <h3>Units</h3>
-            <input
-              type="text"
-              name="unit"
-              placeholder="Unit"
-              value={!selectedOption ? formData.unit : selectedOption.unit}
-              onChange={handleChange}
-            />
+            <h2>{selectedUnit}</h2>
             <br />
             <h3>Quantity</h3>
             <input
@@ -106,27 +108,18 @@ export default function AddPantryItem() {
               onChange={handleChange}
             />
             <br />
-            <h3>Category</h3>
-            <input
-              type="text"
-              name="category"
-              placeholder="Category"
-              value={!selectedOption ? formData.unit : selectedOption.category}
-              onChange={handleChange}
-            />
-            <br />
             <div>
               <button>Add Item</button>
             </div>
           </form>
         </div>
-        {errors.length > 0 &&
+        {/* {errors.length > 0 &&
             <ul>{errors.map(e => (
               <ul key={e}>
                 <h3>{e}</h3>
               </ul>))}
             </ul>
-          }
+          } */}
     </StyledAddFoodstuffOrPantryItem>
   )
 }

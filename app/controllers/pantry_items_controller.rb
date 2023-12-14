@@ -13,7 +13,7 @@ class PantryItemsController < ApplicationController
   private
 
   def pantry_item_params
-    params.permit(:name, :unit, :quantity, :category)
+    params.permit(:quantity, :user_id, :foodstuff_id)
   end
 
 end
