@@ -3,15 +3,15 @@ import { PantryNavlink } from "./styles/PantryNavLink.styled"
 import { useContext } from "react"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
+import { PantryItemsList } from "./PantryItemsList"
 
 
 export default function UserPantry() {
-  // const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const {user, setUser} = useContext(UserContext)
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
 
-
-  console.log(user, foodstuffs)
+  if (!user) return <h1>Loading...</h1>
+  console.log(user)
   
 
 
@@ -41,6 +41,13 @@ export default function UserPantry() {
         </div>
         <div>
           <h3>Remove</h3>
+        </div>
+        <div>
+          <ul>{user.pantry_items.map(pantry_item => (
+            <PantryItemsList key={pantry_item.id} pantry_item={pantry_item} />
+          ))}
+
+          </ul>
         </div>
       </div>
     </StyledUserPantry>

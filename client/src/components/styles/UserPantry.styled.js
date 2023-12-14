@@ -43,4 +43,11 @@ export const StyledUserPantry = styled.div`
       width:calc(100% / 4);
       padding:1rem;
   }
+
+  .pantry-items-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `
