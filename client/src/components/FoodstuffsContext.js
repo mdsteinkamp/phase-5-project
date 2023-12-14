@@ -1,9 +1,12 @@
-import { useState, useEffect, createContext } from "react"
+import { useState, useEffect, useContext, createContext } from "react"
+import { UserContext } from "./UserContext"
 
 const FoodstuffsContext = createContext()
 
 function FoodstuffsProvider({ children }) {
   const [foodstuffs, setFoodstuffs] = useState(null)
+  const {user, setUser} = useContext(UserContext)
+
 
   useEffect(() => {
     fetch('/foodstuffs').then((resp) => {
@@ -11,7 +14,7 @@ function FoodstuffsProvider({ children }) {
         resp.json().then((foodstuffs => setFoodstuffs(foodstuffs)))
       }
     })
-  }, [])
+  }, [user])
 
 
 

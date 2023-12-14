@@ -45,11 +45,6 @@ export default function AddPantryItem() {
       foodstuff_id: option.value})
   }
 
-  // function handleSelectUnitOption(option) {
-  //   setSelectedUnitOption(option)
-  //   setFormData({...formData, unit: option.label})
-  // }
-
   console.log(formData)
 
   function handleSubmit(e) {
@@ -85,27 +80,30 @@ export default function AddPantryItem() {
       <div>
         <h1>Add Pantry Item</h1>git 
       </div>
+      <div>
+        <h3>User definable units to come later...</h3>git 
+      </div>
 
       <div>
         <form onSubmit={handleSubmit}>
-            <h3>Name</h3>
-              <Select
-              defaultValue={selectedNameOption}
-              onChange={option => handleSelectNameOption(option)}
-              options={pantryItemNameOptions}
-              placeholder="Name"
-            />
-            <br />
-            <h3>Units</h3>
-            <h2>{selectedUnit}</h2>
-            <br />
-            <h3>Quantity</h3>
-            <input
-              type="number"
-              name="quantity"
-              placeholder="Quantity"
-              value={formData.quantity}
-              onChange={handleChange}
+          <h3>Name</h3>
+            <Select
+            defaultValue={selectedNameOption}
+            onChange={option => handleSelectNameOption(option)}
+            options={pantryItemNameOptions}
+            placeholder="Name"
+          />
+          <br />
+          <h3>Units</h3>
+          <h2>{selectedUnit}</h2>
+          <br />
+          <h3>Quantity</h3>
+          <input
+            type="number"
+            name="quantity"
+            placeholder="Quantity"
+            value={formData.quantity}
+            onChange={handleChange}
             />
             <br />
             <div>
@@ -113,13 +111,13 @@ export default function AddPantryItem() {
             </div>
           </form>
         </div>
-        {/* {errors.length > 0 &&
+        {errors.length > 0 &&
             <ul>{errors.map(e => (
               <ul key={e}>
                 <h3>{e}</h3>
               </ul>))}
             </ul>
-          } */}
+          }
     </StyledAddFoodstuffOrPantryItem>
   )
 }

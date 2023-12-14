@@ -5,7 +5,7 @@ export const StyledAddFoodstuffOrPantryItem = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
+  
   h1 {
     color: #EF6351;
   }
@@ -16,6 +16,11 @@ export const StyledAddFoodstuffOrPantryItem = styled.div`
   }
 
   h3 {
+    color: #EF6351;
+    text-align: center;
+  }
+
+  h4 {
     color: #EF6351;
     text-align: center;
   }

@@ -62,6 +62,10 @@ export default function AddFoodstuff() {
         <h1>Add Food Item</h1>
       </div>
       <div>
+        <h4>Add a basic ingredient here. You can select items from this list to add to your personal pantry!</h4>
+      </div>
+
+      <div>
         <form onSubmit={handleSubmit}>
             <h3>Name</h3>
             <input
