@@ -9,6 +9,7 @@ export default function UserPantry() {
   const {user, setUser} = useContext(UserContext)
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const [isChecked, setIsChecked] = useState(true)
+  const [foodstuffCheckedArray, setFoodstuffCheckedArray] = useState([])
 
   if (!user) return <h1>Loading...</h1>
   console.log(user)
@@ -16,11 +17,13 @@ export default function UserPantry() {
   function handleClickChange(e) {
     console.log(e.target.checked, e.target.value)
     setIsChecked(!isChecked)
+    setFoodstuffCheckedArray([...foodstuffCheckedArray, {name: e.target.value, isChecked: e.target.checked}])
     console.log(isChecked)
+    console.log(foodstuffCheckedArray)
   }
+
+  // ({name: e.target.value, isChecked: e.target.checked})
   
-
-
   return (
     <StyledUserPantry>
         <h1>My Pantry</h1>
@@ -59,12 +62,15 @@ export default function UserPantry() {
           </div>
           <div>
             <h3>Remove</h3>
-            <ul>{user.pantry_items.map(pantry_item => (
-              <h4 key={pantry_item.id}>
-                <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
-              </h4>
-            ))}
+            <div>
+              <ul>{user.pantry_items.map(pantry_item => (
+                <h4 key={pantry_item.id}>
+                  <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
+                  {}
+                </h4>
+              ))}
             </ul>
+            </div>
           </div>
         </div>
     </StyledUserPantry>
