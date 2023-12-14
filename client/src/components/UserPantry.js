@@ -53,6 +53,10 @@ export default function UserPantry() {
           </div>
           <div>
             <h3>Remove</h3>
+            <ul>{user.pantry_items.map(pantry_item => (
+              <h4 key={pantry_item.id}><input type="checkbox"></input></h4>
+            ))}
+            </ul>
           </div>
           {/* <div className="four-columns">
             <ul>{user.pantry_items.map(pantry_item => (

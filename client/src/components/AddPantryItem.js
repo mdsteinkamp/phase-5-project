@@ -58,7 +58,11 @@ export default function AddPantryItem() {
     })
     .then((resp) => {
       if (resp.ok) {
-        resp.json().then((pantryItem) => console.log(pantryItem))
+        resp.json().then((pantryItem) => {
+          const newPantryItems = [...user.pantry_items, pantryItem]
+          const newUser = {...user, pantry_items: newPantryItems}
+          setUser(newUser)
+        })
         setFormData({
           name: "",
           unit: "",
