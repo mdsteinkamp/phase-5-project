@@ -1,17 +1,23 @@
 import { StyledUserPantry } from "./styles/UserPantry.styled"
 import { PantryNavlink } from "./styles/PantryNavLink.styled"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
-import { PantryItemsList } from "./PantryItemsList"
 
 
 export default function UserPantry() {
   const {user, setUser} = useContext(UserContext)
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
+  const [isChecked, setIsChecked] = useState(true)
 
   if (!user) return <h1>Loading...</h1>
   console.log(user)
+
+  function handleClickChange(e) {
+    console.log(e.target.checked, e.target.value)
+    setIsChecked(!isChecked)
+    console.log(isChecked)
+  }
   
 
 
@@ -54,16 +60,12 @@ export default function UserPantry() {
           <div>
             <h3>Remove</h3>
             <ul>{user.pantry_items.map(pantry_item => (
-              <h4 key={pantry_item.id}><input type="checkbox"></input></h4>
+              <h4 key={pantry_item.id}>
+                <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
+              </h4>
             ))}
             </ul>
           </div>
-          {/* <div className="four-columns">
-            <ul>{user.pantry_items.map(pantry_item => (
-              <PantryItemsList key={pantry_item.id} pantry_item={pantry_item} />
-            ))}
-            </ul>
-          </div> */}
         </div>
     </StyledUserPantry>
   )
