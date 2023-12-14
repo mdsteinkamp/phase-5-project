@@ -16,6 +16,10 @@ export const StyledUserPantry = styled.div`
     color: white;
   }
 
+  h4 {
+    color: white;
+  }
+
   /* container */
   .responsive-three-columns {
       display:flex;
@@ -44,10 +48,10 @@ export const StyledUserPantry = styled.div`
       padding:1rem;
   }
 
-  .pantry-items-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 `

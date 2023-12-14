@@ -22,6 +22,6 @@ export function PantryItemsList({ pantry_item }) {
       <div>
         <h3>Remove</h3>
       </div>
-    </StyledUserPantry>
+    /</StyledUserPantry>
   )
 }
