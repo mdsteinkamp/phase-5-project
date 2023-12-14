@@ -3,13 +3,13 @@ class UsersController < ApplicationController
 
   def index
     users = User.all
-    render json: users
+    render json: users, include: ['pantry_items', 'pantry_items.foodstuff']
   end
 
   def show
     user = @current_user
     if user
-      render json: user
+      render json: user, include: ['pantry_items', 'pantry_items.foodstuff']
     else
       render json: { error: "User not found" }, status: :not_found
     end
