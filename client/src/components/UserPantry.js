@@ -16,13 +16,35 @@ export default function UserPantry() {
 
   function handleClickChange(e) {
     console.log(e.target.checked, e.target.value)
-    setIsChecked(!isChecked)
-    setFoodstuffCheckedArray([...foodstuffCheckedArray, {name: e.target.value, isChecked: e.target.checked}])
-    console.log(isChecked)
-    console.log(foodstuffCheckedArray)
+    setIsChecked(isChecked => !isChecked)
+    const newCheckedObj = {name: e.target.value, isChecked: e.target.checked}
+    const newFoodstuffCheckedArray = [...foodstuffCheckedArray]
+    if (newFoodstuffCheckedArray.length == 0) {
+      newFoodstuffCheckedArray.push(newCheckedObj)
+    } else {
+      for (const obj of newFoodstuffCheckedArray) {
+        if (obj.name === newCheckedObj.name) {
+          obj.isChecked = newCheckedObj.isChecked
+        } else {
+          newFoodstuffCheckedArray.push(newCheckedObj)
+        }
+      }
+    }
+    let result = newFoodstuffCheckedArray.reduce((unique, o) => {
+      if(!unique.some(obj => obj.name === o.name)) {
+        unique.push(o)
+      }
+      return unique
+    }, [])
+    console.log((result))
+    setFoodstuffCheckedArray(result)
   }
+  console.log(isChecked)
+  console.log(foodstuffCheckedArray)
 
   // ({name: e.target.value, isChecked: e.target.checked})
+  // setFoodstuffCheckedArray(foodstuffCheckedArray => [...foodstuffCheckedArray, {name: e.target.value, isChecked: e.target.checked}])
+
   
   return (
     <StyledUserPantry>
