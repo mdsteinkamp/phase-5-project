@@ -10,6 +10,14 @@ class PantryItemsController < ApplicationController
     render json: pantry_item, status: :created
   end
 
+  def destroy
+    pantry_item = @current_user.pantry_items.find_by(id: params[:id])
+    if pantry_item
+      pantry_item.destroy
+      head :no_content
+    else render json: { error: "Not authorized to remove this item" }, status: :unauthorized
+  end
+
   private
 
   def pantry_item_params

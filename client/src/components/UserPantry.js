@@ -17,7 +17,11 @@ export default function UserPantry() {
   function handleClickChange(e) {
     console.log(e.target.checked, e.target.value)
     setIsChecked(isChecked => !isChecked)
-    const newCheckedObj = {name: e.target.value, isChecked: e.target.checked}
+    const itemID = user.pantry_items.find(item => item.foodstuff.name === e.target.value).id
+    console.log(itemID)
+    const newCheckedObj = {name: e.target.value, isChecked: e.target.checked, id: itemID}
+    const id = user.pantry_items.find(item => item.foodstuff.name === newCheckedObj.name).id
+    console.log(id)
     const newFoodstuffCheckedArray = [...foodstuffCheckedArray]
     if (newFoodstuffCheckedArray.length == 0) {
       newFoodstuffCheckedArray.push(newCheckedObj)
@@ -38,8 +42,13 @@ export default function UserPantry() {
     }, [])
     setFoodstuffCheckedArray(result)
   }
-  console.log(isChecked)
-  console.log(foodstuffCheckedArray)
+  // console.log(isChecked)
+  // console.log(foodstuffCheckedArray)
+
+  function handleDeleteClick() {
+    console.log(foodstuffCheckedArray)
+
+  }
   
   return (
     <StyledUserPantry>
@@ -87,7 +96,7 @@ export default function UserPantry() {
                 </h4>
               ))}
             </ul>
-            <button>REMOVE</button>
+            <button onClick={handleDeleteClick}>REMOVE</button>
             </div>
           </div>
         </div>
