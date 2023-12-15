@@ -16,8 +16,6 @@ export default function AddPantryItem() {
   })
   const [errors, setErrors] = useState([])
 
-  console.log(selectedNameOption, selectedUnit)
-
   if (!foodstuffs) return <h1>Loading...</h1>
   const pantryItemNameOptions = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit}))
   const pantryItemUnitOptions = [
@@ -45,7 +43,6 @@ export default function AddPantryItem() {
       foodstuff_id: option.value})
   }
 
-  console.log(formData)
 
   function handleSubmit(e) {
     e.preventDefault()

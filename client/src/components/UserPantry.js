@@ -45,18 +45,25 @@ export default function UserPantry() {
   }
 
   const handleDeleteClick = async() => {
-    const idsToDelete = foodstuffCheckedArray.filter(item => item.isChecked == true).map(item => item.id)
-    await Promise.all(idsToDelete.map(id => {
-      return fetch(`${id}`, {
+    const itemstoDelete = foodstuffCheckedArray.filter(item => item.isChecked == true)
+    console.log(itemstoDelete)
+    await Promise.all(itemstoDelete.map(item => {
+      return fetch(`pantry_items/${item.id}`, {
         method: "DELETE",
       })
       .then(resp => {
         if (resp.ok) {
-          console.log(resp)
-        } else {console.log(resp.json())}
+          // const updatedPantryItems = user.pantry_items.filter(pantry_item => pantry_item.id !== item.id)
+          // const updatedUser = {...user, pantry_items: updatedPantryItems}
+          // setUser(updatedUser)
+
+        } else {
+          resp.json().then(e => {
+            setErrors(e.errors)
+          })
+        }
       })
     }))
-
   }
   
   return (
