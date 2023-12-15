@@ -15,7 +15,8 @@ class PantryItemsController < ApplicationController
     if pantry_item
       pantry_item.destroy
       head :no_content
-    else render json: { error: "Not authorized to remove this item" }, status: :unauthorized
+    else render json: { errors: ["Not authorized to remove this item"] }, status: :unauthorized
+    end
   end
 
   private

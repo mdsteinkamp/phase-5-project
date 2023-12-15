@@ -10,6 +10,7 @@ export default function UserPantry() {
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const [isChecked, setIsChecked] = useState(true)
   const [foodstuffCheckedArray, setFoodstuffCheckedArray] = useState([])
+  const [errors, setErrors] = useState([])
 
   if (!user) return <h1>Loading...</h1>
   console.log(user)
@@ -42,11 +43,19 @@ export default function UserPantry() {
     }, [])
     setFoodstuffCheckedArray(result)
   }
-  // console.log(isChecked)
-  // console.log(foodstuffCheckedArray)
 
-  function handleDeleteClick() {
-    console.log(foodstuffCheckedArray)
+  const handleDeleteClick = async() => {
+    const idsToDelete = foodstuffCheckedArray.filter(item => item.isChecked == true).map(item => item.id)
+    await Promise.all(idsToDelete.map(id => {
+      return fetch(`${id}`, {
+        method: "DELETE",
+      })
+      .then(resp => {
+        if (resp.ok) {
+          console.log(resp)
+        } else {console.log(resp.json())}
+      })
+    }))
 
   }
   
@@ -100,6 +109,13 @@ export default function UserPantry() {
             </div>
           </div>
         </div>
+        {errors.length > 0 &&
+          <ul>{errors.map(e => (
+            <ul key={e}>
+              <h3>{e}</h3>
+            </ul>))}
+          </ul>
+        }
     </StyledUserPantry>
   )
 }
