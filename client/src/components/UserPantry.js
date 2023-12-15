@@ -3,6 +3,7 @@ import { PantryNavlink } from "./styles/PantryNavLink.styled"
 import { useContext, useState } from "react"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
+import { MAX_RESULTS } from "react-search-autocomplete/dist/components/ReactSearchAutocomplete"
 
 
 export default function UserPantry() {
@@ -44,26 +45,46 @@ export default function UserPantry() {
     setFoodstuffCheckedArray(result)
   }
 
-  const handleDeleteClick = async() => {
+  function handleDeleteClick () {
     const itemstoDelete = foodstuffCheckedArray.filter(item => item.isChecked == true)
     console.log(itemstoDelete)
-    await Promise.all(itemstoDelete.map(item => {
-      return fetch(`pantry_items/${item.id}`, {
+    itemstoDelete.forEach(item => {
+      fetch(`/pantry_items/${item.id}`, {
         method: "DELETE",
       })
       .then(resp => {
         if (resp.ok) {
-          // const updatedPantryItems = user.pantry_items.filter(pantry_item => pantry_item.id !== item.id)
-          // const updatedUser = {...user, pantry_items: updatedPantryItems}
-          // setUser(updatedUser)
-
-        } else {
-          resp.json().then(e => {
-            setErrors(e.errors)
-          })
-        }
+          console.log(resp)
+        }})
+        .catch(err => console.log(err))
       })
-    }))
+      // const updatedPantryItems = user.pantry_items.filter(pantry_item => pantry_item.id !== item.id)
+      // const updatedPantryItems = [...user.pantry_items]
+      const updatedPantryItems = [...user.pantry_items].filter(item => !itemstoDelete.find(f => f.id === item.id))
+      console.log(updatedPantryItems)
+      const updatedUser = {...user, pantry_items: updatedPantryItems}
+      setUser(updatedUser)
+      
+      
+    // const promises = itemstoDelete.map(item => {
+    //   fetch(`/pantry_items/${item.id}`, {
+    //     method: "DELETE",
+    //   })
+    //   const results = await Promise.all(promises)
+    //   console.log(results)
+
+    // })
+
+        // if (resp.ok) {
+        //   // const updatedPantryItems = user.pantry_items.filter(pantry_item => pantry_item.id !== item.id)
+        //   // const updatedUser = {...user, pantry_items: updatedPantryItems}
+        //   // setUser(updatedUser)
+
+        // } else {
+        //   resp.json().then(e => {
+        //     setErrors(e.errors)
+        //   })
+        // }
   }
   
   return (
