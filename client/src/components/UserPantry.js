@@ -3,7 +3,6 @@ import { PantryNavlink } from "./styles/PantryNavLink.styled"
 import { useContext, useState } from "react"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
-import { MAX_RESULTS } from "react-search-autocomplete/dist/components/ReactSearchAutocomplete"
 
 
 export default function UserPantry() {
