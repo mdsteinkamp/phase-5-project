@@ -36,15 +36,10 @@ export default function UserPantry() {
       }
       return unique
     }, [])
-    console.log((result))
     setFoodstuffCheckedArray(result)
   }
   console.log(isChecked)
   console.log(foodstuffCheckedArray)
-
-  // ({name: e.target.value, isChecked: e.target.checked})
-  // setFoodstuffCheckedArray(foodstuffCheckedArray => [...foodstuffCheckedArray, {name: e.target.value, isChecked: e.target.checked}])
-
   
   return (
     <StyledUserPantry>
@@ -92,6 +87,7 @@ export default function UserPantry() {
                 </h4>
               ))}
             </ul>
+            <button>REMOVE</button>
             </div>
           </div>
         </div>
