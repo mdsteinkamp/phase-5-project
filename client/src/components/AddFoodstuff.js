@@ -13,9 +13,6 @@ export default function AddFoodstuff() {
   })
   const [errors, setErrors] = useState([])
   const {user, setUser} = useContext(UserContext)
-  console.log(foodstuffs)
-
-  const navigate = useNavigate()
 
   function handleChange(e) {
     const name = e.target.name
