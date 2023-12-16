@@ -10,14 +10,23 @@ class PantryItemsController < ApplicationController
     if pantry_item
       render json: pantry_item
     else
-      render json: { errors: ["Item not found"] }, status: :not_found
+      render json: { error: "Item not found" }, status: :not_found
     end
-
   end
 
   def create
     pantry_item = PantryItem.create!(pantry_item_params)
     render json: pantry_item, status: :created
+  end
+
+  def update
+    pantry_item = PantryItem.find_by(id: params[:id])
+    if pantry_item
+      pantry_item.update!(pantry_item_params)
+      render json: pantry_item, status: :ok
+    else
+      render json: { error: "Not authorized to edit this item"}, status: :unauthorized
+    end
   end
 
   def destroy

@@ -61,10 +61,32 @@ export const StyledUserPantry = styled.div`
   }
 
   button {
-  display: flex;
+    display: flex;
+    text-decoration: none;
+    width: 100px;
+    height: 26px;
+    padding: 8px 5px 10px 5px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: none;
+    background: #F6A192;
+    color: #FFE5B4;
+    outline: 0;
+    cursor: pointer;
+    transition: ease background-color 250ms;
+    &:hover {
+    background-color: #ff5252;
+    }
+  }
+
+  .change-quantity-button {
+    display: flex;
   text-decoration: none;
   width: 100px;
-  height: 26px;
+  height: 35px;
   padding: 8px 5px 10px 5px;
   justify-content: center;
   align-items: center;

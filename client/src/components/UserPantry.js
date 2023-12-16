@@ -82,7 +82,7 @@ export default function UserPantry() {
           <div>
             <h3>Item</h3>
             <ul>{user.pantry_items.map(pantry_item => (
-              <NavLink to={`pantry_items/${pantry_item.id}`} className="navlink" key={pantry_item.id}>{pantry_item.foodstuff.name}</NavLink>
+              <NavLink to={`/pantry_items/${pantry_item.id}`} className="navlink" key={pantry_item.id}>{pantry_item.foodstuff.name}</NavLink>
             ))}
             </ul>
           </div>
