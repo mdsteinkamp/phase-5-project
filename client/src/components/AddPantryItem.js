@@ -17,7 +17,7 @@ export default function AddPantryItem() {
   const [errors, setErrors] = useState([])
   console.log(user)
 
-  if (!foodstuffs) return <h1>Loading...</h1>
+  if (!foodstuffs, !user) return <h1>Loading...</h1>
   const pantryItemNameOptions = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit}))
   // const pantryItemUnitOptions = [
   //   {label: "Oz", value: "Oz"},
@@ -47,9 +47,10 @@ export default function AddPantryItem() {
   console.log(formData)
 
 
+
   function handleSubmit(e) {
     e.preventDefault()
-    if ((user.pantry_items.map(item => item.foodstuff.foodstuff_id).includes(formData.id))) {
+    if ((user.pantry_items.map(item => item.foodstuff_id).includes(formData.foodstuff_id))) {
       console.log(true)
       const pantryItem = user.pantry_items.find(item => item.foodstuff.id === formData.foodstuff_id)
       const newFormData = {...formData, quantity: parseInt(pantryItem.quantity) + parseInt(formData.quantity) }
