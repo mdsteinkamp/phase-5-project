@@ -5,6 +5,16 @@ class PantryItemsController < ApplicationController
     render json: pantry_items
   end
 
+  def show
+    pantry_item = PantryItem.find_by(id: params[:id])
+    if pantry_item
+      render json: pantry_item
+    else
+      render json: { errors: ["Item not found"] }, status: :not_found
+    end
+
+  end
+
   def create
     pantry_item = PantryItem.create!(pantry_item_params)
     render json: pantry_item, status: :created

@@ -1,5 +1,6 @@
 import { StyledUserPantry } from "./styles/UserPantry.styled"
 import { PantryNavlink } from "./styles/PantryNavLink.styled"
+import { NavLink } from "react-router-dom"
 import { useContext, useState } from "react"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
@@ -57,33 +58,10 @@ export default function UserPantry() {
         }})
         .catch(err => console.log(err))
       })
-      // const updatedPantryItems = user.pantry_items.filter(pantry_item => pantry_item.id !== item.id)
-      // const updatedPantryItems = [...user.pantry_items]
       const updatedPantryItems = [...user.pantry_items].filter(item => !itemstoDelete.find(f => f.id === item.id))
       console.log(updatedPantryItems)
       const updatedUser = {...user, pantry_items: updatedPantryItems}
       setUser(updatedUser)
-      
-      
-    // const promises = itemstoDelete.map(item => {
-    //   fetch(`/pantry_items/${item.id}`, {
-    //     method: "DELETE",
-    //   })
-    //   const results = await Promise.all(promises)
-    //   console.log(results)
-
-    // })
-
-        // if (resp.ok) {
-        //   // const updatedPantryItems = user.pantry_items.filter(pantry_item => pantry_item.id !== item.id)
-        //   // const updatedUser = {...user, pantry_items: updatedPantryItems}
-        //   // setUser(updatedUser)
-
-        // } else {
-        //   resp.json().then(e => {
-        //     setErrors(e.errors)
-        //   })
-        // }
   }
   
   return (
@@ -104,7 +82,7 @@ export default function UserPantry() {
           <div>
             <h3>Item</h3>
             <ul>{user.pantry_items.map(pantry_item => (
-              <h4 key={pantry_item.id}>{pantry_item.foodstuff.name}</h4>
+              <NavLink to={`pantry_items/${pantry_item.id}`} className="navlink" key={pantry_item.id}>{pantry_item.foodstuff.name}</NavLink>
             ))}
             </ul>
           </div>

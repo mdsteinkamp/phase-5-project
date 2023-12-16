@@ -12,6 +12,12 @@ export const StyledUserPantry = styled.div`
     line-height: normal;
   }
 
+  .navlink {
+    display: flex;
+    height: 30px;
+  }
+
+
   h3 {
     color: white;
   }
@@ -52,9 +58,9 @@ export const StyledUserPantry = styled.div`
   list-style: none;
   margin: 0;
   padding: 0;
-}
+  }
 
-button {
+  button {
   display: flex;
   text-decoration: none;
   width: 100px;

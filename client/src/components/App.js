@@ -11,6 +11,7 @@ import NavBar from "./NavBar"
 import UserPantry from "./UserPantry"
 import AddPantryItem from "./AddPantryItem"
 import AddFoodstuff from "./AddFoodstuff"
+import PantryItemDetailPage from "./PantryItemDetailPage"
 
 export default function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/pantry_items" element={<UserPantry />} />
+        <Route path="/pantry_items/:id" element={<PantryItemDetailPage />} />
         <Route path="/pantry_items/new" element={<AddPantryItem />} />
         <Route path="/foodstuffs/new" element={<AddFoodstuff />} />
       </Routes>
