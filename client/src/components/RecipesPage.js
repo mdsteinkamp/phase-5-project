@@ -4,6 +4,7 @@ import { StyledRecipes } from "./styles/StyledRecipes"
 export default function RecipesPage() {
 
 
+
   return (
     <StyledRecipes>
       <h1>Recipes</h1>

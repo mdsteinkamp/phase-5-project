@@ -1,7 +1,6 @@
 import { StyledAddFoodstuffOrPantryItem } from "./styles/AddFoodstuff.styled"
 import { useState, useContext } from "react"
 import { UserContext } from "./UserContext"
-import { useNavigate } from "react-router-dom"
 import { FoodstuffsContext } from "./FoodstuffsContext"
 
 export default function AddFoodstuff() {
