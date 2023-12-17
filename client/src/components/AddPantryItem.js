@@ -67,6 +67,12 @@ export default function AddPantryItem() {
             const newPantryItems = user.pantry_items.map(item => item.id === newItem.id ? newItem : item)
             const updatedUser = {...user, pantry_items: newPantryItems}
             setUser(updatedUser)
+            setFormData({
+              name: "",
+              unit: "",
+              quantity: "",
+              foodstuff_id: "",
+            })
             setErrors([])
           })
         } else {
