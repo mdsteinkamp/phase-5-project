@@ -12,6 +12,9 @@ import UserPantry from "./UserPantry"
 import AddPantryItem from "./AddPantryItem"
 import AddFoodstuff from "./AddFoodstuff"
 import PantryItemDetailPage from "./PantryItemDetailPage"
+import RecipesPage from "./RecipesPage"
+import AddRecipe from "./AddRecipe"
+
 
 export default function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +32,9 @@ export default function App() {
         <Route path="/pantry_items/:id" element={<PantryItemDetailPage />} />
         <Route path="/pantry_items/new" element={<AddPantryItem />} />
         <Route path="/foodstuffs/new" element={<AddFoodstuff />} />
+        <Route path="/recipes" element={<RecipesPage />} />
+        <Route path="/recipes/new" element={<AddRecipe />} />
+
       </Routes>
       </StyledAppContainer>
   );

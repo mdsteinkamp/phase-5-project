@@ -10,7 +10,7 @@ export default function NavBar() {
         <NavbarNavLink to="/pantry_items">Pantry</NavbarNavLink>
       </div>
       <div>
-        <NavbarNavLink to="/signup">Recipes</NavbarNavLink>
+        <NavbarNavLink to="/recipes">Recipes</NavbarNavLink>
       </div>
       <div>
         <NavbarNavLink to="/foodstuffs/new">Add Ingredient</NavbarNavLink>
