@@ -60,9 +60,10 @@ export default function AddRecipe() {
       if (resp.ok) {
         resp.json().then((recipe) => {
           const newRecipes = [...recipes, recipe]
-          setNewRecipe(recipe)
-          console.log(newRecipe)
-          setRecipes(newRecipes)
+          console.log(recipe)
+          // setNewRecipe(recipe)
+          // console.log(newRecipe)
+          // setRecipes(newRecipes)
         })
         setRecipeFormData({
           name: "",
@@ -75,21 +76,21 @@ export default function AddRecipe() {
           console.log(errors)
         })
       }})
-      ingredients.forEach(ingredient => {
-        const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
-        fetch("/ingredients", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedIngredient),
-        })
-        .then(resp => {
-          if (resp.ok) {
-            console.log(resp)
-          }})
-          .catch(err => console.log(err))
-        })
+      // ingredients.forEach(ingredient => {
+      //   const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
+      //   fetch("/ingredients", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(updatedIngredient),
+      //   })
+      //   .then(resp => {
+      //     if (resp.ok) {
+      //       console.log(resp)
+      //     }})
+      //     .catch(err => console.log(err))
+      //   })
   
       // const updatedPantryItems = [...user.pantry_items].filter(item => !itemstoDelete.find(f => f.id === item.id))
       // console.log(updatedPantryItems)
