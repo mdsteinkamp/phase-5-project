@@ -1,8 +1,8 @@
 import { StyledAddFoodstuffOrPantryItem } from "./styles/AddFoodstuff.styled"
 import { useState, useContext } from "react"
 import { UserContext } from "./UserContext"
-import Select from 'react-select'
 import { FoodstuffsContext } from "./FoodstuffsContext"
+import Select from 'react-select'
 
 export default function AddPantryItem() {
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
@@ -129,7 +129,7 @@ export default function AddPantryItem() {
             onChange={option => handleSelectNameOption(option)}
             options={pantryItemNameOptions}
             placeholder="Name"
-          />
+            />
           <br />
 
           <h3>Units</h3>

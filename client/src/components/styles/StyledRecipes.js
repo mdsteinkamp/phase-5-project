@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
 export const StyledRecipes = styled.div`
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-  div {
+
+  /* div {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100px;
-  }
+  } */
 
   h1 {
     color: #EF6351;
