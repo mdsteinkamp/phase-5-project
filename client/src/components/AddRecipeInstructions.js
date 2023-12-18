@@ -13,8 +13,6 @@ export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe }
   })
   const [addRecipe, setAddRecipe] = useState(false)
 
-  console.log(recipeFormData)
-
   function handleRecipeChange(e) {
     const name = e.target.name
     const value = e.target.value
@@ -24,7 +22,6 @@ export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe }
       [name]: value
     })
   }
-
 
   function handleSubmitRecipe(recipe) {
     onhandleSubmitRecipe(recipe)
