@@ -36,9 +36,6 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
     })
   }
 
-  console.log(ingredientFormData)
-  console.log(recipeIngredients)
-
   const pantryItemNameOptions = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit}))
 
   function handleSelectNameOption(option) {

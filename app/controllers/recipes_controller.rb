@@ -6,8 +6,8 @@ class RecipesController < ApplicationController
   end
 
   def create
-    foodstuff = Foodstuff.create!(foodstuff_params)
-    render json: foodstuff, status: :created
+    recipe = Recipe.create!(recipe_params)
+    render json: recipe, status: :created
   end
 
   private
