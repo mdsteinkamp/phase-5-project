@@ -45,6 +45,32 @@ export default function AddRecipe() {
 
   function handleSubmitRecipe(recipe) {
     console.log(recipe, ingredients)
+    fetch("/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(recipe),
+    })
+    .then((resp) => {
+      if (resp.ok) {
+        resp.json().then((foodstuff) => {
+          const newRecipes = [...foodstuffs, foodstuff]
+          setFoodstuffs(newFoodstuffs)
+        })
+        setFormData({
+          name: "",
+          unit: "",
+          category: ""
+        })
+        setErrors([])
+      } else {
+        resp.json().then(e => {
+          setErrors(e.errors)
+          console.log(errors)
+        })
+      }
+    });
 
   }
 
