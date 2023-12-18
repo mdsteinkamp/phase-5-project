@@ -6,11 +6,12 @@ import { Link } from "react-router-dom"
 import Select from 'react-select'
 import { Routes, Route } from "react-router-dom"
 
-export default function AddRecipeName({ onHandleChangeRender }) {
+export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe }) {
   const [recipeFormData, setRecipeFormData] = useState({
     name: "",
     instructions: "",
   })
+  const [addRecipe, setAddRecipe] = useState(false)
 
   console.log(recipeFormData)
 
@@ -19,24 +20,26 @@ export default function AddRecipeName({ onHandleChangeRender }) {
     const value = e.target.value
     setRecipeFormData({
       ...recipeFormData,
+      name: recipe.name,
       [name]: value
     })
   }
 
-  function handleChangeRender(value, recipe) {
-    onHandleChangeRender(value, recipe)
+
+  function handleSubmitRecipe(recipe) {
+    onhandleSubmitRecipe(recipe)
+    setAddRecipe(true)
   }
 
   return (
     <StyledRecipes>
-      <h1>Create Recipe</h1>
-      <h2>Name</h2>
+      <h1>Instructions</h1>
       <form>
-        <input 
+        <textarea 
           type="text"
-          name="name"
-          placeholder="Recipe Name"
-          value={recipeFormData.name}
+          name="instructions"
+          placeholder="Instructions"
+          value={recipeFormData.instructions}
           onChange={handleRecipeChange}
         />
 
@@ -44,7 +47,14 @@ export default function AddRecipeName({ onHandleChangeRender }) {
       </form>
       <br />
       <div>
-        <button onClick={e => handleChangeRender("ingredients", recipeFormData)}>Next</button>
+        <button onClick={e => handleSubmitRecipe(recipeFormData)}>Next</button>
+      </div>
+      <div>
+      {!addRecipe ? null : 
+
+          <h1>Recipe Added!</h1>
+
+      }
       </div>
     </StyledRecipes>
   )

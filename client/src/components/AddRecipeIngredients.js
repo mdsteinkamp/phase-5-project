@@ -53,8 +53,8 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
     setRecipeIngredients([...recipeIngredients, ingredientFormData])
   }
 
-  function handleChangeRender(value) {
-    onHandleChangeRender(value)
+  function handleRenderInstructions(value, ingredient) {
+    onHandleChangeRender(value, ingredient)
   }
 
 
@@ -64,41 +64,39 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
       <h1>Add Ingredients</h1>
 
       <div>
-    <form>
-
-      <h3>Name</h3>
-        <Select
-        defaultValue={selectedNameOption}
-        onChange={option => handleSelectNameOption(option)}
-        options={pantryItemNameOptions}
-        placeholder="Name"
-        />
-      <br />
-
-      <h2>Units</h2>
-      <h2>{selectedUnit}</h2>
-      <br />
-
-      <h3>Quantity</h3>
-      <input
-        type="number"
-        name="quantity"
-        placeholder="Quantity"
-        value={ingredientFormData.quantity}
-        onChange={handleIngredientChange}
-        />
+      <form>
+        <h2>Name</h2>
+          <Select
+          defaultValue={selectedNameOption}
+          onChange={option => handleSelectNameOption(option)}
+          options={pantryItemNameOptions}
+          placeholder="Name"
+          />
         <br />
+        <h2>Units</h2>
+        <h2>{selectedUnit}</h2>
         <br />
 
+        <h3>Quantity</h3>
+        <input
+          type="number"
+          name="quantity"
+          placeholder="Quantity"
+          value={ingredientFormData.quantity}
+          onChange={handleIngredientChange}
+          />
+        <br />
+        <br />
       </form>
-      <br />
-    </div>
+        <br />
+      </div>
+
     <div>
         <button onClick={e => handleAddIngredient(ingredientFormData)}>Add to Recipe</button>
       </div>
       <br />
       <div>
-        <button onClick={e => setRenderAddIngredient("instructions")}>Next</button>
+        <button onClick={e => handleRenderInstructions("instructions", recipeIngredients)}>Next</button>
       </div>
     </StyledRecipes>
   )

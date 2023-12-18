@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom"
 
 import AddRecipeIngredients from "./AddRecipeIngredients"
 import AddRecipeName from "./AddRecipeName"
+import AddRecipeInstructions from "./AddRecipeInstructions"
 
 
 export default function AddRecipe() {
@@ -15,7 +16,8 @@ export default function AddRecipe() {
   const {user, setUser} = useContext(UserContext)
   const [selectedNameOption, setSelectedNameOption] = useState(null)
   const [selectedUnit, setSelectedUnit] = useState("")
-  // const [recipeIngredients, setRecipeIngredients] = useState([])
+  const [recipe, setRecipe] = useState({})
+  const [ingredients, setIngredients] = useState([])
 
 
   const [recipeFormData, setRecipeFormData] = useState({
@@ -32,53 +34,71 @@ export default function AddRecipe() {
   if (!foodstuffs, !user) return <h1>Loading...</h1>
 
 
-  function handleRecipeChange(e) {
-    const name = e.target.name
-    const value = e.target.value
-    setRecipeFormData({
-      ...recipeFormData,
-      [name]: value
-    })
-  }
+  // function handleRecipeChange(e) {
+  //   const name = e.target.name
+  //   const value = e.target.value
+  //   setRecipeFormData({
+  //     ...recipeFormData,
+  //     [name]: value
+  //   })
+  // }
 
-  function handleIngredientChange(e) {
-    const name = e.target.name
-    const value = e.target.value
-    setIngredientFormData({
-      ...ingredientFormData,
-      [name]: value
-    })
-  }
-
-  console.log(recipeFormData)
-  console.log(ingredientFormData)
+  // function handleIngredientChange(e) {
+  //   const name = e.target.name
+  //   const value = e.target.value
+  //   setIngredientFormData({
+  //     ...ingredientFormData,
+  //     [name]: value
+  //   })
+  // }
 
   // const pantryItemNameOptions = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit}))
 
-  function handleSelectNameOption(option) {
-    setSelectedNameOption(option)
-    setSelectedUnit(option.unit)
-    setIngredientFormData({...ingredientFormData,
-      user_id: user.id,
-      foodstuff_id: option.value})
-  }
+  // function handleSelectNameOption(option) {
+  //   setSelectedNameOption(option)
+  //   setSelectedUnit(option.unit)
+  //   setIngredientFormData({...ingredientFormData,
+  //     user_id: user.id,
+  //     foodstuff_id: option.value})
+  // }
 
   // function handleAddIngredient(e) {
   //   recipeIngredients = [...recipeIngredients, ingredientFormData]
   // }
 
-  function handleChangeRender(value) {
+  function handleChangeNameRender(value, recipe) {
     setRenderAddIngredient(value)
+    setRecipe(recipe)
   }
+
+  function handleIngredientsChangeRender(value, ingredients) {
+    setRenderAddIngredient(value)
+    setIngredients(ingredients)
+  }
+
+  function handleChangeInstructionsRender(value, recipe) {
+    setRecipe(recipe)
+  }
+
+  function handleSubmitRecipe(recipe) {
+    console.log(recipe, ingredients)
+
+  }
+
+  console.log(recipe, ingredients)
 
 
 
   {if (renderAddIngredient === "name") {
-    return <AddRecipeName onHandleChangeRender={handleChangeRender} />
+    return <AddRecipeName onHandleChangeRender={handleChangeNameRender} />
   }
 
     else if (renderAddIngredient === "ingredients") {
-    return <AddRecipeIngredients onHandleChangeRender={handleChangeRender} />
+    return <AddRecipeIngredients onHandleChangeRender={handleIngredientsChangeRender} />
+    }
+
+    else if (renderAddIngredient === "instructions") {
+      return <AddRecipeInstructions recipe={recipe} onhandleSubmitRecipe={handleSubmitRecipe}/>
     }
   }
   
