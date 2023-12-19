@@ -18,6 +18,8 @@ export default function AddRecipe() {
   const [errors, setErrors] = useState([])
   const [finalRecipe, setFinalRecipe] = useState({})
   const [newIngredients, setNewIngredients] = useState([])
+  const [addRecipe, setAddRecipe] = useState(false)
+
 
   const navigate = useNavigate()
 
@@ -46,12 +48,7 @@ export default function AddRecipe() {
     setIngredients(ingredients)
   }
 
-  // function handleChangeInstructionsRender(value, recipe) {
-  //   setRecipe(recipe)
-  // }
-
   function handleSubmitRecipe(recipe) {
-    console.log(recipe, ingredients)
     fetch("/recipes", {
       method: "POST",
       headers: {
@@ -83,8 +80,6 @@ export default function AddRecipe() {
   }
 
   function handleSubmitIngredients(ingredients, newRecipe) {
-    console.log(newRecipe)
-    
     Promise.all(ingredients.map(ingredient => {
       const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
       return fetch("/ingredients", {
@@ -103,12 +98,15 @@ export default function AddRecipe() {
         const updatedRecipe = {...newRecipe, ingredients: ingredients}
         console.log(updatedRecipe)
         setRecipes([...recipes, updatedRecipe])
+        
+        setAddRecipe(true)
       })
+      .catch(e => console.log(e))
     })
   }
 
   {if (renderAddIngredient === "name") {
-    return <AddRecipeName onHandleChangeRender={handleChangeNameRender} />
+    return (<AddRecipeName onHandleChangeRender={handleChangeNameRender} />)
   }
 
     else if (renderAddIngredient === "ingredients") {
@@ -116,7 +114,23 @@ export default function AddRecipe() {
     }
 
     else if (renderAddIngredient === "instructions") {
-      return <AddRecipeInstructions recipe={recipe} onhandleSubmitRecipe={handleSubmitRecipe}/>
+      return (
+        <>
+          <AddRecipeInstructions recipe={recipe} onhandleSubmitRecipe={handleSubmitRecipe} errors={errors}/>
+          {!addRecipe ? null : 
+            <div>
+              <h1 style={{color:"#EF6351"}}>Recipe Added!</h1>
+            </div>
+          }
+          {errors.length > 0 &&
+            <ul>{errors.map(e => (
+              <ul key={e}>
+                <h2 style={{color: "white"}}>{e}</h2>
+              </ul>))}
+            </ul>
+          }
+        </>
+      )
     }
   }
 
