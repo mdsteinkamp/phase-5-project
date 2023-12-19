@@ -83,6 +83,7 @@ export default function AddRecipe() {
   }
 
   function handleSubmitIngredients(ingredients, newRecipe) {
+    console.log(newRecipe)
     
     Promise.all(ingredients.map(ingredient => {
       const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
@@ -95,17 +96,16 @@ export default function AddRecipe() {
       })
     }))
     .then(results => {
-      Promise.all(results.map((item) => {
-        return item.json()
+      Promise.all(results.map((ingredient) => {
+        return ingredient.json()
       }))
-      .then(data => console.log(data))
+      .then(ingredients => {
+        const updatedRecipe = {...newRecipe, ingredients: ingredients}
+        console.log(updatedRecipe)
+        setRecipes([...recipes, updatedRecipe])
+      })
     })
   }
-
-  // .then(results => {
-  //   console.log(results.map(item => item.json()))
-  // })
-
 
   {if (renderAddIngredient === "name") {
     return <AddRecipeName onHandleChangeRender={handleChangeNameRender} />
