@@ -48,16 +48,22 @@ export default function UserPantry() {
   function handleDeleteClick () {
     const itemstoDelete = foodstuffCheckedArray.filter(item => item.isChecked == true)
     console.log(itemstoDelete)
-    itemstoDelete.forEach(item => {
-      fetch(`/pantry_items/${item.id}`, {
+    
+    Promise.all(itemstoDelete.map(item => {
+      return fetch(`/pantry_items/${item.id}`, {
         method: "DELETE",
+        })
+      }))
+      .then(results => {
+        Promise.all(results.map(ingredient => {
+          return ingredient
+        }))
+        .then(ingredients => {
+          console.log(ingredients)
+        })
       })
-      .then(resp => {
-        if (resp.ok) {
-          console.log(resp)
-        }})
-        .catch(err => console.log(err))
-      })
+
+      
       const updatedPantryItems = [...user.pantry_items].filter(item => !itemstoDelete.find(f => f.id === item.id))
       console.log(updatedPantryItems)
       const updatedUser = {...user, pantry_items: updatedPantryItems}
