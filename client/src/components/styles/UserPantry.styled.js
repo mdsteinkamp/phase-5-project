@@ -15,6 +15,11 @@ export const StyledUserPantry = styled.div`
   .navlink {
     display: flex;
     height: 30px;
+    color: #EA654E;
+    &:hover {
+      color: #ff5252;
+    }
+
   }
 
 
@@ -124,6 +129,10 @@ export const StyledUserPantry = styled.div`
   &:hover {
   background-color: #ff5252;
   }
+
+  a:visited{
+  color:blue;
+}
 
 }
 

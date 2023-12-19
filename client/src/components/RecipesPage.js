@@ -20,7 +20,7 @@ export default function RecipesPage() {
           <PantryNavlink to="/recipes/new" className="create-recipe-button">Add Recipe</PantryNavlink>
         </div>
         <div>
-            <h3>Item</h3>
+            <h3>All Recipes</h3>
             <ul>{recipes.map(recipe => (
               <PantryNavlink to={`/recipes/${recipe.id}`} className="navlink" key={recipe.id}>{recipe.name}</PantryNavlink>
             ))}
