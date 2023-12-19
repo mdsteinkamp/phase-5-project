@@ -22,6 +22,14 @@ export const StyledRecipes = styled.div`
     color: #EF6351;
   }
 
+  h3 {
+    color: #EF6351;
+  }
+
+  p {
+    color: #EF6351;
+  }
+
   button {
     display: flex;
     text-decoration: none;
@@ -43,5 +51,9 @@ export const StyledRecipes = styled.div`
     &:hover {
     background-color: #ff5252;
     }
+  }
+
+  .display-linebreak {
+    white-space: pre-line;
   }
 `
