@@ -61,6 +61,7 @@ export default function UserPantry() {
         .then(ingredients => {
           console.log(ingredients)
         })
+        .catch(e => console.log(e))
       })
 
       
