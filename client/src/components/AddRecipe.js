@@ -2,6 +2,7 @@ import { useState, useContext } from "react"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
 import { RecipesContext } from "./RecipesContext"
+import { useNavigate } from "react-router"
 import AddRecipeIngredients from "./AddRecipeIngredients"
 import AddRecipeName from "./AddRecipeName"
 import AddRecipeInstructions from "./AddRecipeInstructions"
@@ -17,6 +18,8 @@ export default function AddRecipe() {
   const [ingredients, setIngredients] = useState([])
   const [errors, setErrors] = useState([])
   const [newRecipe, setNewRecipe] = useState(null)
+
+  const navigate = useNavigate()
 
 
 
@@ -86,32 +89,14 @@ export default function AddRecipe() {
           instructions: "",
         })
         setErrors([])
+        navigate("/recipes")
       } else {
         resp.json().then(e => {
           setErrors(e.errors)
           console.log(errors)
         })
       }})
-      // ingredients.forEach(ingredient => {
-      //   const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
-      //   fetch("/ingredients", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(updatedIngredient),
-      //   })
-      //   .then(resp => {
-      //     if (resp.ok) {
-      //       console.log(resp)
-      //     }})
-      //     .catch(err => console.log(err))
-      //   })
-  
-      // const updatedPantryItems = [...user.pantry_items].filter(item => !itemstoDelete.find(f => f.id === item.id))
-      // console.log(updatedPantryItems)
-      // const updatedUser = {...user, pantry_items: updatedPantryItems}
-      // setUser(updatedUser)
+
   }
 
 
