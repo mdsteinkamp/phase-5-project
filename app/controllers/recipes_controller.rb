@@ -5,6 +5,11 @@ class RecipesController < ApplicationController
     render json: recipes, include: ['ingredients.foodstuff']
   end
 
+  def show
+    recipe = recipe.find_by(id: params[:id])
+    render json: recipe
+  end
+
   def create
     recipe = Recipe.create!(recipe_params)
     render json: recipe, status: :created
