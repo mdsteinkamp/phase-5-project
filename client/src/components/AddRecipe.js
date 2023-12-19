@@ -61,9 +61,25 @@ export default function AddRecipe() {
         resp.json().then((recipe) => {
           const newRecipes = [...recipes, recipe]
           console.log(recipe)
-          // setNewRecipe(recipe)
-          // console.log(newRecipe)
-          // setRecipes(newRecipes)
+          setNewRecipe(recipe)
+          console.log(newRecipe)
+          setRecipes(newRecipes)
+
+          ingredients.forEach(ingredient => {
+            const updatedIngredient = {...ingredient, recipe_id: recipe.id}
+            fetch("/ingredients", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(updatedIngredient),
+            })
+            .then(resp => {
+              if (resp.ok) {
+                console.log(resp)
+              }})
+              .catch(err => console.log(err))
+            })
         })
         setRecipeFormData({
           name: "",
