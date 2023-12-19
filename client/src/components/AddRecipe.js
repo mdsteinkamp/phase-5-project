@@ -12,12 +12,12 @@ export default function AddRecipe() {
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const {user, setUser} = useContext(UserContext)
   const {recipes, setRecipes} = useContext(RecipesContext)
-  const [selectedNameOption, setSelectedNameOption] = useState(null)
-  const [selectedUnit, setSelectedUnit] = useState("")
   const [recipe, setRecipe] = useState({})
+  const [newRecipe, setNewRecipe] = useState({})
   const [ingredients, setIngredients] = useState([])
   const [errors, setErrors] = useState([])
-  const [newRecipe, setNewRecipe] = useState(null)
+  const [finalRecipe, setFinalRecipe] = useState({})
+  const [newIngredients, setNewIngredients] = useState([])
 
   const navigate = useNavigate()
 
@@ -46,9 +46,9 @@ export default function AddRecipe() {
     setIngredients(ingredients)
   }
 
-  function handleChangeInstructionsRender(value, recipe) {
-    setRecipe(recipe)
-  }
+  // function handleChangeInstructionsRender(value, recipe) {
+  //   setRecipe(recipe)
+  // }
 
   function handleSubmitRecipe(recipe) {
     console.log(recipe, ingredients)
@@ -61,35 +61,18 @@ export default function AddRecipe() {
     })
     .then((resp) => {
       if (resp.ok) {
-        resp.json().then((recipe) => {
-          const newRecipes = [...recipes, recipe]
-          console.log(recipe)
-          setNewRecipe(recipe)
-          console.log(newRecipe)
+        resp.json().then(newRecipe => {
+          const newRecipes = [...recipes, newRecipe]
           setRecipes(newRecipes)
+          setNewRecipe(newRecipe)
+          handleSubmitIngredients(ingredients, newRecipe)
 
-          ingredients.forEach(ingredient => {
-            const updatedIngredient = {...ingredient, recipe_id: recipe.id}
-            fetch("/ingredients", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(updatedIngredient),
-            })
-            .then(resp => {
-              if (resp.ok) {
-                console.log(resp)
-              }})
-              .catch(err => console.log(err))
-            })
         })
         setRecipeFormData({
           name: "",
           instructions: "",
         })
         setErrors([])
-        navigate("/recipes")
       } else {
         resp.json().then(e => {
           setErrors(e.errors)
@@ -98,6 +81,30 @@ export default function AddRecipe() {
       }})
 
   }
+
+  function handleSubmitIngredients(ingredients, newRecipe) {
+    
+    Promise.all(ingredients.map(ingredient => {
+      const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
+      return fetch("/ingredients", {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json", 
+        },
+        body: JSON.stringify(updatedIngredient)
+      })
+    }))
+    .then(results => {
+      Promise.all(results.map((item) => {
+        return item.json()
+      }))
+      .then(data => console.log(data))
+    })
+  }
+
+  // .then(results => {
+  //   console.log(results.map(item => item.json()))
+  // })
 
 
   {if (renderAddIngredient === "name") {
