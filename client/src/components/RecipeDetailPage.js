@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { StyledRecipes } from "./styles/StyledRecipes"
 import { useParams } from "react-router"
 import { RecipesContext } from "./RecipesContext"
+import { StyledRecipeDetails } from "./styles/RecipeDetail.styled"
 
 
 export default function RecipeDetailPage() {
@@ -15,9 +16,9 @@ export default function RecipeDetailPage() {
 
 
   return (
-    <StyledRecipes>
+    <StyledRecipeDetails>
       <h1>{recipe.name}</h1>
-      <div>
+      <div className="recipe-details">
         <h2>Ingredients</h2>
         <ul>{recipe.ingredients.map((ingredient, index) => {
           return <p key={ingredient.id}>{index + 1}: {ingredient.foodstuff.name}: {ingredient.quantity} {ingredient.foodstuff.unit}</p>
@@ -27,6 +28,6 @@ export default function RecipeDetailPage() {
         <h2>Instructions</h2>
         <h2 className="display-linebreak">{recipe.instructions}</h2>
       </div>
-    </StyledRecipes>
+    </StyledRecipeDetails>
   )
 }
