@@ -23,12 +23,14 @@ export default function RecipeDetailPage() {
   function handleCheckIngredients() {
     const results = {}
     for (const ingredient of recipe.ingredients) {
-      console.log(ingredient)
-      if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)) {
+      if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name) === undefined) {
+        results[`${ingredient.foodstuff.name}`] = [-(ingredient.quantity), ingredient.foodstuff.unit]
+      } else if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)) {
         const pantry_ingredient = user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)
         results[`${pantry_ingredient.foodstuff.name}`] = [pantry_ingredient.quantity - ingredient.quantity, ingredient.foodstuff.unit]
       }
     }
+    console.log(results)
     setIngredientCheckResults(results)
     const results_array = Object.entries(results)
     const negatives_array = results_array.filter(item => item[1][0] < 0)
