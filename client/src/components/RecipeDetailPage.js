@@ -4,6 +4,7 @@ import { UserContext } from "./UserContext"
 import { RecipesContext } from "./RecipesContext"
 import { StyledRecipeDetails } from "./styles/RecipeDetail.styled"
 import { PantryNavlink } from "./styles/PantryNavLink.styled"
+import { render } from "react-dom"
 
 
 
@@ -13,6 +14,7 @@ export default function RecipeDetailPage() {
   const {id} = useParams()
   const [ingredientCheckResults, setIngredientCheckResults] = useState(null)
   const [missingIngredients, setMissingIngredients] = useState(null)
+  const [renderIngredients, setRenderIngredients] = useState(null)
 
   if (!recipes, !user) return(<h1>Loading data...</h1>)
 
@@ -32,11 +34,12 @@ export default function RecipeDetailPage() {
     }
     console.log(results)
     setIngredientCheckResults(results)
-    const results_array = Object.entries(results)
-    const negatives_array = results_array.filter(item => item[1][0] < 0)
-    const render_negatives = negatives_array.length > 0 ? negatives_array : null
+    const resultsArray = Object.entries(results)
+    const negativesArray = resultsArray.filter(item => item[1][0] < 0)
+    const renderNegatives = negativesArray.length > 0 ? negativesArray : null
 
-    setMissingIngredients(render_negatives)
+
+    setMissingIngredients(renderNegatives)
   }
   console.log(ingredientCheckResults)
   console.log(missingIngredients)
@@ -58,8 +61,12 @@ export default function RecipeDetailPage() {
       <div>
         <button onClick={handleCheckIngredients}>Can I Make This?</button>
       </div>
+      {renderIngredients ? <h2>You can make it!</h2> : null}
 
-      {!missingIngredients ? null 
+      {switch renderIngredients {
+        case null:
+          null
+      }
         :
         <div>
           <h2>Missing Ingredients</h2>
