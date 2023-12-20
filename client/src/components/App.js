@@ -36,7 +36,6 @@ export default function App() {
         <Route path="/recipes" element={<RecipesPage />} />
         <Route path="/recipes/new" element={<AddRecipe />} />
         <Route path="/recipes/:id" element={<RecipeDetailPage />} />
-
       </Routes>
       </StyledAppContainer>
   );

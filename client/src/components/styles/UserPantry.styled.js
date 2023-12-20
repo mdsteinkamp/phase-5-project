@@ -19,7 +19,6 @@ export const StyledUserPantry = styled.div`
     &:hover {
       color: #ff5252;
     }
-
   }
 
 

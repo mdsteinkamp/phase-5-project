@@ -1,18 +1,34 @@
 import { useContext } from "react"
-import { StyledRecipes } from "./styles/StyledRecipes"
 import { useParams } from "react-router"
+import { UserContext } from "./UserContext"
 import { RecipesContext } from "./RecipesContext"
 import { StyledRecipeDetails } from "./styles/RecipeDetail.styled"
+import { PantryNavlink } from "./styles/PantryNavLink.styled"
+
 
 
 export default function RecipeDetailPage() {
-  const {recipes, setRecipes} = useContext(RecipesContext)
+  const {recipes} = useContext(RecipesContext)
+  const {user, setUser} = useContext(UserContext)
   const {id} = useParams()
 
-  if (!recipes) return(<h1>Loading data...</h1>)
+  if (!recipes, !user) return(<h1>Loading data...</h1>)
 
   const recipe = recipes.find(recipe => recipe.id === parseInt(id))
-  console.log(recipe)
+
+  console.log("pantry items:", user.pantry_items, "recipe ingreds:", recipe.ingredients)
+
+  function handleCheckIngredients() {
+    const results = {}
+    for (const ingredient of recipe.ingredients) {
+      console.log(ingredient)
+      if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)) {
+        const pantry_ingredient = user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)
+        results[`${pantry_ingredient.foodstuff.name}`] = pantry_ingredient.quantity - ingredient.quantity
+      }
+    }
+    console.log(results)
+  }
 
 
   return (
@@ -27,6 +43,9 @@ export default function RecipeDetailPage() {
       <div>
         <h2>Instructions</h2>
         <h2 className="display-linebreak">{recipe.instructions}</h2>
+      </div>
+      <div>
+        <button onClick={handleCheckIngredients}>Can I Make This?</button>
       </div>
     </StyledRecipeDetails>
   )
