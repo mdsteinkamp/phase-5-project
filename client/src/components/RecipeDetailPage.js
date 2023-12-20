@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useState, useContext } from "react"
 import { useParams } from "react-router"
 import { UserContext } from "./UserContext"
 import { RecipesContext } from "./RecipesContext"
@@ -11,6 +11,8 @@ export default function RecipeDetailPage() {
   const {recipes} = useContext(RecipesContext)
   const {user, setUser} = useContext(UserContext)
   const {id} = useParams()
+  const [ingredientCheckResults, setIngredientCheckResults] = useState(null)
+  const [missingIngredients, setMissingIngredients] = useState(null)
 
   if (!recipes, !user) return(<h1>Loading data...</h1>)
 
@@ -27,8 +29,14 @@ export default function RecipeDetailPage() {
         results[`${pantry_ingredient.foodstuff.name}`] = pantry_ingredient.quantity - ingredient.quantity
       }
     }
-    console.log(results)
+    setIngredientCheckResults(results)
+    const results_array = Object.entries(results)
+    const negatives_array = results_array.filter(item => item[1] < 0)
+    const render_negatives = negatives_array.length > 0 ? negatives_array : null
+    setMissingIngredients(render_negatives)
   }
+  console.log(ingredientCheckResults)
+  console.log(missingIngredients)
 
 
   return (
@@ -47,6 +55,25 @@ export default function RecipeDetailPage() {
       <div>
         <button onClick={handleCheckIngredients}>Can I Make This?</button>
       </div>
+      {!missingIngredients ? <h2>Yes!</h2> 
+        :
+        <div>
+          <h2>Missing Ingredients</h2>
+        <ul>{missingIngredients.map(ingredient => (
+          <h4 key={ingredient[0]}>
+            <p>{ingredient[0]} {ingredient[1]}</p>
+          </h4>
+        ))}
+      </ul>
+      </div>
+      }
     </StyledRecipeDetails>
   )
 }
+
+{/* <ul>{missingIngredients.map(ingredient => (
+          <h4 key={ingredient[0]}>
+            <p></p>
+          </h4>
+        ))}
+      </ul> */}
