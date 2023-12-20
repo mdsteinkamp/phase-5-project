@@ -26,13 +26,14 @@ export default function RecipeDetailPage() {
       console.log(ingredient)
       if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)) {
         const pantry_ingredient = user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)
-        results[`${pantry_ingredient.foodstuff.name}`] = pantry_ingredient.quantity - ingredient.quantity
+        results[`${pantry_ingredient.foodstuff.name}`] = [pantry_ingredient.quantity - ingredient.quantity, ingredient.foodstuff.unit]
       }
     }
     setIngredientCheckResults(results)
     const results_array = Object.entries(results)
-    const negatives_array = results_array.filter(item => item[1] < 0)
+    const negatives_array = results_array.filter(item => item[1][0] < 0)
     const render_negatives = negatives_array.length > 0 ? negatives_array : null
+
     setMissingIngredients(render_negatives)
   }
   console.log(ingredientCheckResults)
@@ -55,13 +56,14 @@ export default function RecipeDetailPage() {
       <div>
         <button onClick={handleCheckIngredients}>Can I Make This?</button>
       </div>
-      {!missingIngredients ? <h2>Yes!</h2> 
+
+      {!missingIngredients ? null 
         :
         <div>
           <h2>Missing Ingredients</h2>
         <ul>{missingIngredients.map(ingredient => (
           <h4 key={ingredient[0]}>
-            <p>{ingredient[0]} {ingredient[1]}</p>
+            <p>{ingredient[0]} {Math.abs(ingredient[1][0])} {ingredient[1][1]}</p>
           </h4>
         ))}
       </ul>
@@ -70,10 +72,3 @@ export default function RecipeDetailPage() {
     </StyledRecipeDetails>
   )
 }
-
-{/* <ul>{missingIngredients.map(ingredient => (
-          <h4 key={ingredient[0]}>
-            <p></p>
-          </h4>
-        ))}
-      </ul> */}
