@@ -36,7 +36,6 @@ export default function RecipeDetailPage() {
         results[`${pantry_ingredient.foodstuff.name}`] = [pantry_ingredient.quantity - ingredient.quantity, ingredient.foodstuff.unit]
       }
     }
-    console.log(results)
     setIngredientCheckResults(results)
     const resultsArray = Object.entries(results)
     const negativesArray = resultsArray.filter(item => item[1][0] < 0)

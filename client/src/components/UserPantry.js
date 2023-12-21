@@ -14,6 +14,7 @@ export default function UserPantry() {
   const [errors, setErrors] = useState([])
 
   if (!user) return <h1>Loading...</h1>
+  const sortedUserPantryItems = [...user.pantry_items].sort((a, b) => ((a.foodstuff.name < b.foodstuff.name) ? -1 : (b.foodstuff.name > a.foodstuff.name) ? 1 : 0))
   console.log(user)
 
   function handleClickChange(e) {
@@ -88,21 +89,21 @@ export default function UserPantry() {
         <div className="four-columns">  
           <div>
             <h3>Item</h3>
-            <ul>{user.pantry_items.map(pantry_item => (
+            <ul>{sortedUserPantryItems.map(pantry_item => (
               <NavLink to={`/pantry_items/${pantry_item.id}`} className="navlink" key={pantry_item.id}>{pantry_item.foodstuff.name}</NavLink>
             ))}
             </ul>
           </div>
           <div>
             <h3>Quantity</h3>
-            <ul>{user.pantry_items.map(pantry_item => (
+            <ul>{sortedUserPantryItems.map(pantry_item => (
               <h4 key={pantry_item.id}>{pantry_item.quantity}</h4>
             ))}
             </ul>
           </div>
           <div>
             <h3>Units</h3>
-            <ul>{user.pantry_items.map(pantry_item => (
+            <ul>{sortedUserPantryItems.map(pantry_item => (
               <h4 key={pantry_item.id}>{pantry_item.foodstuff.unit}</h4>
             ))}
             </ul>
@@ -110,7 +111,7 @@ export default function UserPantry() {
           <div>
             <h3>Remove</h3>
             <div>
-              <ul>{user.pantry_items.map(pantry_item => (
+              <ul>{sortedUserPantryItems.map(pantry_item => (
                 <h4 key={pantry_item.id}>
                   <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
                   {}
