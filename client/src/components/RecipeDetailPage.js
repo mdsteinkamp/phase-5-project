@@ -25,17 +25,18 @@ export default function RecipeDetailPage() {
 
   function handleCheckIngredients() {
     const results = {}
-    const pantryItemsToUpdate = recipe.ingredients.map(ingredient => user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name))
-    console.log(pantryItemsToUpdate)
+    // const pantryItemsToUpdate = recipe.ingredients.map(ingredient => user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name))
+    // console.log(pantryItemsToUpdate)
     for (const ingredient of recipe.ingredients) {
-      if (pantryItemsToUpdate.find(i => i.foodstuff.name === ingredient.foodstuff.name) === undefined) {
+      if (!(user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name))) {
         results[`${ingredient.foodstuff.name}`] = [-(ingredient.quantity), ingredient.foodstuff.unit]
       } 
-      else if (pantryItemsToUpdate.find(i => i.foodstuff.name === ingredient.foodstuff.name)) {
-        const pantry_ingredient = pantryItemsToUpdate.find(i => i.foodstuff.name === ingredient.foodstuff.name)
+      else if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)) {
+        const pantry_ingredient = user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)
         results[`${pantry_ingredient.foodstuff.name}`] = [pantry_ingredient.quantity - ingredient.quantity, ingredient.foodstuff.unit]
       }
     }
+    console.log(results)
     setIngredientCheckResults(results)
     const resultsArray = Object.entries(results)
     const negativesArray = resultsArray.filter(item => item[1][0] < 0)
