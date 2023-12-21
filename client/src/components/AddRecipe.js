@@ -76,8 +76,7 @@ export default function AddRecipe() {
           console.log(errors)
         })
       }})
-
-  }
+    }
 
   function handleSubmitIngredients(ingredients, newRecipe) {
     Promise.all(ingredients.map(ingredient => {

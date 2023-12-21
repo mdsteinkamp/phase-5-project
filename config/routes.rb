@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
   resources :ingredients
   resources :foodstuffs, only: [:index, :create]
-  resources :recipes, only: [:index, :show, :create]
+  resources :recipes, only: [:index, :show, :create] do
+    resources :ingredients, only: [:index, :show]
+  end
   resources :pantry_items
 
   get '*path',

@@ -25,11 +25,14 @@ export default function RecipeDetailPage() {
 
   function handleCheckIngredients() {
     const results = {}
+    const pantryItemsToUpdate = recipe.ingredients.map(ingredient => user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name))
+    console.log(pantryItemsToUpdate)
     for (const ingredient of recipe.ingredients) {
-      if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name) === undefined) {
+      if (pantryItemsToUpdate.find(i => i.foodstuff.name === ingredient.foodstuff.name) === undefined) {
         results[`${ingredient.foodstuff.name}`] = [-(ingredient.quantity), ingredient.foodstuff.unit]
-      } else if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)) {
-        const pantry_ingredient = user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name)
+      } 
+      else if (pantryItemsToUpdate.find(i => i.foodstuff.name === ingredient.foodstuff.name)) {
+        const pantry_ingredient = pantryItemsToUpdate.find(i => i.foodstuff.name === ingredient.foodstuff.name)
         results[`${pantry_ingredient.foodstuff.name}`] = [pantry_ingredient.quantity - ingredient.quantity, ingredient.foodstuff.unit]
       }
     }
@@ -39,13 +42,46 @@ export default function RecipeDetailPage() {
     const negativesArray = resultsArray.filter(item => item[1][0] < 0)
     const renderNegatives = negativesArray.length > 0 ? negativesArray : null
     
-    // missingIngredients ? "no" : "yes"
     setMissingIngredients(renderNegatives)
-    setRenderIngredients(!renderIngredients)
+    setRenderIngredients(true)
   }
   console.log(ingredientCheckResults)
   console.log(missingIngredients)
-  // console.log(renderIngredients)
+
+  function handleUpdateUserPantry() {
+    const pantryItemsToUpdate = recipe.ingredients.map(ingredient => user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name))
+    console.log(pantryItemsToUpdate)
+
+    Promise.all(pantryItemsToUpdate.map(item => {
+      const updatedItem = {
+        ...item,
+        quantity: item.quantity - recipe.ingredients.find(ingred => ingred.foodstuff.name === item.foodstuff.name).quantity
+      }
+      console.log(updatedItem)
+      return fetch(`/pantry_items/${item.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedItem)
+      })
+    }))
+    .then(results => {
+      Promise.all(results.map(pantryItem => {
+        return pantryItem.json()
+      }))
+      .then(pantryItems => {
+        console.log(pantryItems)
+        const updatedUserPantryItems = [...user.pantry_items].map(item => pantryItems.find(i => i.id === item.id) || item)
+        console.log(updatedUserPantryItems)
+        const updatedUser = {...user, pantry_items: updatedUserPantryItems}
+        setUser(updatedUser)
+
+
+      })
+      .catch(e => console.log(e))
+    })
+  }
 
 
   return (
@@ -64,8 +100,12 @@ export default function RecipeDetailPage() {
       <div>
         <button onClick={handleCheckIngredients}>Can I Make This?</button>
       </div>
+      <br />
+
       
-      {renderIngredients ? <RenderMissingIngredients ingredients={missingIngredients}/> : null }
+      {renderIngredients ? <RenderMissingIngredients missingIngredients={missingIngredients} onUpdateUserPantry={handleUpdateUserPantry}/> : null }
+
+      
 
     </StyledRecipeDetails>
   )

@@ -5,10 +5,39 @@ class IngredientsController < ApplicationController
     render json: ingredients
   end
 
+  def show
+    if params[:recipe_id]
+      recipe = Recipe.find_by(id: params[:recipe_id])
+      ingredient = recipe.ingredients.find_by(id: params[:id])
+    else
+      ingredient = Ingredient.find_by(id: params[:id])
+    end
+    if ingredient
+      render json: ingredient
+    else
+      render json: { errors: ["Ingredient not found"] }, status: :not_found
+    end
+  end
+
   def create
     ingredient = Ingredient.create!(ingredient_params)
     render json: ingredient, status: :created
   end
+
+  # def update
+  #   if params[:recipe_id]
+  #     recipe = Recipe.find_by(id: params[:recipe_id])
+  #     ingredient = recipe.ingredients.find_by(id: params[:id])
+  #   else 
+  #     ingredient = Ingredient.find_by(id: params[:id])
+  #   end
+  #   if ingredient 
+  #     ingredient.update!(ingredient_params)
+  #     render json: ingredient, status: :ok
+  #   else
+  #     render json: { errors: ["Not authorized to remove this item"] }, status: :unauthorized
+  #   end
+  # end
 
   
   private

@@ -6,8 +6,8 @@ class RecipesController < ApplicationController
   end
 
   def show
-    recipe = recipe.find_by(id: params[:id])
-    render json: recipe
+    recipe = Recipe.find_by(id: params[:id])
+    render json: recipe,  include: ['ingredients.foodstuff']
   end
 
   def create
