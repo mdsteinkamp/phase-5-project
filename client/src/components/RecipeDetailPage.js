@@ -25,8 +25,6 @@ export default function RecipeDetailPage() {
 
   function handleCheckIngredients() {
     const results = {}
-    // const pantryItemsToUpdate = recipe.ingredients.map(ingredient => user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name))
-    // console.log(pantryItemsToUpdate)
     for (const ingredient of recipe.ingredients) {
       if (!(user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name))) {
         results[`${ingredient.foodstuff.name}`] = [-(ingredient.quantity), ingredient.foodstuff.unit]
