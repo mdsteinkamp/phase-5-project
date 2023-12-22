@@ -11,6 +11,7 @@ export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe, 
     name: "",
     instructions: "",
   })
+  const [instructionsError, setInstructionsError] = useState(false)
 
   function handleRecipeChange(e) {
     const name = e.target.name
@@ -23,7 +24,10 @@ export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe, 
   }
 
   function handleSubmitRecipe(recipe) {
-    onhandleSubmitRecipe(recipe)
+    if (recipeFormData.instructions === "") {
+      setInstructionsError(true)
+    } else {onhandleSubmitRecipe(recipe)}
+    
     // setAddRecipe(true)
   }
 
@@ -45,13 +49,8 @@ export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe, 
       <div>
         <button onClick={e => handleSubmitRecipe(recipeFormData)}>Next</button>
       </div>
-      {/* <div>
-      {!addRecipe && errors.length === 0 ? null : 
+      {instructionsError ? <h2>How do we make this thing? 🤔</h2> : null}
 
-          <h1>Recipe Added!</h1>
-
-      }
-      </div> */}
     </StyledRecipes>
   )
 }
