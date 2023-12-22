@@ -1,24 +1,27 @@
 import { StyledAddFoodstuffOrPantryItem } from "./styles/AddFoodstuff.styled"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
 import Select from 'react-select'
+import AddPantryItemForm from "./AddPantryItemForm"
 
 export default function AddPantryItem() {
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const {user, setUser} = useContext(UserContext)
-  const [selectedNameOption, setSelectedNameOption] = useState(null)
-  const [selectedUnit, setSelectedUnit] = useState("")
-  const [formData, setFormData] = useState({
-    quantity: "",
-    user_id: "",
-    foodstuff_id: "",
-  })
+  // const [selectedNameOption, setSelectedNameOption] = useState(null)
+  // const [selectedUnit, setSelectedUnit] = useState("")
+  // const [formData, setFormData] = useState({
+  //   quantity: "",
+  //   user_id: "",
+  //   foodstuff_id: "",
+  // })
   const [errors, setErrors] = useState([])
   console.log(user)
 
   if (!foodstuffs, !user) return <h1>Loading...</h1>
-  const pantryItemNameOptions = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit}))
+
+
+  // const pantryItemNameOptions = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit}))
   // const pantryItemUnitOptions = [
   //   {label: "Oz", value: "Oz"},
   //   {label: "Lb", value: "Lb"}, 
@@ -27,39 +30,36 @@ export default function AddPantryItem() {
   //   {label: "Amount", value: "Oz"}, 
   // ]
     
-  function handleChange(e) {
-    const name = e.target.name
-    const value = e.target.value
-    setFormData({
-      ...formData,
-      [name]: value
-    })
-  }
+  // function handleChange(e) {
+  //   const name = e.target.name
+  //   const value = e.target.value
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value
+  //   })
+  // }
 
-  function handleSelectNameOption(option) {
-    setSelectedNameOption(option)
-    setSelectedUnit(option.unit)
-    setFormData({...formData,
-      user_id: user.id,
-      foodstuff_id: option.value})
-  }
-
-  console.log(formData)
+  // function handleSelectNameOption(option) {
+  //   setSelectedNameOption(option)
+  //   setSelectedUnit(option.unit)
+  //   setFormData({...formData,
+  //     user_id: user.id,
+  //     foodstuff_id: option.value})
+  // }
 
 
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    if ((user.pantry_items.map(item => item.foodstuff_id).includes(formData.foodstuff_id))) {
+  function handleSubmit(newPantryItem) {
+    console.log(newPantryItem)
+    if ((user.pantry_items.map(item => item.foodstuff_id).includes(newPantryItem.foodstuff_id))) {
       console.log(true)
-      const pantryItem = user.pantry_items.find(item => item.foodstuff.id === formData.foodstuff_id)
-      const newFormData = {...formData, quantity: parseInt(pantryItem.quantity) + parseInt(formData.quantity) }
+      const pantryItem = user.pantry_items.find(item => item.foodstuff.id === newPantryItem.foodstuff_id)
+      const updatedNewPantryItem = {...newPantryItem, quantity: parseInt(pantryItem.quantity) + parseInt(newPantryItem.quantity) }
       fetch(`/pantry_items/${pantryItem.id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json"
         },
-        body: JSON.stringify(newFormData)
+        body: JSON.stringify(updatedNewPantryItem)
       })
       .then(resp => {
         if (resp.ok) {
@@ -67,12 +67,12 @@ export default function AddPantryItem() {
             const newPantryItems = user.pantry_items.map(item => item.id === newItem.id ? newItem : item)
             const updatedUser = {...user, pantry_items: newPantryItems}
             setUser(updatedUser)
-            setFormData({
-              name: "",
-              unit: "",
-              quantity: "",
-              foodstuff_id: "",
-            })
+            // setFormData({
+            //   name: "",
+            //   unit: "",
+            //   quantity: "",
+            //   foodstuff_id: "",
+            // })
             setErrors([])
           })
         } else {
@@ -85,7 +85,7 @@ export default function AddPantryItem() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(newPantryItem),
       })
       .then((resp) => {
         if (resp.ok) {
@@ -94,12 +94,12 @@ export default function AddPantryItem() {
             const newUser = {...user, pantry_items: newPantryItems}
             setUser(newUser)
           })
-          setFormData({
-            name: "",
-            unit: "",
-            quantity: "",
-            foodstuff_id: "",
-          })
+          // setFormData({
+          //   name: "",
+          //   unit: "",
+          //   quantity: "",
+          //   foodstuff_id: "",
+          // })
           setErrors([])
         } else {
           resp.json().then(e => {
@@ -119,7 +119,11 @@ export default function AddPantryItem() {
       <div>
         <h3>User definable units to come later...</h3>git 
       </div>
+      <div>
 
+      </div>
+      <AddPantryItemForm user={user} foodstuffs={foodstuffs} onSubmit={handleSubmit}/>
+{/* 
       <div>
         <form onSubmit={handleSubmit}>
 
@@ -149,7 +153,7 @@ export default function AddPantryItem() {
               <button>Add Item</button>
             </div>
           </form>
-        </div>
+        </div> */}
 
         {errors.length > 0 &&
             <ul>{errors.map(e => (
