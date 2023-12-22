@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
   post "/login", to: "sessions#create"
@@ -12,5 +13,4 @@ Rails.application.routes.draw do
   end
   resources :pantry_items
 
-  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
