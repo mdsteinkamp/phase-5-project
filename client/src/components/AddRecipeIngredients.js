@@ -67,9 +67,12 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
   }
 
   function handleRenderInstructions(value, ingredient) {
+    if (recipeIngredients.length === 0) {
+      setIngredientError(true)
 
+    } else {onHandleChangeRender(value, ingredient)}
     
-    onHandleChangeRender(value, ingredient)
+    
   }
 
 
