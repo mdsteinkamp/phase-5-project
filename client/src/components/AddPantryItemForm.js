@@ -41,12 +41,15 @@ export default function AddPantryItemForm({ user, foodstuffs, onSubmit }) {
   function handleSubmit(e) {
     e.preventDefault()
     onSubmit(formData)
-    setFormData({
+    if(formData.foodstuff_id !== "" && formData.quantity !== "") {
+      setSelectedNameOption("")
+      setFormData({
         quantity: "",
         user_id: user.id,
         foodstuff_id: "",
       })
-      setSelectedNameOption("")
+      
+    }
   }
 
   return (

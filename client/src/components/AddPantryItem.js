@@ -17,15 +17,12 @@ export default function AddPantryItem() {
   // })
   const [errors, setErrors] = useState([])
   const [resetForm, setResetForm] = useState(false)
+  const [renderItemAdded, setRenderItemAdded] = useState(false)
+
+
   console.log(user)
 
   if (!foodstuffs, !user) return <h1>Loading...</h1>
-
-
-  function handleClearReset() {
-    setResetForm(false)
-  }
-
 
   function handleSubmit(newPantryItem) {
     console.log(newPantryItem)
@@ -47,6 +44,7 @@ export default function AddPantryItem() {
             const updatedUser = {...user, pantry_items: newPantryItems}
             setUser(updatedUser)
             setErrors([])
+            setRenderItemAdded(true)
           })
         } else {
           resp.json().then(e => setErrors(e.errors))
@@ -68,6 +66,7 @@ export default function AddPantryItem() {
             setUser(newUser)
           })
           setErrors([])
+          setRenderItemAdded(true)
         } else {
           resp.json().then(e => {
             setErrors(e.errors)
@@ -90,14 +89,15 @@ export default function AddPantryItem() {
 
       </div>
       <AddPantryItemForm user={user} foodstuffs={foodstuffs} onSubmit={handleSubmit} resetForm={resetForm} />
+      {renderItemAdded ? <h2>Added!</h2> : null}
 
-        {errors.length > 0 &&
-            <ul>{errors.map(e => (
-              <ul key={e}>
-                <h3>{e}</h3>
-              </ul>))}
-            </ul>
-          }
+      {errors.length > 0 &&
+          <ul>{errors.map(e => (
+            <ul key={e}>
+              <h3>{e}</h3>
+            </ul>))}
+          </ul>
+        }
     </StyledAddFoodstuffOrPantryItem>
   )
 }

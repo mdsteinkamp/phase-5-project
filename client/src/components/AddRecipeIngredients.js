@@ -16,9 +16,6 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
   const [ingredientError, setIngredientError] = useState(false)
   const [renderIngredientAdded, setRenderIngredientAdded] = useState(false)
 
-
-  // const recipeIngredients = []
-
   const [ingredientFormData, setIngredientFormData] = useState({
     quantity: "",
     user_id: "",
@@ -71,11 +68,7 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
       setIngredientError(true)
 
     } else {onHandleChangeRender(value, ingredient)}
-    
-    
   }
-
-
 
   return ( 
     <StyledRecipes>
