@@ -41,6 +41,12 @@ export default function AddPantryItemForm({ user, foodstuffs, onSubmit }) {
   function handleSubmit(e) {
     e.preventDefault()
     onSubmit(formData)
+    setFormData({
+        quantity: "",
+        user_id: user.id,
+        foodstuff_id: "",
+      })
+      setSelectedNameOption("")
   }
 
   return (
@@ -51,7 +57,7 @@ export default function AddPantryItemForm({ user, foodstuffs, onSubmit }) {
 
           <h3>Name</h3>
             <Select
-            defaultValue={selectedNameOption}
+            value={selectedNameOption}
             onChange={option => handleSelectNameOption(option)}
             options={pantryItemNameOptions}
             placeholder="Name"

@@ -11,6 +11,7 @@ export default function AddRecipeName({ onHandleChangeRender }) {
     name: "",
     instructions: "",
   })
+  const [nameError, setNameError] = useState(false)
 
   console.log(recipeFormData)
 
@@ -24,7 +25,7 @@ export default function AddRecipeName({ onHandleChangeRender }) {
   }
 
   function handleChangeRender(value, recipe) {
-    onHandleChangeRender(value, recipe)
+    if (!recipeFormData.name)  {setNameError(true)} else {onHandleChangeRender(value, recipe)}
   }
 
   return (
@@ -46,6 +47,8 @@ export default function AddRecipeName({ onHandleChangeRender }) {
       <div>
         <button onClick={e => handleChangeRender("ingredients", recipeFormData)}>Next</button>
       </div>
+      {nameError ? <h2>Name must be present</h2> : null}
+
     </StyledRecipes>
   )
 }

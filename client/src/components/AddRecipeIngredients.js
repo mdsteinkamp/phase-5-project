@@ -13,6 +13,9 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
   const [selectedNameOption, setSelectedNameOption] = useState(null)
   const [selectedUnit, setSelectedUnit] = useState("")
   const [recipeIngredients, setRecipeIngredients] = useState([])
+  const [ingredientError, setIngredientError] = useState(false)
+  const [renderIngredientAdded, setRenderIngredientAdded] = useState(false)
+
 
   // const recipeIngredients = []
 
@@ -24,7 +27,7 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
   const [renderAddIngredient, setRenderAddIngredient] = useState("name")
 
   if (!foodstuffs, !user) return <h1>Loading...</h1>
-
+  console.log(ingredientFormData)
 
 
   function handleIngredientChange(e) {
@@ -47,10 +50,25 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
   }
 
   function handleAddIngredient() {
-    setRecipeIngredients([...recipeIngredients, ingredientFormData])
+    if (Object.values(ingredientFormData).includes("")) {
+      console.log('nein')
+      setIngredientError(true)
+    } else {
+      setRecipeIngredients([...recipeIngredients, ingredientFormData])
+      setIngredientError(false)
+      setRenderIngredientAdded(true)
+      setIngredientFormData({
+        quantity: "",
+        user_id: "",
+        foodstuff_id: "",
+      })
+      setSelectedNameOption("")
+    }
   }
 
   function handleRenderInstructions(value, ingredient) {
+
+    
     onHandleChangeRender(value, ingredient)
   }
 
@@ -64,7 +82,7 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
       <form>
         <h2>Name</h2>
           <Select
-          defaultValue={selectedNameOption}
+          value={selectedNameOption}
           onChange={option => handleSelectNameOption(option)}
           options={pantryItemNameOptions}
           placeholder="Name"
@@ -95,6 +113,8 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
       <div>
         <button onClick={e => handleRenderInstructions("instructions", recipeIngredients)}>Next</button>
       </div>
+      {ingredientError ? <h2>Ingredient Info Missing</h2> : null}
+      {renderIngredientAdded ? <h2>Added!</h2> : null}
     </StyledRecipes>
   )
 }

@@ -11,7 +11,6 @@ export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe, 
     name: "",
     instructions: "",
   })
-  // const [addRecipe, setAddRecipe] = useState(false)
 
   function handleRecipeChange(e) {
     const name = e.target.name

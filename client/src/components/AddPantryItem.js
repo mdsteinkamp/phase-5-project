@@ -16,36 +16,15 @@ export default function AddPantryItem() {
   //   foodstuff_id: "",
   // })
   const [errors, setErrors] = useState([])
+  const [resetForm, setResetForm] = useState(false)
   console.log(user)
 
   if (!foodstuffs, !user) return <h1>Loading...</h1>
 
 
-  // const pantryItemNameOptions = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit}))
-  // const pantryItemUnitOptions = [
-  //   {label: "Oz", value: "Oz"},
-  //   {label: "Lb", value: "Lb"}, 
-  //   {label: "Tbsp", value: "Tbsp"}, 
-  //   {label: "Tsp", value: "Tsp"}, 
-  //   {label: "Amount", value: "Oz"}, 
-  // ]
-    
-  // function handleChange(e) {
-  //   const name = e.target.name
-  //   const value = e.target.value
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value
-  //   })
-  // }
-
-  // function handleSelectNameOption(option) {
-  //   setSelectedNameOption(option)
-  //   setSelectedUnit(option.unit)
-  //   setFormData({...formData,
-  //     user_id: user.id,
-  //     foodstuff_id: option.value})
-  // }
+  function handleClearReset() {
+    setResetForm(false)
+  }
 
 
   function handleSubmit(newPantryItem) {
@@ -67,12 +46,6 @@ export default function AddPantryItem() {
             const newPantryItems = user.pantry_items.map(item => item.id === newItem.id ? newItem : item)
             const updatedUser = {...user, pantry_items: newPantryItems}
             setUser(updatedUser)
-            // setFormData({
-            //   name: "",
-            //   unit: "",
-            //   quantity: "",
-            //   foodstuff_id: "",
-            // })
             setErrors([])
           })
         } else {
@@ -94,12 +67,6 @@ export default function AddPantryItem() {
             const newUser = {...user, pantry_items: newPantryItems}
             setUser(newUser)
           })
-          // setFormData({
-          //   name: "",
-          //   unit: "",
-          //   quantity: "",
-          //   foodstuff_id: "",
-          // })
           setErrors([])
         } else {
           resp.json().then(e => {
@@ -122,38 +89,7 @@ export default function AddPantryItem() {
       <div>
 
       </div>
-      <AddPantryItemForm user={user} foodstuffs={foodstuffs} onSubmit={handleSubmit}/>
-{/* 
-      <div>
-        <form onSubmit={handleSubmit}>
-
-          <h3>Name</h3>
-            <Select
-            defaultValue={selectedNameOption}
-            onChange={option => handleSelectNameOption(option)}
-            options={pantryItemNameOptions}
-            placeholder="Name"
-            />
-          <br />
-
-          <h3>Units</h3>
-          <h2>{selectedUnit}</h2>
-          <br />
-
-          <h3>Quantity</h3>
-          <input
-            type="number"
-            name="quantity"
-            placeholder="Quantity"
-            value={formData.quantity}
-            onChange={handleChange}
-            />
-            <br />
-            <div>
-              <button>Add Item</button>
-            </div>
-          </form>
-        </div> */}
+      <AddPantryItemForm user={user} foodstuffs={foodstuffs} onSubmit={handleSubmit} resetForm={resetForm} />
 
         {errors.length > 0 &&
             <ul>{errors.map(e => (
