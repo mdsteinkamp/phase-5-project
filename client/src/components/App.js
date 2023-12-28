@@ -15,6 +15,7 @@ import PantryItemDetailPage from "./PantryItemDetailPage"
 import RecipesPage from "./RecipesPage"
 import AddRecipe from "./AddRecipe"
 import RecipeDetailPage from "./RecipeDetailPage"
+import AvailableRecipesPage from "./AvailableRecipesPage"
 
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/recipes" element={<RecipesPage />} />
         <Route path="/recipes/new" element={<AddRecipe />} />
         <Route path="/recipes/:id" element={<RecipeDetailPage />} />
+        <Route path="/available_recipes" element={<AvailableRecipesPage />} />
       </Routes>
       </StyledAppContainer>
   );

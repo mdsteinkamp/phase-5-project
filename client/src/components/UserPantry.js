@@ -83,7 +83,7 @@ export default function UserPantry() {
             <PantryNavlink to="/pantry_items">Scan Item</PantryNavlink>
           </div>
           <div>
-            <PantryNavlink to="/pantry_items">What Can I Make</PantryNavlink>
+            <PantryNavlink to="/available_recipes">What Can I Make</PantryNavlink>
           </div>
         </div>
         <div className="four-columns">  
