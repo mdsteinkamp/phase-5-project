@@ -13,7 +13,7 @@ export default function AvailableRecipesPage() {
 	const makeableRecipes = user.pantry_items.map(item => {
 		const arr = []
 		for (const recipe of recipes) {
-			if (recipe.ingredients.find(ingredient => ingredient.foodstuff.name === item.foodstuff.name && ingredient.quantity <= item.quantity)) { arr.push(recipe.name)}
+			if (recipe.ingredients.find(ingredient => ingredient.foodstuff.name === item.foodstuff.name && ingredient.quantity <= item.quantity)) { arr.push(recipe.name, item.foodstuff.name)}
 
 		}
 
