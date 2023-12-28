@@ -3,8 +3,6 @@ import { useParams } from "react-router"
 import { UserContext } from "./UserContext"
 import { RecipesContext } from "./RecipesContext"
 import { StyledRecipeDetails } from "./styles/RecipeDetail.styled"
-import { PantryNavlink } from "./styles/PantryNavLink.styled"
-import { render } from "react-dom"
 import RenderMissingIngredients from "./RenderMissingIngredients"
 
 

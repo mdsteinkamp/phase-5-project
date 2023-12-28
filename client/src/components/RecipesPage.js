@@ -5,7 +5,7 @@ import { RecipesContext } from "./RecipesContext"
 
 
 export default function RecipesPage() {
-  const {recipes, setRecipes} = useContext(RecipesContext)
+  const {recipes} = useContext(RecipesContext)
 
   if (!recipes) return (<h1>Loading data...</h1>)
 
