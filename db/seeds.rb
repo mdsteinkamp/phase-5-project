@@ -7,6 +7,7 @@ PantryItem.destroy_all
 
 
 bolo = Recipe.create(name: "Bolognese", instructions: "do this then this then this etc")
+marinara = Recipe.create(name: "Marinara Sauce", instructions: "make the SAUCEs")
 taco_salad = Recipe.create(name: "Taco Salad", instructions: "do this then this then this etc")
 
 evoo = Foodstuff.create(name: "Extra Virgin Olive Oil", unit: "Cup", category: "Cooking Liquid")
@@ -26,6 +27,8 @@ white_pepper = Foodstuff.create(name: "White Pepper", unit: "Tbsp", category: "S
 heavy_cream = Foodstuff.create(name: "Heavy Cream", unit: "Cup", category: "Cooking Liquid")
 penne = Foodstuff.create(name: "Penne", unit: "Lb", category: "Grain")
 parmesan_cheese = Foodstuff.create(name: "Parmesan Cheese", unit: "Grated", category: "Cheese")
+oregano = Foodstuff.create(name: "Oregano", unit: "Tsp", category: "Spice")
+basil = Foodstuff.create(name: "Basil", unit: "Tbsp", category: "Spice")
 
 # bolonese ingredients
 Ingredient.create(quantity: 0.25, recipe_id: bolo.id, foodstuff_id: evoo.id)
@@ -44,5 +47,16 @@ Ingredient.create(quantity: 1, recipe_id: bolo.id, foodstuff_id: black_pepper.id
 Ingredient.create(quantity: 0.25, recipe_id: bolo.id, foodstuff_id: heavy_cream.id)
 Ingredient.create(quantity: 2, recipe_id: bolo.id, foodstuff_id: penne.id)
 Ingredient.create(quantity: 25, recipe_id: bolo.id, foodstuff_id: parmesan_cheese.id)
+
+#marinara ingredients
+Ingredient.create(quantity: 0.125, recipe_id: marinara.id, foodstuff_id: evoo.id)
+Ingredient.create(quantity: 0.5, recipe_id: marinara.id, foodstuff_id: white_onion.id)
+Ingredient.create(quantity: 3, recipe_id: marinara.id, foodstuff_id: garlic.id)
+Ingredient.create(quantity: 28, recipe_id: marinara.id, foodstuff_id: san_marzano_tomatoes.id)
+Ingredient.create(quantity: 0.5, recipe_id: marinara.id, foodstuff_id: oregano.id)
+Ingredient.create(quantity: 0.5, recipe_id: marinara.id, foodstuff_id: kosher_salt.id)
+Ingredient.create(quantity: 0.25, recipe_id: marinara.id, foodstuff_id: black_pepper.id)
+Ingredient.create(quantity: 1, recipe_id: marinara.id, foodstuff_id: basil.id)
+
 
 puts "👩‍🍳👨‍🍳 it's COOKIN' TIME 👩‍🍳👨‍🍳"

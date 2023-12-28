@@ -6,12 +6,7 @@ class IngredientsController < ApplicationController
   end
 
   def show
-    if params[:recipe_id]
-      recipe = Recipe.find_by(id: params[:recipe_id])
-      ingredient = recipe.ingredients.find_by(id: params[:id])
-    else
-      ingredient = Ingredient.find_by(id: params[:id])
-    end
+    ingredient = Ingredient.find_by(id: params[:id])
     if ingredient
       render json: ingredient
     else
