@@ -19,27 +19,26 @@ export default function AvailableRecipesPage() {
 
   function handleCheckIngredients() {
     const results = new Set()
-		const unmakeableRecipes = []
+		let unmakeableRecipes = new Set()
 		for (const recipe of recipes)
 			for (const ingredient of recipe.ingredients) {
-				if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name && ingredient.quantity > i.quantity)) {
-					unmakeableRecipes.push(recipe.name)
+				if (!user.pantry_items.find(i => (i.foodstuff.name === ingredient.foodstuff.name))) {
+					unmakeableRecipes.add(recipe.name)
+				} else if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name && ingredient.quantity > i.quantity)) {
+					unmakeableRecipes.add(recipe.name)
 				}	if ((user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name && ingredient.quantity <= i.quantity))) {
 					results.add(recipe)
 				} 
 			}
-		console.log(unmakeableRecipes)
+		let unmakeableRecipesArray = [...unmakeableRecipes]
 		let resultsArray = [...results]
-		for (const recipe of unmakeableRecipes) {
+		for (const recipe of unmakeableRecipesArray) {
 			resultsArray = resultsArray.filter(r => r.name !== recipe)
 		}
 		console.log(resultsArray)
 
   }
 	handleCheckIngredients()
-
-	// console.log(makeableRecipes.pop())
-
 
 	return (
 			<StyledUserPantry>
