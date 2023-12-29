@@ -17,7 +17,7 @@ export default function AvailableRecipesPage() {
 	}
 	let recipesToSearch = [...recipes]
 
-  function handleCheckIngredients() {
+  function CheckAvailableRecipes() {
     const results = new Set()
 		let unmakeableRecipes = new Set()
 		for (const recipe of recipes)
@@ -38,7 +38,8 @@ export default function AvailableRecipesPage() {
 		console.log(resultsArray)
 
   }
-	handleCheckIngredients()
+	
+	CheckAvailableRecipes()
 
 	return (
 			<StyledUserPantry>
