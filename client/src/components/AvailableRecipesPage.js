@@ -1,52 +1,61 @@
 import { StyledUserPantry } from "./styles/UserPantry.styled"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "./UserContext"
 import { RecipesContext } from "./RecipesContext"
 
 export default function AvailableRecipesPage() {
   const {recipes} = useContext(RecipesContext)
   const {user} = useContext(UserContext)
-	const [makeableRecipes, setMakeableRecipes] = useState([])
+	const [makeableRecipes, setMakeableRecipes] = useState(null)
     
-  if (!recipes, !user) return(<h1>Loading data...</h1>)
-	console.log(recipes, user)
+  // if (!recipes, !user) return(<h1>Loading data...</h1>)
+    // console.log(recipes, user)
 
-	let arr = []
-	let obj = {
-		recipes: []
-	}
-	let recipesToSearch = [...recipes]
+    // let arr = []
+    // let obj = {
+    //     recipes: []
+    // }
+    // let recipesToSearch = [...recipes]
 
-  function CheckAvailableRecipes() {
-    const results = new Set()
-		let unmakeableRecipes = new Set()
-		for (const recipe of recipes)
-			for (const ingredient of recipe.ingredients) {
-				if (!user.pantry_items.find(i => (i.foodstuff.name === ingredient.foodstuff.name))) {
-					unmakeableRecipes.add(recipe.name)
-				} else if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name && ingredient.quantity > i.quantity)) {
-					unmakeableRecipes.add(recipe.name)
-				}	if ((user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name && ingredient.quantity <= i.quantity))) {
-					results.add(recipe)
-				} 
+	useEffect(() => {
+		if(recipes) {
+
+			
+			function CheckAvailableRecipes() {
+				let resultsArray = []
+				const results = new Set()
+					let unmakeableRecipes = new Set()
+					for (const recipe of recipes) {
+						for (const ingredient of recipe.ingredients) {
+							if (!user.pantry_items.find(i => (i.foodstuff.name === ingredient.foodstuff.name))) {
+									unmakeableRecipes.add(recipe.name)
+							} else if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name && ingredient.quantity > i.quantity)) {
+									unmakeableRecipes.add(recipe.name)
+							}	if ((user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name && ingredient.quantity <= i.quantity))) {
+									results.add(recipe)
+							} 
+						}
+		
+					resultsArray = [...results]
+					let unmakeableRecipesArray = [...unmakeableRecipes]
+					for (const recipe of unmakeableRecipesArray) {
+							resultsArray = resultsArray.filter(r => r.name !== recipe)
+					}
+				}
+				console.log(resultsArray)
+				setMakeableRecipes(resultsArray)
 			}
-		let unmakeableRecipesArray = [...unmakeableRecipes]
-		let resultsArray = [...results]
-		for (const recipe of unmakeableRecipesArray) {
-			resultsArray = resultsArray.filter(r => r.name !== recipe)
+			CheckAvailableRecipes()
 		}
-		console.log(resultsArray)
 
-  }
-	
-	CheckAvailableRecipes()
+	}, [recipes])
 
-	return (
-			<StyledUserPantry>
-					<h1>You can make the below recipes!</h1>
-			</StyledUserPantry>
+    return (
+            <StyledUserPantry>
+                    <h1>You can make the below recipes!</h1>
+            </StyledUserPantry>
 
-	)
+    )
 }
 
 // const makeableRecipes = user.pantry_items.map(item => {
@@ -77,7 +86,7 @@ export default function AvailableRecipesPage() {
 // 	}
 
 // 	return arr
-	
+    
 // })
 
 // const set = new Set()
@@ -88,5 +97,5 @@ export default function AvailableRecipesPage() {
 // 	}
 
 // 	return set
-	
+    
 // })
