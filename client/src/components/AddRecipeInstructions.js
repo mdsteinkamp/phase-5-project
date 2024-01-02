@@ -23,9 +23,11 @@ export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe, 
   function handleSubmitRecipe(recipe) {
     if (recipeFormData.instructions === "") {
       setInstructionsError(true)
+      return
     } else {onhandleSubmitRecipe(recipe)}
     navigate("/recipes")
   }
+  console.log(recipeFormData)
 
   return (
     <StyledRecipes>
