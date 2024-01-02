@@ -1,4 +1,6 @@
 import { StyledLogin } from "./styles/Login.styled"
+import { PantryNavlink } from "./styles/PantryNavLink.styled"
+import { Link } from "react-router-dom"
 import { useState, useContext } from "react"
 import { UserContext } from "./UserContext"
 import { useNavigate } from "react-router-dom"
@@ -13,6 +15,14 @@ export default function Signup() {
   const {setUser} = useContext(UserContext)
 
   const navigate = useNavigate()
+
+  const Button = ({ onClick, children, as: Component = 'button', ...rest }) => {
+    return (
+      <Component onClick={onClick} className="button" {...rest}>
+        {children}
+      </Component>
+    );
+  };
 
   function handleChange(e) {
     const name = e.target.name
@@ -77,9 +87,11 @@ export default function Signup() {
             onChange={handleChange}
           />
           <br />
-          <button>Signup</button>
+          <PantryNavlink className="signup-button" as={Link} to="/" onClick={handleSubmit}>Signup</PantryNavlink>
         </form>
-        <button>Cancel</button>
+        <div>
+        <PantryNavlink className="signup-button" to="/">Cancel</PantryNavlink>
+        </div>
         {errors.length > 0 &&
             <ul>{errors.map(e => (
               <ul key={e}>
