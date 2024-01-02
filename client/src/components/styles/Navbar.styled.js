@@ -8,5 +8,4 @@ export const StyledNavbar = styled.nav`
   align-items: center;
   height: 50px;
   color: #B52F2F;
-
 `

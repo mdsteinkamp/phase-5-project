@@ -1,5 +1,7 @@
 import { StyledUserPantry } from "./styles/UserPantry.styled"
+import { NavbarNavLink } from "./styles/NavbarNavLink.styled"
 import { useContext, useEffect, useState } from "react"
+import { Link, NavLink } from "react-router-dom"
 import { UserContext } from "./UserContext"
 import { RecipesContext } from "./RecipesContext"
 
@@ -42,20 +44,24 @@ export default function AvailableRecipesPage() {
 							resultsArray = resultsArray.filter(r => r.name !== recipe)
 					}
 				}
-				console.log(resultsArray)
 				setMakeableRecipes(resultsArray)
 			}
 			CheckAvailableRecipes()
 		}
 
 	}, [recipes])
+	console.log(makeableRecipes)
 
-    return (
-            <StyledUserPantry>
-                    <h1>You can make the below recipes!</h1>
-            </StyledUserPantry>
+	if (makeableRecipes) return (
+					<StyledUserPantry>
+									<h1>You can make the below recipes!</h1>
+									<ul>{makeableRecipes.map((recipe, index) => (
+										<NavbarNavLink to={`/recipes/${recipe.id}`} key={recipe.id}>{index + 1}. {recipe.name}</NavbarNavLink>
+									))}</ul>
 
-    )
+					</StyledUserPantry>
+
+	)
 }
 
 // const makeableRecipes = user.pantry_items.map(item => {

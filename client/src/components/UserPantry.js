@@ -114,7 +114,6 @@ export default function UserPantry() {
               <ul>{sortedUserPantryItems.map(pantry_item => (
                 <h4 key={pantry_item.id}>
                   <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
-                  {}
                 </h4>
               ))}
             </ul>
