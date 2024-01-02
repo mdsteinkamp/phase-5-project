@@ -126,7 +126,7 @@ export default function AddRecipe() {
           {errors.length > 0 &&
             <ul>{errors.map(e => (
               <ul key={e}>
-                <h2 style={{color: "white"}}>{e}</h2>
+                <h3 style={{color: "white"}}>{e}</h3>
               </ul>))}
             </ul>
           }
