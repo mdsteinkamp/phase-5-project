@@ -1,7 +1,7 @@
 import { StyledUserPantry } from "./styles/UserPantry.styled"
 import { PantryNavlink } from "./styles/PantryNavLink.styled"
 import { NavLink } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useContext, useState, Fragment } from "react"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
 
@@ -75,7 +75,7 @@ export default function UserPantry() {
   return (
     <StyledUserPantry>
         <h1>My Pantry</h1>
-        <div className="three-columns">
+        <div className="responsive-three-columns">
           <div>
             <PantryNavlink to="/pantry_items/new">Add Item</PantryNavlink>
           </div>
@@ -86,41 +86,48 @@ export default function UserPantry() {
             <PantryNavlink to="/available_recipes">What Can I Make</PantryNavlink>
           </div>
         </div>
-        <div className="four-columns">  
-          <div>
-            <h3>Item</h3>
-            <ul>{sortedUserPantryItems.map(pantry_item => (
-              <NavLink to={`/pantry_items/${pantry_item.id}`} className="navlink" key={pantry_item.id}>{pantry_item.foodstuff.name}</NavLink>
+
+        <div className="grid">  
+            <span>Item</span>
+            <span>Quantity</span>
+            <span>Units</span>
+            <span>Remove</span>
+            </div>
+            
+            <ul className="grid-list">{sortedUserPantryItems.map(pantry_item => (
+              <Fragment key={pantry_item.id}>
+              <NavLink to={`/pantry_items/${pantry_item.id}`}>{pantry_item.foodstuff.name}</NavLink>
+                <h4>{pantry_item.quantity}</h4>
+                <h4>{pantry_item.foodstuff.unit}</h4>
+                <h4 key={pantry_item.foodstuff.name}>
+                  <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
+                </h4>
+              </Fragment>
             ))}
             </ul>
-          </div>
-          <div>
-            <h3>Quantity</h3>
-            <ul>{sortedUserPantryItems.map(pantry_item => (
-              <h4 key={pantry_item.id}>{pantry_item.quantity}</h4>
+
+            {/* <ul>{sortedUserPantryItems.map(pantry_item => (
+              <h4 key={pantry_item.id}> {pantry_item.quantity}</h4>
             ))}
             </ul>
-          </div>
-          <div>
-            <h3>Units</h3>
+
             <ul>{sortedUserPantryItems.map(pantry_item => (
               <h4 key={pantry_item.id}>{pantry_item.foodstuff.unit}</h4>
             ))}
             </ul>
-          </div>
-          <div>
-            <h3>Remove</h3>
-            <div>
+
               <ul>{sortedUserPantryItems.map(pantry_item => (
                 <h4 key={pantry_item.id}>
                   <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
                 </h4>
               ))}
-            </ul>
-            <button onClick={handleDeleteClick}>REMOVE</button>
-            </div>
-          </div>
-        </div>
+            </ul> */}
+
+            <button onClick={handleDeleteClick} className="end-button">REMOVE</button>
+
+        {/* </div> */}
+
+
         {errors.length > 0 &&
           <ul>{errors.map(e => (
             <ul key={e}>

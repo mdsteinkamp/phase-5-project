@@ -21,7 +21,6 @@ export const StyledUserPantry = styled.div`
     }
   }
 
-
   h3 {
     color: white;
   }
@@ -34,6 +33,7 @@ export const StyledUserPantry = styled.div`
   .responsive-three-columns {
       display:flex;
       flex-wrap:wrap;
+      justify-content: space-between;
   }
 
   /* container */
@@ -128,11 +128,30 @@ export const StyledUserPantry = styled.div`
   &:hover {
   background-color: #ff5252;
   }
+}
 
   a:visited{
   color:blue;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid > span {
+  color: white;
+}
+
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
 
 `
