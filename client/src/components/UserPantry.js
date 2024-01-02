@@ -92,7 +92,7 @@ export default function UserPantry() {
             <span>Quantity</span>
             <span>Units</span>
             <span>Remove</span>
-            </div>
+        </div>
             
             <ul className="grid-list">{sortedUserPantryItems.map(pantry_item => (
               <Fragment key={pantry_item.id}>
@@ -105,6 +105,15 @@ export default function UserPantry() {
               </Fragment>
             ))}
             </ul>
+        <div className="grid">
+            <span></span>
+            <span></span>
+            <span></span>
+            <button onClick={handleDeleteClick} className="end-button">REMOVE</button>
+
+
+        </div>
+
 
             {/* <ul>{sortedUserPantryItems.map(pantry_item => (
               <h4 key={pantry_item.id}> {pantry_item.quantity}</h4>
@@ -122,8 +131,6 @@ export default function UserPantry() {
                 </h4>
               ))}
             </ul> */}
-
-            <button onClick={handleDeleteClick} className="end-button">REMOVE</button>
 
         {/* </div> */}
 

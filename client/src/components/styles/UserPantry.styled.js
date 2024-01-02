@@ -130,28 +130,37 @@ export const StyledUserPantry = styled.div`
   }
 }
 
+  a {
+    color: #EA654E;
+    &:hover {
+      color: #FFE5B4;
+    }
+  }
+
   a:visited{
-  color:blue;
-}
+    color: #EA654E;
+    &:hover {
+      color: #FFE5B4;
+    }
+  }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
 
-.grid-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
+  .grid-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
 
-.grid > span {
-  color: white;
-}
+  .grid > span {
+    color: white;
+  }
 
-.grid-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
+  .grid-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
 
 `
