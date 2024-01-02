@@ -130,14 +130,14 @@ export const StyledUserPantry = styled.div`
   }
 }
 
-  a {
+  .list-item{
     color: #EA654E;
     &:hover {
       color: #FFE5B4;
     }
   }
 
-  a:visited{
+  .list-item{
     color: #EA654E;
     &:hover {
       color: #FFE5B4;

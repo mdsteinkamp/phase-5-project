@@ -96,7 +96,7 @@ export default function UserPantry() {
             
             <ul className="grid-list">{sortedUserPantryItems.map(pantry_item => (
               <Fragment key={pantry_item.id}>
-              <NavLink to={`/pantry_items/${pantry_item.id}`}>{pantry_item.foodstuff.name}</NavLink>
+              <NavLink to={`/pantry_items/${pantry_item.id}`} className="list-item">{pantry_item.foodstuff.name}</NavLink>
                 <h4>{pantry_item.quantity}</h4>
                 <h4>{pantry_item.foodstuff.unit}</h4>
                 <h4 key={pantry_item.foodstuff.name}>
@@ -113,27 +113,6 @@ export default function UserPantry() {
 
 
         </div>
-
-
-            {/* <ul>{sortedUserPantryItems.map(pantry_item => (
-              <h4 key={pantry_item.id}> {pantry_item.quantity}</h4>
-            ))}
-            </ul>
-
-            <ul>{sortedUserPantryItems.map(pantry_item => (
-              <h4 key={pantry_item.id}>{pantry_item.foodstuff.unit}</h4>
-            ))}
-            </ul>
-
-              <ul>{sortedUserPantryItems.map(pantry_item => (
-                <h4 key={pantry_item.id}>
-                  <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
-                </h4>
-              ))}
-            </ul> */}
-
-        {/* </div> */}
-
 
         {errors.length > 0 &&
           <ul>{errors.map(e => (
