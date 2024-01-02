@@ -70,13 +70,15 @@ export default function AddRecipe() {
           instructions: "",
         })
         setErrors([])
-      } else {
+      } else {  
         resp.json().then(e => {
+          console.log(e.errors)
           setErrors(e.errors)
-          console.log(errors)
+          return
         })
       }})
     }
+    console.log(errors)
 
   function handleSubmitIngredients(ingredients, newRecipe) {
     Promise.all(ingredients.map(ingredient => {
