@@ -87,10 +87,10 @@ export default function Signup() {
             onChange={handleChange}
           />
           <br />
-          <PantryNavlink className="signup-button" as={Link} to="/" onClick={handleSubmit}>Signup</PantryNavlink>
+          <PantryNavlink className={"signup-button"} as={Link} to="/" onClick={handleSubmit}>Signup</PantryNavlink>
         </form>
         <div>
-        <PantryNavlink className="signup-button" to="/">Cancel</PantryNavlink>
+        <PantryNavlink className={"signup-button"} to="/">Cancel</PantryNavlink>
         </div>
         {errors.length > 0 &&
             <ul>{errors.map(e => (

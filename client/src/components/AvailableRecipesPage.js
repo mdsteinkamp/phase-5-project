@@ -56,7 +56,9 @@ export default function AvailableRecipesPage() {
 					<StyledUserPantry>
 									<h1>You can make the below recipes!</h1>
 									<ul>{makeableRecipes.map((recipe, index) => (
-										<NavbarNavLink to={`/recipes/${recipe.id}`} key={recipe.id}>{index + 1}. {recipe.name}</NavbarNavLink>
+										<div>
+											<NavbarNavLink to={`/recipes/${recipe.id}`} key={recipe.id}>{index + 1}. {recipe.name}</NavbarNavLink>
+										</div>
 									))}</ul>
 
 					</StyledUserPantry>
