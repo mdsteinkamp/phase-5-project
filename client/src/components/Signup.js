@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 export default function Signup() {
   const [formData, setFormData] = useState({
     username: "",
+    email: "",
     password: "",
     password_confirmation: ""
   })
@@ -16,13 +17,13 @@ export default function Signup() {
 
   const navigate = useNavigate()
 
-  const Button = ({ onClick, children, as: Component = 'button', ...rest }) => {
-    return (
-      <Component onClick={onClick} className="button" {...rest}>
-        {children}
-      </Component>
-    );
-  };
+  // const Button = ({ onClick, children, as: Component = 'button', ...rest }) => {
+  //   return (
+  //     <Component onClick={onClick} className="button" {...rest}>
+  //       {children}
+  //     </Component>
+  //   );
+  // };
 
   function handleChange(e) {
     const name = e.target.name
@@ -66,6 +67,15 @@ export default function Signup() {
             name="username"
             placeholder="Username"
             value={formData.username}
+            onChange={handleChange}
+          />
+          <br />
+          <h3>Email</h3>
+          <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
             onChange={handleChange}
           />
           <br />
