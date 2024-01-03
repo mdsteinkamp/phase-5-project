@@ -163,4 +163,9 @@ export const StyledUserPantry = styled.div`
     grid-template-columns: repeat(4, 1fr);
   }
 
+  .grid-list a {
+    display: flex;
+    align-items: center;
+  }
+
 `
