@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom"
 import { UserContext } from "./UserContext"
 import { RecipesContext } from "./RecipesContext"
 
-export default function AvailableRecipesPage() {
+export default function AvailableRecipesPage({}) {
   const {recipes} = useContext(RecipesContext)
   const {user} = useContext(UserContext)
 	const [makeableRecipes, setMakeableRecipes] = useState(null)
@@ -21,8 +21,6 @@ export default function AvailableRecipesPage() {
 
 	useEffect(() => {
 		if(recipes) {
-
-			
 			function CheckAvailableRecipes() {
 				let resultsArray = []
 				const results = new Set()

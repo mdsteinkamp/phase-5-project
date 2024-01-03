@@ -1,6 +1,8 @@
 import { useState, useContext } from "react"
 import { Routes, Route } from "react-router-dom"
 import { UserContext } from "./UserContext"
+import { RecipesContext } from "./RecipesContext"
+
 import '../App.css'
 import Header from "./Header"
 import Home from "./Home"
@@ -21,6 +23,8 @@ import AvailableRecipesPage from "./AvailableRecipesPage"
 export default function App() {
   // const [count, setCount] = useState(0)
   const {user} = useContext(UserContext)
+  const {recipes} = useContext(RecipesContext)
+
 
   return (
     <StyledAppContainer>
@@ -37,7 +41,7 @@ export default function App() {
         <Route path="/recipes" element={<RecipesPage />} />
         <Route path="/recipes/new" element={<AddRecipe />} />
         <Route path="/recipes/:id" element={<RecipeDetailPage />} />
-        <Route path="/available_recipes" element={<AvailableRecipesPage />} />
+        <Route path="/available_recipes" element={<AvailableRecipesPage recipes={recipes} user={user} />} />
       </Routes>
       </StyledAppContainer>
   );
