@@ -48,7 +48,7 @@ export default function RecipeDetailPage() {
     Promise.all(pantryItemsToUpdate.map(item => {
       const updatedItem = {
         ...item,
-        quantity: item.quantity - recipe.ingredients.find(ingredient => ingredient.foodstuff.name === 1tem.foodstuff.name).quantity
+        quantity: item.quantity - recipe.ingredients.find(ingredient => ingredient.foodstuff.name === item.foodstuff.name).quantity
       }
       console.log(updatedItem)
       return fetch(`/pantry_items/${item.id}`, {
