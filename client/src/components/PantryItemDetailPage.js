@@ -36,6 +36,7 @@ export default function PantryItemDetailPage() {
         resp.json().then(e => setErrors(e.errors))
       }
     })
+    .catch(e => console.log(e))
   }
 
 

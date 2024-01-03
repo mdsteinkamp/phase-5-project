@@ -41,7 +41,6 @@ export default function AddRecipeName({ onHandleChangeRender }) {
           onChange={handleRecipeChange}
         />
 
-
       </form>
       <br />
       <div>

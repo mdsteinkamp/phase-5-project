@@ -5,8 +5,6 @@ import { RecipesContext } from "./RecipesContext"
 import { StyledRecipeDetails } from "./styles/RecipeDetail.styled"
 import RenderMissingIngredients from "./RenderMissingIngredients"
 
-
-
 export default function RecipeDetailPage() {
   const {recipes} = useContext(RecipesContext)
   const {user, setUser} = useContext(UserContext)
@@ -37,7 +35,6 @@ export default function RecipeDetailPage() {
     const resultsArray = Object.entries(results)
     const negativesArray = resultsArray.filter(item => item[1][0] < 0)
     const renderNegatives = negativesArray.length > 0 ? negativesArray : null
-    
     setMissingIngredients(renderNegatives)
     setRenderIngredients(true)
   }
@@ -51,7 +48,7 @@ export default function RecipeDetailPage() {
     Promise.all(pantryItemsToUpdate.map(item => {
       const updatedItem = {
         ...item,
-        quantity: item.quantity - recipe.ingredients.find(ingred => ingred.foodstuff.name === item.foodstuff.name).quantity
+        quantity: item.quantity - recipe.ingredients.find(ingredient => ingredient.foodstuff.name === 1tem.foodstuff.name).quantity
       }
       console.log(updatedItem)
       return fetch(`/pantry_items/${item.id}`, {
@@ -72,13 +69,10 @@ export default function RecipeDetailPage() {
         console.log(updatedUserPantryItems)
         const updatedUser = {...user, pantry_items: updatedUserPantryItems}
         setUser(updatedUser)
-
-
       })
       .catch(e => console.log(e))
     })
   }
-
 
   return (
     <StyledRecipeDetails>
@@ -97,11 +91,8 @@ export default function RecipeDetailPage() {
         <button onClick={handleCheckIngredients}>Can I Make This?</button>
       </div>
       <br />
-
       
       {renderIngredients ? <RenderMissingIngredients missingIngredients={missingIngredients} onUpdateUserPantry={handleUpdateUserPantry}/> : null }
-
-      
 
     </StyledRecipeDetails>
   )
