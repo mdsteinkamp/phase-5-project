@@ -63,7 +63,6 @@ export default function AddRecipe() {
           setRecipes(newRecipes)
           setNewRecipe(newRecipe)
           handleSubmitIngredients(ingredients, newRecipe)
-
         })
         setRecipeFormData({
           name: "",
@@ -93,13 +92,12 @@ export default function AddRecipe() {
     }))
     .then(results => {
       Promise.all(results.map((ingredient) => {
-        return ingredient.json()
+        return ingredient.json().catch(e => console.log(e))
       }))
       .then(ingredients => {
         const updatedRecipe = {...newRecipe, ingredients: ingredients}
         console.log(updatedRecipe)
         setRecipes([...recipes, updatedRecipe])
-        
         setAddRecipe(true)
       })
       .catch(e => console.log(e))

@@ -6,6 +6,10 @@ export const StyledRecipes = styled.div`
   justify-content: center;
   flex-direction: column;
 
+  /* ul {
+    align-items: center;
+  } */
+
 
   /* div {
     display: flex;

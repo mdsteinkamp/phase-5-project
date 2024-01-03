@@ -1,14 +1,14 @@
 import { useState } from "react"
 import { StyledRecipes } from "./styles/StyledRecipes"
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 
-export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe, errors }) {
+export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe }) {
   const [recipeFormData, setRecipeFormData] = useState({
     name: "",
     instructions: "",
   })
   const [instructionsError, setInstructionsError] = useState(false)
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   function handleRecipeChange(e) {
     const name = e.target.name

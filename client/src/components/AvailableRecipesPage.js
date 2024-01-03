@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { UserContext } from "./UserContext"
 import { RecipesContext } from "./RecipesContext"
-import AvailableRecipesLogic from "./AvailableRecipesLogic"
 
 export default function AvailableRecipesPage() {
   const {recipes} = useContext(RecipesContext)

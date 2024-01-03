@@ -21,7 +21,7 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
     user_id: "",
     foodstuff_id: "",
   })
-  const [renderAddIngredient, setRenderAddIngredient] = useState("name")
+  // const [renderAddIngredient, setRenderAddIngredient] = useState("name")
 
   if (!foodstuffs, !user) return <h1>Loading...</h1>
   console.log(ingredientFormData)
@@ -48,7 +48,6 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
 
   function handleAddIngredient() {
     if (Object.values(ingredientFormData).includes("")) {
-      console.log('nein')
       setIngredientError(true)
     } else {
       setRecipeIngredients([...recipeIngredients, ingredientFormData])
@@ -73,7 +72,6 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
   return ( 
     <StyledRecipes>
       <h1>Add Ingredients</h1>
-
       <div>
       <form>
         <h2>Name</h2>
