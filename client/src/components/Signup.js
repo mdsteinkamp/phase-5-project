@@ -32,7 +32,6 @@ export default function Signup() {
       ...formData,
       [name]: value
     })
-    console.log(formData)
   }
 
   function handleSubmit(e) {
