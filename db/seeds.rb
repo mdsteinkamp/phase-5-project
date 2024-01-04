@@ -1,5 +1,6 @@
 puts "seeding..."
 
+User.destroy_all
 Recipe.destroy_all
 Foodstuff.destroy_all
 Ingredient.destroy_all
