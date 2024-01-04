@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       UserMailer.with(user: @user).welcome_email.deliver_now
       render json: @user, status: :created
     else
-      render json: { errors: "Error on creation" }, status: :unprocessable_entity
+      render json: { errors: ["Error on creation"] }, status: :unprocessable_entity
     end
   end
 
