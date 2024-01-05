@@ -33,7 +33,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Mount Action Cable outside main process or domain.
-  # config.action_cable.mount_path = nil
+  # config.action_cable.mount_path = nil 
   # config.action_cable.url = "wss://example.com/cable"
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
 
@@ -68,7 +68,22 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  host = 'https://pantry-app-032x.onrender.com'
+  # config.action_mailer.default_url_options = { :host => 'https://pantry-app-032x.onrender.com', protocol: 'http' }
+  config.action_mailer.smtp_settings = {
+    address:         'smtp.gmail.com',
+    port:            587,
+    domain:          'https://pantry-app-032x.onrender.com',
+    user_name:       ENV["GMAIL_USERNAME"],
+    password:        ENV["GMAIL_PASSWORD"],
+    authentication:  'plain',
+    enable_starttls: true,
+    open_timeout:    5,
+    read_timeout:    5 }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -87,14 +102,4 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:         'smtp.gmail.com',
-    port:            587,
-    user_name:       ENV["GMAIL_USERNAME"],
-    password:        ENV["GMAIL_PASSWORD"],
-    authentication:  'plain',
-    enable_starttls: true,
-    open_timeout:    5,
-    read_timeout:    5 }
 end
