@@ -2,19 +2,18 @@ import { useState, useContext } from "react"
 import { StyledRecipes } from "./styles/StyledRecipes"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
-import { Link } from "react-router-dom"
 import Select from 'react-select'
-import { Routes, Route } from "react-router-dom"
 
 
 export default function AddRecipeIngredients({ onHandleChangeRender }) {
-  const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
-  const {user, setUser} = useContext(UserContext)
+  const {foodstuffs} = useContext(FoodstuffsContext)
+  const {user} = useContext(UserContext)
   const [selectedNameOption, setSelectedNameOption] = useState(null)
   const [selectedUnit, setSelectedUnit] = useState("")
   const [recipeIngredients, setRecipeIngredients] = useState([])
   const [ingredientError, setIngredientError] = useState(false)
   const [renderIngredientAdded, setRenderIngredientAdded] = useState(false)
+  const [duplicateIngredientError, setDuplicateIngredientError] = useState(false)
 
   const [ingredientFormData, setIngredientFormData] = useState({
     quantity: "",
@@ -25,6 +24,7 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
 
   if (!foodstuffs, !user) return <h1>Loading...</h1>
   console.log(ingredientFormData)
+  console.log(selectedNameOption)
 
 
   function handleIngredientChange(e) {
@@ -49,6 +49,9 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
   function handleAddIngredient() {
     if (Object.values(ingredientFormData).includes("")) {
       setIngredientError(true)
+    } else if (recipeIngredients.find(recipe => recipe.foodstuff_id === ingredientFormData.foodstuff_id)) {
+      setDuplicateIngredientError(true)
+      setRenderIngredientAdded(false)
     } else {
       setRecipeIngredients([...recipeIngredients, ingredientFormData])
       setIngredientError(false)
@@ -109,6 +112,7 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
       </div>
       {ingredientError ? <h2>Ingredient Info Missing</h2> : null}
       {renderIngredientAdded ? <h2>Added!</h2> : null}
+      {duplicateIngredientError ? <h2>{selectedNameOption.label} already in recipe!</h2> : null}
     </StyledRecipes>
   )
 }

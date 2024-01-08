@@ -24,7 +24,7 @@ export default function AvailableRecipesPage() {
 										unmakeableRecipes.add(recipe.name)
 								} else if (user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name && ingredient.quantity > i.quantity)) {
 										unmakeableRecipes.add(recipe.name)
-								}	if ((user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name && ingredient.quantity <= i.quantity))) {
+								} else if ((user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name && ingredient.quantity <= i.quantity))) {
 										results.add(recipe)
 								} 
 							}

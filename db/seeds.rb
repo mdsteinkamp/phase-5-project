@@ -8,7 +8,7 @@ PantryItem.destroy_all
 
 bolo = Recipe.create(name: "Bolognese", instructions: "do this then this then this etc")
 marinara = Recipe.create(name: "Marinara Sauce", instructions: "make the SAUCEs")
-taco_salad = Recipe.create(name: "Taco Salad", instructions: "do this then this then this etc")
+# taco_salad = Recipe.create(name: "Taco Salad", instructions: "do this then this then this etc")
 
 evoo = Foodstuff.create(name: "Extra Virgin Olive Oil", unit: "Cup", category: "Cooking Liquid")
 white_onion = Foodstuff.create(name: "White Onion", unit: "Item", category: "Vegetable")
