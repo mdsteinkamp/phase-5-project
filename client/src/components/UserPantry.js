@@ -12,9 +12,12 @@ export default function UserPantry() {
   const [isChecked, setIsChecked] = useState(true)
   const [foodstuffCheckedArray, setFoodstuffCheckedArray] = useState([])
   const [errors, setErrors] = useState([])
+  const [searchInput, setSearchInput] = useState("")
 
   if (!user) return <h1>Loading...</h1>
   const sortedUserPantryItems = [...user.pantry_items].sort((a, b) => ((a.foodstuff.name < b.foodstuff.name) ? -1 : (b.foodstuff.name > a.foodstuff.name) ? 1 : 0))
+  console.log(sortedUserPantryItems)
+  const shownPantryItems = searchInput !== "" ? sortedUserPantryItems.filter(item => Object.values(item.foodstuff).join(' ').toLowerCase().includes(searchInput.toLowerCase())) : sortedUserPantryItems
   console.log(user)
 
   function handleClickChange(e) {
@@ -86,6 +89,17 @@ export default function UserPantry() {
             <PantryNavlink to="/available_recipes">What Can I Make</PantryNavlink>
           </div>
         </div>
+        <div>
+          <form>
+            <input
+              type="text"
+              id="search"
+              placeholder="Search Pantry..."
+              value={searchInput}
+              onChange={e => setSearchInput(e.target.value)}
+            />
+          </form>
+        </div>
 
         <div className="grid">  
             <span>Item</span>
@@ -94,17 +108,17 @@ export default function UserPantry() {
             <span>Remove</span>
         </div>
             
-            <ul className="grid-list">{sortedUserPantryItems.map(pantry_item => (
-              <Fragment key={pantry_item.id}>
-              <NavLink to={`/pantry_items/${pantry_item.id}`} className="list-item">{pantry_item.foodstuff.name}</NavLink>
-                <h4>{pantry_item.quantity}</h4>
-                <h4>{pantry_item.foodstuff.unit}</h4>
-                <h4 key={pantry_item.foodstuff.name}>
-                  <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
-                </h4>
-              </Fragment>
-            ))}
-            </ul>
+          <ul className="grid-list">{shownPantryItems.map(pantry_item => (
+            <Fragment key={pantry_item.id}>
+            <NavLink to={`/pantry_items/${pantry_item.id}`} className="list-item">{pantry_item.foodstuff.name}</NavLink>
+              <h4>{pantry_item.quantity}</h4>
+              <h4>{pantry_item.foodstuff.unit}</h4>
+              <h4 key={pantry_item.foodstuff.name}>
+                <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
+              </h4>
+            </Fragment>
+          ))}
+          </ul>
         <div className="grid">
             <span></span>
             <span></span>
