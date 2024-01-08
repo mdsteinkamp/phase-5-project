@@ -168,4 +168,16 @@ export const StyledUserPantry = styled.div`
     align-items: center;
   }
 
+  label[for="search"] {
+    color: white;
+    font-size: 25px;
+  }
+
+  #search-container {
+    display: flex;
+    height: 75px;
+    justify-content: center;
+    align-items: center;
+  }
+
 `

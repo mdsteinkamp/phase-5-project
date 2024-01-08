@@ -89,8 +89,9 @@ export default function UserPantry() {
             <PantryNavlink to="/available_recipes">What Can I Make</PantryNavlink>
           </div>
         </div>
-        <div>
+        <div id="search-container">
           <form>
+            <label for="search">Search Your Pantry: </label>
             <input
               type="text"
               id="search"
