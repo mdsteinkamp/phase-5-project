@@ -39,6 +39,7 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
   const pantryItemNameOptions = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit}))
 
   function handleSelectNameOption(option) {
+    setDuplicateIngredientError(false)
     setSelectedNameOption(option)
     setSelectedUnit(option.unit)
     setIngredientFormData({...ingredientFormData,
