@@ -30,6 +30,19 @@ parmesan_cheese = Foodstuff.create(name: "Parmesan Cheese", unit: "Grated", cate
 oregano = Foodstuff.create(name: "Oregano", unit: "Tsp", category: "Spice")
 basil = Foodstuff.create(name: "Basil", unit: "Tbsp", category: "Spice")
 
+
+puts "loading from xlsx"
+xlsx = Roo::Spreadsheet.open('lib/ingredients.xlsx')
+xlsx.sheet(0).each_with_index(name: "name", unit: "unit") do |row, row_index|
+  next if row_index == 0 || Foodstuff.find_by(name: row[:name]).present?
+  Foodstuff.create(
+    name: row[:name].gsub(/\d/, "").gsub(/\;/,"").titleize,
+    unit: row[:unit], 
+    category: "Blank"
+  )
+end
+puts "xlsx load done!"
+
 # bolonese ingredients
 Ingredient.create(quantity: 0.25, recipe_id: bolo.id, foodstuff_id: evoo.id)
 Ingredient.create(quantity: 1, recipe_id: bolo.id, foodstuff_id: white_onion.id)
