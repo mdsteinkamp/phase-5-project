@@ -3,33 +3,30 @@ import { PantryNavlink } from "./styles/PantryNavLink.styled"
 import { NavLink } from "react-router-dom"
 import { useContext, useState, Fragment } from "react"
 import { UserContext } from "./UserContext"
-import { FoodstuffsContext } from "./FoodstuffsContext"
-
 
 export default function UserPantry() {
   const {user, setUser} = useContext(UserContext)
-  const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const [isChecked, setIsChecked] = useState(true)
   const [foodstuffCheckedArray, setFoodstuffCheckedArray] = useState([])
-  const [errors, setErrors] = useState([])
+  const [errors] = useState([])
   const [searchInput, setSearchInput] = useState("")
 
   if (!user) return <h1>Loading...</h1>
   const sortedUserPantryItems = [...user.pantry_items].sort((a, b) => ((a.foodstuff.name < b.foodstuff.name) ? -1 : (b.foodstuff.name > a.foodstuff.name) ? 1 : 0))
-  console.log(sortedUserPantryItems)
+  // console.log(sortedUserPantryItems)
   const shownPantryItems = searchInput !== "" ? sortedUserPantryItems.filter(item => Object.values(item.foodstuff).join(' ').toLowerCase().includes(searchInput.toLowerCase())) : sortedUserPantryItems
-  console.log(user)
+  // console.log(user)
 
   function handleClickChange(e) {
-    console.log(e.target.checked, e.target.value)
+    // console.log(e.target.checked, e.target.value)
     setIsChecked(isChecked => !isChecked)
     const itemID = user.pantry_items.find(item => item.foodstuff.name === e.target.value).id
-    console.log(itemID)
+    // console.log(itemID)
     const newCheckedObj = {name: e.target.value, isChecked: e.target.checked, id: itemID}
     const id = user.pantry_items.find(item => item.foodstuff.name === newCheckedObj.name).id
-    console.log(id)
+    // console.log(id)
     const newFoodstuffCheckedArray = [...foodstuffCheckedArray]
-    if (newFoodstuffCheckedArray.length == 0) {
+    if (newFoodstuffCheckedArray.length === 0) {
       newFoodstuffCheckedArray.push(newCheckedObj)
     } else {
       for (const obj of newFoodstuffCheckedArray) {
@@ -50,8 +47,9 @@ export default function UserPantry() {
   }
 
   function handleDeleteClick () {
-    const itemstoDelete = foodstuffCheckedArray.filter(item => item.isChecked == true)
-    console.log(itemstoDelete)
+    const itemstoDelete = foodstuffCheckedArray.filter(item => item.isChecked === true)
+    // console.log(itemstoDelete)
+    setFoodstuffCheckedArray([])
     
     Promise.all(itemstoDelete.map(item => {
       return fetch(`/pantry_items/${item.id}`, {
@@ -70,7 +68,7 @@ export default function UserPantry() {
 
       
       const updatedPantryItems = [...user.pantry_items].filter(item => !itemstoDelete.find(f => f.id === item.id))
-      console.log(updatedPantryItems)
+      // console.log(updatedPantryItems)
       const updatedUser = {...user, pantry_items: updatedPantryItems}
       setUser(updatedUser)
   }
