@@ -13,18 +13,14 @@ export default function UserPantry() {
 
   if (!user) return <h1>Loading...</h1>
   const sortedUserPantryItems = [...user.pantry_items].sort((a, b) => ((a.foodstuff.name < b.foodstuff.name) ? -1 : (b.foodstuff.name > a.foodstuff.name) ? 1 : 0))
-  // console.log(sortedUserPantryItems)
   const shownPantryItems = searchInput !== "" ? sortedUserPantryItems.filter(item => Object.values(item.foodstuff).join(' ').toLowerCase().includes(searchInput.toLowerCase())) : sortedUserPantryItems
   // console.log(user)
 
   function handleClickChange(e) {
-    // console.log(e.target.checked, e.target.value)
     setIsChecked(isChecked => !isChecked)
     const itemID = user.pantry_items.find(item => item.foodstuff.name === e.target.value).id
-    // console.log(itemID)
     const newCheckedObj = {name: e.target.value, isChecked: e.target.checked, id: itemID}
-    const id = user.pantry_items.find(item => item.foodstuff.name === newCheckedObj.name).id
-    // console.log(id)
+    // const id = user.pantry_items.find(item => item.foodstuff.name === newCheckedObj.name).id
     const newFoodstuffCheckedArray = [...foodstuffCheckedArray]
     if (newFoodstuffCheckedArray.length === 0) {
       newFoodstuffCheckedArray.push(newCheckedObj)
@@ -48,7 +44,6 @@ export default function UserPantry() {
 
   function handleDeleteClick () {
     const itemstoDelete = foodstuffCheckedArray.filter(item => item.isChecked === true)
-    // console.log(itemstoDelete)
     setFoodstuffCheckedArray([])
     
     Promise.all(itemstoDelete.map(item => {
@@ -65,7 +60,6 @@ export default function UserPantry() {
 
       
       const updatedPantryItems = [...user.pantry_items].filter(item => !itemstoDelete.find(f => f.id === item.id))
-      // console.log(updatedPantryItems)
       const updatedUser = {...user, pantry_items: updatedPantryItems}
       setUser(updatedUser)
   }
