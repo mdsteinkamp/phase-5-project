@@ -60,9 +60,6 @@ export default function UserPantry() {
         Promise.all(results.map(ingredient => {
           return ingredient
         }))
-        .then(ingredients => {
-          console.log(ingredients)
-        })
         .catch(e => console.log(e))
       })
 

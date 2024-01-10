@@ -14,7 +14,6 @@ export default function AddPantryItemForm({ user, foodstuffs, onSubmit }) {
     foodstuff_id: "",
   })
 
-  console.log(user)
   let pantryItemNameOptions
 
   pantryItemNameOptions = (foodstuffs) ? pantryItemNameOptions = foodstuffs.map(foodstuff => ({label: foodstuff.name, value: foodstuff.id, unit: foodstuff.unit})) : null
