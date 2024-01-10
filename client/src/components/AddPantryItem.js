@@ -80,10 +80,10 @@ export default function AddPantryItem() {
   return (
     <StyledAddFoodstuffOrPantryItem>
       <div>
-        <h1>Add Pantry Item</h1>git 
+        <h1>Add Pantry Item</h1>
       </div>
       <div>
-        <h3>User definable units to come later...</h3>git 
+        <h3>User definable units to come later...If the ingredient is not in the list please add in "Add Ingredient" above. </h3>
       </div>
       <div>
 

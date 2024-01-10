@@ -91,7 +91,7 @@ export default function UserPantry() {
         </div>
         <div id="search-container">
           <form>
-            <label for="search">Search Your Pantry: </label>
+            <label htmlFor="search">Search Your Pantry: </label>
             <input
               type="text"
               id="search"
