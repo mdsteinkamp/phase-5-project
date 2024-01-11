@@ -6,9 +6,17 @@ Ingredient.destroy_all
 PantryItem.destroy_all
 
 
-bolo = Recipe.create(name: "Bolognese", instructions: "do this then this then this etc")
-marinara = Recipe.create(name: "Marinara Sauce", instructions: "make the SAUCEs")
-# taco_salad = Recipe.create(name: "Taco Salad", instructions: "do this then this then this etc")
+bolo = Recipe.create(name: "Bolognese", instructions: "
+1. Cook diced onion, carrot, celery in large saucepan until softened. Scrape into bowl.\n
+2. In same pan cook ground beef/meat until just barely pink, ~5 minutes.\n
+3. Return vegetable mixture to pan, add diced garlic & cook over high heat ~1 minute until fragrant.\n
+4. Add wine & cook until mostly evaporated.
+5. Stir in tomatoes, chicken stock, thyme, bay leaf, salt & pepper & bring to boil.\n
+6. Lower heat to simmer, cover & cook for ~1 hour. Discard bay leaf, stir in heavy cream.\n
+7. Meanwhile cook your penne unti al dente, drain and mix into the saue. 
+")
+marinara = Recipe.create(name: "Marinara Sauce", instructions: "make the SAUCES")
+martinez_picadillo = Recipe.create(name: "Martinez Family Picadillo", instructions: "")
 
 evoo = Foodstuff.create(name: "Extra Virgin Olive Oil", unit: "Cup", category: "Cooking Liquid")
 white_onion = Foodstuff.create(name: "White Onion", unit: "Item", category: "Vegetable")
@@ -29,6 +37,13 @@ penne = Foodstuff.create(name: "Penne", unit: "Lb", category: "Grain")
 parmesan_cheese = Foodstuff.create(name: "Parmesan Cheese", unit: "Grated", category: "Cheese")
 oregano = Foodstuff.create(name: "Oregano", unit: "Tsp", category: "Spice")
 basil = Foodstuff.create(name: "Basil", unit: "Tbsp", category: "Spice")
+guajillo_chile_pod = Foodstuff.create(name: "Guajillo Chile Pod (dried)", unit: "Pod", category: "Spice")
+california_chile_pod = Foodstuff.create(name: "California Chile Pod (dried)", unit: "Pod", category: "Spice")
+arbol_chile_pod = Foodstuff.create(name: "Arbol Chile Pod (dried)", unit: "Pod", category: "Spice")
+tomatillo = Foodstuff.create(name: "Tomatillo", unit: "Lb", category: "Fruit")
+beef_chuck_roast = Foodstuff.create(name: "Beef Chuck Roast", unit: "Lb", category: "Meat")
+
+
 
 
 puts "loading from xlsx"
@@ -70,6 +85,14 @@ Ingredient.create(quantity: 0.5, recipe_id: marinara.id, foodstuff_id: oregano.i
 Ingredient.create(quantity: 0.5, recipe_id: marinara.id, foodstuff_id: kosher_salt.id)
 Ingredient.create(quantity: 0.25, recipe_id: marinara.id, foodstuff_id: black_pepper.id)
 Ingredient.create(quantity: 1, recipe_id: marinara.id, foodstuff_id: basil.id)
+
+#Martinez picadillo ingredients
+Ingredient.create(quantity: 10, recipe_id: martinez_picadillo.id, foodstuff_id: guajillo_chile_pod.id)
+Ingredient.create(quantity: 5, recipe_id: martinez_picadillo.id, foodstuff_id: california_chile_pod.id)
+Ingredient.create(quantity: 2, recipe_id: martinez_picadillo.id, foodstuff_id: white_onion.id)
+Ingredient.create(quantity: 10, recipe_id: martinez_picadillo.id, foodstuff_id: garlic.id)
+Ingredient.create(quantity: 3, recipe_id: martinez_picadillo.id, foodstuff_id: beef_chuck_roast.id)
+Ingredient.create(quantity: 1, recipe_id: martinez_picadillo.id, foodstuff_id: tomatillo.id)
 
 
 puts "👩‍🍳👨‍🍳 it's COOKIN' TIME 👩‍🍳👨‍🍳"
