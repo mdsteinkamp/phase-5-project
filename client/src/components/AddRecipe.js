@@ -9,15 +9,13 @@ import AddRecipeInstructions from "./AddRecipeInstructions"
 
 
 export default function AddRecipe() {
-  const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
-  const {user, setUser} = useContext(UserContext)
+  const {foodstuffs} = useContext(FoodstuffsContext)
+  const {user} = useContext(UserContext)
   const {recipes, setRecipes} = useContext(RecipesContext)
   const [recipe, setRecipe] = useState({})
   const [newRecipe, setNewRecipe] = useState({})
   const [ingredients, setIngredients] = useState([])
   const [errors, setErrors] = useState([])
-  const [finalRecipe, setFinalRecipe] = useState({})
-  const [newIngredients, setNewIngredients] = useState([])
   const [addRecipe, setAddRecipe] = useState(false)
 
 
@@ -28,11 +26,6 @@ export default function AddRecipe() {
   const [recipeFormData, setRecipeFormData] = useState({
     name: "",
     instructions: "",
-  })
-  const [ingredientFormData, setIngredientFormData] = useState({
-    quantity: "",
-    user_id: "",
-    foodstuff_id: "",
   })
   const [renderAddIngredient, setRenderAddIngredient] = useState("name")
 
