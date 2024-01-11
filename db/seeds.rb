@@ -7,16 +7,30 @@ PantryItem.destroy_all
 
 
 bolo = Recipe.create(name: "Bolognese", instructions: "
-1. Cook diced onion, carrot, celery in large saucepan until softened. Scrape into bowl.\n
-2. In same pan cook ground beef/meat until just barely pink, ~5 minutes.\n
-3. Return vegetable mixture to pan, add diced garlic & cook over high heat ~1 minute until fragrant.\n
-4. Add wine & cook until mostly evaporated.
-5. Stir in tomatoes, chicken stock, thyme, bay leaf, salt & pepper & bring to boil.\n
-6. Lower heat to simmer, cover & cook for ~1 hour. Discard bay leaf, stir in heavy cream.\n
-7. Meanwhile cook your penne unti al dente, drain and mix into the saue. 
+  1. Cook diced onion, carrot, celery in large saucepan until softened. Scrape into bowl.\n
+  2. In same pan cook ground beef/meat until just barely pink, ~5 minutes.\n
+  3. Return vegetable mixture to pan, add diced garlic & cook over high heat ~1 minute until fragrant.\n
+  4. Add wine & cook until mostly evaporated.\n
+  5. Stir in tomatoes, chicken stock, thyme, bay leaf, salt & pepper & bring to boil.\n
+  6. Lower heat to simmer, cover & cook for ~1 hour. Discard bay leaf, stir in heavy cream.\n
+  7. Meanwhile cook your penne unti al dente, drain and mix into the sauce. 
 ")
-marinara = Recipe.create(name: "Marinara Sauce", instructions: "make the SAUCES")
-martinez_picadillo = Recipe.create(name: "Martinez Family Picadillo", instructions: "")
+
+marinara = Recipe.create(name: "Marinara Sauce", instructions: "
+  1. Heat oil in skillet, add minced garlic stir ~30 seconds, do not let garlic burn!\n
+  2. Add can of tomatoes with their juice to the pan, roughly break up the whole tomatoes. Add salt, basil & sugar. Simmer until fragrant.\n
+  3. Blend sauce (immersion blender or normal). Adjust salt/pepper to taste.
+")
+martinez_picadillo = Recipe.create(name: "Martinez Family Picadillo", instructions: "
+    1. Season beef with salt & pepper. Brown all sides in large pan/skillet. Put roast in slow cooker with ~half onion roughly chopped and a few garlic cloves.\n
+    2. Cover the meat about halfway with water & cook 4-5 hours on HIGH or 7+ hours on LOW.\n
+    3. When meat is cooked (should shred easily with a fork) shred it all and set aside.\n
+    3. For the sauce: Open the chile pods and remove seeds. Place all into a medium saucepan with 1/2 onion and a few garlic cloves. Cover with cold water and bring to a boil. Simmer for ~20 minutes.\n
+    4. Transfer all of the chiles to a blender. (Optional - include some of the onions or garlic. Experiment!). Add some of the liquid from the pot and blend till smooth. Check the consistency as you go - add more liquid & blend more if needed. \n
+    5. Strain the blended sauce mixture into a bowl. Take your time, this will result is a SMOOTH sauce. \n
+    6. Remove tomatillos from their husks/ clean well and chop along with 3-5 garlic cloves and 1/2 a white onion. Heat a clean large skillet/pan with oil, dd the onion and tomatillos to a clean large skillet/pan. Cook until softened, then add garlic.\n
+    7. Once garlic has softened a bit, add the shredded meat & mix into the contents of the pan. Once combined, add the strained sauce and mix all together. Season with salt/pepper to taste.
+")
 
 evoo = Foodstuff.create(name: "Extra Virgin Olive Oil", unit: "Cup", category: "Cooking Liquid")
 white_onion = Foodstuff.create(name: "White Onion", unit: "Item", category: "Vegetable")
@@ -42,6 +56,7 @@ california_chile_pod = Foodstuff.create(name: "California Chile Pod (dried)", un
 arbol_chile_pod = Foodstuff.create(name: "Arbol Chile Pod (dried)", unit: "Pod", category: "Spice")
 tomatillo = Foodstuff.create(name: "Tomatillo", unit: "Lb", category: "Fruit")
 beef_chuck_roast = Foodstuff.create(name: "Beef Chuck Roast", unit: "Lb", category: "Meat")
+white_sugar = Foodstuff.create(name: "White Sugar", unit: "Tsp", category: "Sweetener")
 
 
 
@@ -85,6 +100,7 @@ Ingredient.create(quantity: 0.5, recipe_id: marinara.id, foodstuff_id: oregano.i
 Ingredient.create(quantity: 0.5, recipe_id: marinara.id, foodstuff_id: kosher_salt.id)
 Ingredient.create(quantity: 0.25, recipe_id: marinara.id, foodstuff_id: black_pepper.id)
 Ingredient.create(quantity: 1, recipe_id: marinara.id, foodstuff_id: basil.id)
+Ingredient.create(quantity: 0.0125, recipe_id: marinara.id, foodstuff_id: white_sugar.id)
 
 #Martinez picadillo ingredients
 Ingredient.create(quantity: 10, recipe_id: martinez_picadillo.id, foodstuff_id: guajillo_chile_pod.id)
@@ -93,6 +109,8 @@ Ingredient.create(quantity: 2, recipe_id: martinez_picadillo.id, foodstuff_id: w
 Ingredient.create(quantity: 10, recipe_id: martinez_picadillo.id, foodstuff_id: garlic.id)
 Ingredient.create(quantity: 3, recipe_id: martinez_picadillo.id, foodstuff_id: beef_chuck_roast.id)
 Ingredient.create(quantity: 1, recipe_id: martinez_picadillo.id, foodstuff_id: tomatillo.id)
+Ingredient.create(quantity: 0.25, recipe_id: martinez_picadillo.id, foodstuff_id: evoo.id)
+
 
 
 puts "👩‍🍳👨‍🍳 it's COOKIN' TIME 👩‍🍳👨‍🍳"
