@@ -25,7 +25,6 @@ export default function AddPantryItem() {
   if (!foodstuffs, !user) return <h1>Loading...</h1>
 
   function handleSubmit(newPantryItem) {
-    console.log(newPantryItem)
     if ((user.pantry_items.map(item => item.foodstuff_id).includes(newPantryItem.foodstuff_id))) {
       console.log(true)
       const pantryItem = user.pantry_items.find(item => item.foodstuff.id === newPantryItem.foodstuff_id)
@@ -51,6 +50,7 @@ export default function AddPantryItem() {
         }
       })
     } else {
+      console.log(newPantryItem)
       fetch("/pantry_items", {
         method: "POST",
         headers: {

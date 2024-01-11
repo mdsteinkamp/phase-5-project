@@ -14,13 +14,11 @@ export default function UserPantry() {
   if (!user) return <h1>Loading...</h1>
   const sortedUserPantryItems = [...user.pantry_items].sort((a, b) => ((a.foodstuff.name < b.foodstuff.name) ? -1 : (b.foodstuff.name > a.foodstuff.name) ? 1 : 0))
   const shownPantryItems = searchInput !== "" ? sortedUserPantryItems.filter(item => Object.values(item.foodstuff).join(' ').toLowerCase().includes(searchInput.toLowerCase())) : sortedUserPantryItems
-  // console.log(user)
 
   function handleClickChange(e) {
-    setIsChecked(isChecked => !isChecked)
+    setIsChecked(!isChecked)
     const itemID = user.pantry_items.find(item => item.foodstuff.name === e.target.value).id
     const newCheckedObj = {name: e.target.value, isChecked: e.target.checked, id: itemID}
-    // const id = user.pantry_items.find(item => item.foodstuff.name === newCheckedObj.name).id
     const newFoodstuffCheckedArray = [...foodstuffCheckedArray]
     if (newFoodstuffCheckedArray.length === 0) {
       newFoodstuffCheckedArray.push(newCheckedObj)
@@ -98,24 +96,22 @@ export default function UserPantry() {
             <span>Remove</span>
         </div>
             
-          <ul className="grid-list">{shownPantryItems.map(pantry_item => (
-            <Fragment key={pantry_item.id}>
-            <NavLink to={`/pantry_items/${pantry_item.id}`} className="list-item">{pantry_item.foodstuff.name}</NavLink>
-              <h4>{pantry_item.quantity}</h4>
-              <h4>{pantry_item.foodstuff.unit}</h4>
-              <h4 key={pantry_item.foodstuff.name}>
-                <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
-              </h4>
-            </Fragment>
-          ))}
-          </ul>
+        <ul className="grid-list">{shownPantryItems.map(pantry_item => (
+          <Fragment key={pantry_item.id}>
+          <NavLink to={`/pantry_items/${pantry_item.id}`} className="list-item">{pantry_item.foodstuff.name}</NavLink>
+            <h4>{pantry_item.quantity}</h4>
+            <h4>{pantry_item.foodstuff.unit}</h4>
+            <h4 key={pantry_item.foodstuff.name}>
+              <input onChange={handleClickChange} type="checkbox" value={`${pantry_item.foodstuff.name}`}></input>
+            </h4>
+          </Fragment>
+        ))}
+        </ul>
         <div className="grid">
             <span></span>
             <span></span>
             <span></span>
             <button onClick={handleDeleteClick} className="end-button">REMOVE</button>
-
-
         </div>
 
         {errors.length > 0 &&

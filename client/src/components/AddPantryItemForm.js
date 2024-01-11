@@ -47,13 +47,11 @@ export default function AddPantryItemForm({ user, foodstuffs, onSubmit }) {
         user_id: user.id,
         foodstuff_id: "",
       })
-      
     }
   }
 
   return (
     <StyledAddFoodstuffOrPantryItem>
-
       <div>
         <form onSubmit={handleSubmit}>
 
@@ -65,11 +63,9 @@ export default function AddPantryItemForm({ user, foodstuffs, onSubmit }) {
             placeholder="Name"
             />
           <br />
-
           <h3>Units</h3>
           <h2>{selectedUnit}</h2>
           <br />
-
           <h3>Quantity</h3>
           <input
             type="number"
