@@ -69,9 +69,9 @@ export default function UserPantry() {
           <div>
             <PantryNavlink to="/pantry_items/new">Add Item</PantryNavlink>
           </div>
-          <div>
+          {/* <div>
             <PantryNavlink to="/pantry_items">Scan Item</PantryNavlink>
-          </div>
+          </div> */}
           <div>
             <PantryNavlink to="/available_recipes">What Can I Make</PantryNavlink>
           </div>

@@ -6,31 +6,43 @@ export const StyledRecipes = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  /* ul {
-    align-items: center;
-  } */
-
-
-  /* div {
+  #all-recipes-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-  } */
+    align-self: center;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%
+  }
+
+  #buttons-container {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
 
   h1 {
     color: #EF6351;
   }
 
   h2 {
+    display: flex;
+    align-self: center;
+
     color: #EF6351;
   }
 
   h3 {
+    display: flex;
+    justify-content: center;
     color: #EF6351;
+    align-self: center;
   }
 
   p {
+    display: flex;
+    align-self: center;
     color: #EF6351;
   }
 
@@ -60,4 +72,14 @@ export const StyledRecipes = styled.div`
   .display-linebreak {
     white-space: pre-line;
   }
+
+  ul {
+    padding: 0;
+  }
+
+  /* .navlink {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  } */
 `

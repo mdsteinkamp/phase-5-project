@@ -1,22 +1,14 @@
 import { StyledAddFoodstuffOrPantryItem } from "./styles/AddFoodstuff.styled"
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext } from "react"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
-import Select from 'react-select'
 import AddPantryItemForm from "./AddPantryItemForm"
 
 export default function AddPantryItem() {
-  const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
+  const {foodstuffs} = useContext(FoodstuffsContext)
   const {user, setUser} = useContext(UserContext)
-  // const [selectedNameOption, setSelectedNameOption] = useState(null)
-  // const [selectedUnit, setSelectedUnit] = useState("")
-  // const [formData, setFormData] = useState({
-  //   quantity: "",
-  //   user_id: "",
-  //   foodstuff_id: "",
-  // })
   const [errors, setErrors] = useState([])
-  const [resetForm, setResetForm] = useState(false)
+  const [resetForm] = useState(false)
   const [renderItemAdded, setRenderItemAdded] = useState(false)
 
 
@@ -86,7 +78,6 @@ export default function AddPantryItem() {
         <h3>User definable units to come later...If the ingredient is not in the list please add in "Add Ingredient" above. </h3>
       </div>
       <div>
-
       </div>
       <AddPantryItemForm user={user} foodstuffs={foodstuffs} onSubmit={handleSubmit} resetForm={resetForm} />
       {renderItemAdded ? <h2>Added!</h2> : null}
