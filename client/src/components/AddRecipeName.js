@@ -1,10 +1,5 @@
 import { useState, useContext } from "react"
 import { StyledRecipes } from "./styles/StyledRecipes"
-import { UserContext } from "./UserContext"
-import { FoodstuffsContext } from "./FoodstuffsContext"
-import { Link } from "react-router-dom"
-import Select from 'react-select'
-import { Routes, Route } from "react-router-dom"
 
 export default function AddRecipeName({ onHandleChangeRender }) {
   const [recipeFormData, setRecipeFormData] = useState({
@@ -12,8 +7,6 @@ export default function AddRecipeName({ onHandleChangeRender }) {
     instructions: "",
   })
   const [nameError, setNameError] = useState(false)
-
-  console.log(recipeFormData)
 
   function handleRecipeChange(e) {
     const name = e.target.name

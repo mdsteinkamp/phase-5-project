@@ -17,8 +17,6 @@ export default function RecipeDetailPage() {
 
   const recipe = recipes.find(recipe => recipe.id === parseInt(id))
 
-  console.log("pantry items:", user.pantry_items, "recipe ingreds:", recipe.ingredients)
-
   function handleCheckIngredients() {
     const results = {}
     for (const ingredient of recipe.ingredients) {
@@ -30,7 +28,6 @@ export default function RecipeDetailPage() {
         results[`${pantry_ingredient.foodstuff.name}`] = [pantry_ingredient.quantity - ingredient.quantity, ingredient.foodstuff.unit]
       }
     }
-    console.log(results)
     setIngredientCheckResults(results)
     const resultsArray = Object.entries(results)
     const negativesArray = resultsArray.filter(item => item[1][0] < 0)
@@ -38,19 +35,15 @@ export default function RecipeDetailPage() {
     setMissingIngredients(renderNegatives)
     setRenderIngredients(true)
   }
-  console.log(ingredientCheckResults)
-  console.log(missingIngredients)
 
   function handleUpdateUserPantry() {
     const pantryItemsToUpdate = recipe.ingredients.map(ingredient => user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name))
-    console.log(pantryItemsToUpdate)
 
     Promise.all(pantryItemsToUpdate.map(item => {
       const updatedItem = {
         ...item,
         quantity: item.quantity - recipe.ingredients.find(ingredient => ingredient.foodstuff.name === item.foodstuff.name).quantity
       }
-      console.log(updatedItem)
       return fetch(`/pantry_items/${item.id}`, {
         method: "PATCH",
         headers: {
@@ -64,9 +57,7 @@ export default function RecipeDetailPage() {
         return pantryItem.json()
       }))
       .then(pantryItems => {
-        console.log(pantryItems)
         const updatedUserPantryItems = [...user.pantry_items].map(item => pantryItems.find(i => i.id === item.id) || item)
-        console.log(updatedUserPantryItems)
         const updatedUser = {...user, pantry_items: updatedUserPantryItems}
         setUser(updatedUser)
       })

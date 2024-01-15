@@ -3,7 +3,6 @@ import { NavbarNavLink } from "./styles/NavbarNavLink.styled"
 
 export default function NavBar() {
 
-
   return (
     <StyledNavbar>
       <div>

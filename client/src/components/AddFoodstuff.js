@@ -11,7 +11,7 @@ export default function AddFoodstuff() {
     category: ""
   })
   const [errors, setErrors] = useState([])
-  const {user, setUser} = useContext(UserContext)
+  // const {user, setUser} = useContext(UserContext)
 
   function handleChange(e) {
     const name = e.target.name

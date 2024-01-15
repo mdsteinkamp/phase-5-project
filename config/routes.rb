@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  # get "/available_recipes" to: "recipes#available_recipes"
   
   resources :users, only: [:index, :show]
   resources :ingredients, only: [:index, :show, :create]

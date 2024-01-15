@@ -1,7 +1,6 @@
 import { StyledUserPantry } from "./styles/UserPantry.styled"
 import { NavbarNavLink } from "./styles/NavbarNavLink.styled"
 import { useContext, useEffect, useState } from "react"
-import { Link, NavLink } from "react-router-dom"
 import { UserContext } from "./UserContext"
 import { RecipesContext } from "./RecipesContext"
 
@@ -39,7 +38,6 @@ export default function AvailableRecipesPage() {
 		}
 		CheckAvailableRecipes()
 	}, [recipes])
-	console.log(makeableRecipes)
 
 	if (makeableRecipes) return (
 					<StyledUserPantry>

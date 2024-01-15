@@ -2,7 +2,6 @@ import { useState, useContext } from "react"
 import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
 import { RecipesContext } from "./RecipesContext"
-import { useNavigate } from "react-router"
 import AddRecipeIngredients from "./AddRecipeIngredients"
 import AddRecipeName from "./AddRecipeName"
 import AddRecipeInstructions from "./AddRecipeInstructions"
@@ -17,11 +16,6 @@ export default function AddRecipe() {
   const [ingredients, setIngredients] = useState([])
   const [errors, setErrors] = useState([])
   const [addRecipe, setAddRecipe] = useState(false)
-
-
-  const navigate = useNavigate()
-
-
 
   const [recipeFormData, setRecipeFormData] = useState({
     name: "",
@@ -70,7 +64,6 @@ export default function AddRecipe() {
         })
       }})
     }
-    console.log(errors)
 
   function handleSubmitIngredients(ingredients, newRecipe) {
     Promise.all(ingredients.map(ingredient => {
@@ -89,7 +82,6 @@ export default function AddRecipe() {
       }))
       .then(ingredients => {
         const updatedRecipe = {...newRecipe, ingredients: ingredients}
-        console.log(updatedRecipe)
         setRecipes([...recipes, updatedRecipe])
         setAddRecipe(true)
       })

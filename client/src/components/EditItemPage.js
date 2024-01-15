@@ -14,7 +14,6 @@ export default function EditItemPage({ pantryItem, onUpdateItem }) {
     onUpdateItem(itemFormData)
   }
 
-
   return (
     <StyledUserPantry>
       <h1>Change Item Quantity</h1>

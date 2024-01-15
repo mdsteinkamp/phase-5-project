@@ -11,14 +11,10 @@ export default function AddPantryItem() {
   const [resetForm] = useState(false)
   const [renderItemAdded, setRenderItemAdded] = useState(false)
 
-
-  console.log(user)
-
   if (!foodstuffs, !user) return <h1>Loading...</h1>
 
   function handleSubmit(newPantryItem) {
     if ((user.pantry_items.map(item => item.foodstuff_id).includes(newPantryItem.foodstuff_id))) {
-      console.log(true)
       const pantryItem = user.pantry_items.find(item => item.foodstuff.id === newPantryItem.foodstuff_id)
       const updatedNewPantryItem = {...newPantryItem, quantity: parseInt(pantryItem.quantity) + parseInt(newPantryItem.quantity) }
       fetch(`/pantry_items/${pantryItem.id}`, {
@@ -42,7 +38,6 @@ export default function AddPantryItem() {
         }
       })
     } else {
-      console.log(newPantryItem)
       fetch("/pantry_items", {
         method: "POST",
         headers: {

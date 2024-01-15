@@ -7,7 +7,6 @@ function FoodstuffsProvider({ children }) {
   const [foodstuffs, setFoodstuffs] = useState(null)
   const {user, setUser} = useContext(UserContext)
 
-
   useEffect(() => {
     fetch('/foodstuffs').then((resp) => {
       if (resp.ok) {
@@ -15,8 +14,6 @@ function FoodstuffsProvider({ children }) {
       }
     })
   }, [user])
-
-
 
   return <FoodstuffsContext.Provider value={{ foodstuffs, setFoodstuffs }}>{children}</FoodstuffsContext.Provider>
 }

@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { StyledRecipes } from "./styles/StyledRecipes"
-// import { useNavigate } from "react-router-dom"
 
 export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe }) {
   const [recipeFormData, setRecipeFormData] = useState({
@@ -8,7 +7,6 @@ export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe }
     instructions: "",
   })
   const [instructionsError, setInstructionsError] = useState(false)
-  // const navigate = useNavigate()
 
   function handleRecipeChange(e) {
     const name = e.target.name
@@ -26,7 +24,6 @@ export default function AddddRecipeInstructions({ recipe, onhandleSubmitRecipe }
       return
     } else {
       onhandleSubmitRecipe(recipe)
-      // navigate("/recipes")
     }
   }
 

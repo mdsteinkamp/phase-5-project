@@ -9,9 +9,6 @@ export default function RecipesPage() {
 
   if (!recipes) return (<h1>Loading data...</h1>)
 
-  console.log(recipes)
-
-
   return (
     <StyledRecipes>
       <h1>Recipes</h1>

@@ -17,14 +17,6 @@ export default function Signup() {
 
   const navigate = useNavigate()
 
-  // const Button = ({ onClick, children, as: Component = 'button', ...rest }) => {
-  //   return (
-  //     <Component onClick={onClick} className="button" {...rest}>
-  //       {children}
-  //     </Component>
-  //   );
-  // };
-
   function handleChange(e) {
     const name = e.target.name
     const value = e.target.value

@@ -2,10 +2,7 @@ import { StyledAddFoodstuffOrPantryItem } from "./styles/AddFoodstuff.styled"
 import { useState } from "react"
 import Select from 'react-select'
 
-
-
 export default function AddPantryItemForm({ user, foodstuffs, onSubmit }) {
-  // const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
   const [selectedNameOption, setSelectedNameOption] = useState(null)
   const [selectedUnit, setSelectedUnit] = useState("")
   const [formData, setFormData] = useState({
@@ -24,7 +21,6 @@ export default function AddPantryItemForm({ user, foodstuffs, onSubmit }) {
     setFormData({...formData,
       user_id: user.id,
       foodstuff_id: option.value})
-      console.log(formData)
   }
 
   function handleChange(e) {
@@ -34,7 +30,6 @@ export default function AddPantryItemForm({ user, foodstuffs, onSubmit }) {
       ...formData,
       [name]: value
     })
-    console.log(formData)
   }
 
   function handleSubmit(e) {

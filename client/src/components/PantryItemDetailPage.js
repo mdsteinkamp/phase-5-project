@@ -12,9 +12,7 @@ export default function PantryItemDetailPage() {
 
   if (!user) return <h1>loading data...</h1>
 
-
   const pantryItem = user.pantry_items.find(pantry_item => pantry_item.id === parseInt(id))
-  console.log(pantryItem)
 
   function handleUpdateItem(editedItem) {
     fetch(`/pantry_items/${pantryItem.id}`, {

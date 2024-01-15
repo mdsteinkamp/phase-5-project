@@ -1,7 +1,6 @@
 import { StyledRecipeDetails } from "./styles/RecipeDetail.styled"
 
 export default function RenderMissingIngredients({ missingIngredients, onUpdateUserPantry }) {
-  console.log(missingIngredients)
 
   function handleUpdateUserPantry() {
     onUpdateUserPantry()

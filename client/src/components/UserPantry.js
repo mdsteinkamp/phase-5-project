@@ -56,7 +56,6 @@ export default function UserPantry() {
         .catch(e => console.log(e))
       })
 
-      
       const updatedPantryItems = [...user.pantry_items].filter(item => !itemstoDelete.find(f => f.id === item.id))
       const updatedUser = {...user, pantry_items: updatedPantryItems}
       setUser(updatedUser)
@@ -69,9 +68,6 @@ export default function UserPantry() {
           <div>
             <PantryNavlink to="/pantry_items/new">Add Item</PantryNavlink>
           </div>
-          {/* <div>
-            <PantryNavlink to="/pantry_items">Scan Item</PantryNavlink>
-          </div> */}
           <div>
             <PantryNavlink to="/available_recipes">What Can I Make</PantryNavlink>
           </div>

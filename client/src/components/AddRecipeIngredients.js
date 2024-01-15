@@ -4,7 +4,6 @@ import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
 import Select from 'react-select'
 
-
 export default function AddRecipeIngredients({ onHandleChangeRender }) {
   const {foodstuffs} = useContext(FoodstuffsContext)
   const {user} = useContext(UserContext)
@@ -23,8 +22,6 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
   // const [renderAddIngredient, setRenderAddIngredient] = useState("name")
 
   if (!foodstuffs, !user) return <h1>Loading...</h1>
-  console.log(ingredientFormData)
-  console.log(selectedNameOption)
 
 
   function handleIngredientChange(e) {
