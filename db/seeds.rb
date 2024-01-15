@@ -21,6 +21,7 @@ marinara = Recipe.create(name: "Marinara Sauce", instructions: "
   2. Add can of tomatoes with their juice to the pan, roughly break up the whole tomatoes. Add salt, basil & sugar. Simmer until fragrant.\n
   3. Blend sauce (immersion blender or normal). Adjust salt/pepper to taste.
 ")
+
 martinez_picadillo = Recipe.create(name: "Martinez Family Picadillo", instructions: "
     1. Season beef with salt & pepper. Brown all sides in large pan/skillet. Put roast in slow cooker with ~half onion roughly chopped and a few garlic cloves.\n
     2. Cover the meat about halfway with water & cook 4-5 hours on HIGH or 7+ hours on LOW.\n
@@ -30,6 +31,18 @@ martinez_picadillo = Recipe.create(name: "Martinez Family Picadillo", instructio
     5. Strain the blended sauce mixture into a bowl. Take your time, this will result is a SMOOTH sauce. \n
     6. Remove tomatillos from their husks/ clean well and chop along with 3-5 garlic cloves and 1/2 a white onion. Heat a clean large skillet/pan with oil, dd the onion and tomatillos to a clean large skillet/pan. Cook until softened, then add garlic.\n
     7. Once garlic has softened a bit, add the shredded meat & mix into the contents of the pan. Once combined, add the strained sauce and mix all together. Season with salt/pepper to taste.
+")
+
+honey_sesame_pork_tenderloin = Recipe.create(name: "Honey-Sesame Pork Tenerloin", instructions: "
+    1. Combine soy sauce, garlic, ginger and sesame oil. Place tenderloin in a heavy plastic bag, pour soy mixture over to coat. Marinate for 2 hours at room tem, or overnight in the fridge. Remove pork from marinade and pat dry.\n
+    2. Mix honey and brown sugar in a shallow plate. Place sesame seeds on a separate shallow plate. Roll pork well in honey mixture, coating well, then roll in sesame seeds.\n
+    3. Roast pork in a shallow pan at 375 for 20-30 minutes, until thermometer registers 160F. Remove to serving platter, slice thinly to serve.
+")
+
+chicken_scampi = Recipe.create(name: "Chicken Scampi", instructions: "
+    1. In skillet on medium to medium high heat, heat butter and olive oil together and sautee green onions and garlic.\n
+    2. Add juice of the lemon, chicken, salt, pepper and parsley. Stir constantly for about 5-8 minutes until chicken is cooked through.\n
+    3. Add tomatoes (equal to one small chopped tomato) and heat through. Stir into cooked angel hair pasta.
 ")
 
 evoo = Foodstuff.create(name: "Extra Virgin Olive Oil", unit: "Cup", category: "Cooking Liquid")
@@ -57,9 +70,20 @@ arbol_chile_pod = Foodstuff.create(name: "Arbol Chile Pod (dried)", unit: "Pod",
 tomatillo = Foodstuff.create(name: "Tomatillo", unit: "Lb", category: "Fruit")
 beef_chuck_roast = Foodstuff.create(name: "Beef Chuck Roast", unit: "Lb", category: "Meat")
 white_sugar = Foodstuff.create(name: "White Sugar", unit: "Tsp", category: "Sweetener")
-
-
-
+soy_sauce = Foodstuff.create(name: "Soy Sauce", unit: "Cup", category: "Cooking Liquid")
+ginger = Foodstuff.create(name: "Ginger Root", unit: "Tbsp", category: "Spice")
+sesame_oil = Foodstuff.create(name: "Sesame Oil", unit: "Cup", category: "Cooking Liquid")
+pork_tenderloin = Foodstuff.create(name: "Pork Tenderloin", unit: "Lb", category: "Meat")
+honey = Foodstuff.create(name: "Honey", unit: "Cup", category: "Sweetener")
+brown_sugar = Foodstuff.create(name: "Brown Sugar", unit: "Tbsp", category: "Sweetener")
+sesame_seeds = Foodstuff.create(name: "Sesame Seeds", unit: "Tbsp", category: "Spice")
+butter = Foodstuff.create(name: "Butter", unit: "Tbsp", category: "Dairy")
+green_onion = Foodstuff.create(name: "Green Onion", unit: "Cup", category: "Vegetable")
+lemon = Foodstuff.create(name: "Lemon", unit: "Unit", category: "Fruit")
+chicken_breast = Foodstuff.create(name: "Chicken Breast", unit: "Lb", category: "Meat")
+tomato = Foodstuff.create(name: "Tomato", unit: "Cup", category: "Fruit")
+angel_hair_pasta = Foodstuff.create(name: "Angel Hair Pasta", unit: "Lb", category: "Grain")
+parsley = Foodstuff.create(name: "Parsley", unit: "Cup", category: "Herb")
 
 puts "loading from xlsx"
 xlsx = Roo::Spreadsheet.open('lib/ingredients.xlsx')
@@ -111,6 +135,27 @@ Ingredient.create(quantity: 3, recipe_id: martinez_picadillo.id, foodstuff_id: b
 Ingredient.create(quantity: 1, recipe_id: martinez_picadillo.id, foodstuff_id: tomatillo.id)
 Ingredient.create(quantity: 0.25, recipe_id: martinez_picadillo.id, foodstuff_id: evoo.id)
 
+#Honey-Sesame Pork Tenderloin Ingredients
+Ingredient.create(quantity: 0.5, recipe_id: honey_sesame_pork_tenderloin.id, foodstuff_id: soy_sauce.id)
+Ingredient.create(quantity: 2, recipe_id: honey_sesame_pork_tenderloin.id, foodstuff_id: garlic.id)
+Ingredient.create(quantity: 1, recipe_id: honey_sesame_pork_tenderloin.id, foodstuff_id: ginger.id)
+Ingredient.create(quantity: 0.0625, recipe_id: honey_sesame_pork_tenderloin.id, foodstuff_id: sesame_oil.id)
+Ingredient.create(quantity: 1, recipe_id: honey_sesame_pork_tenderloin.id, foodstuff_id: pork_tenderloin.id)
+Ingredient.create(quantity: 0.25, recipe_id: honey_sesame_pork_tenderloin.id, foodstuff_id: honey.id)
+Ingredient.create(quantity: 2, recipe_id: honey_sesame_pork_tenderloin.id, foodstuff_id: brown_sugar.id)
+Ingredient.create(quantity: 4, recipe_id: honey_sesame_pork_tenderloin.id, foodstuff_id: sesame_seeds.id)
 
+#Chicken Scampi Ingredients
+Ingredient.create(quantity: 8, recipe_id: chicken_scampi.id, foodstuff_id: butter.id)
+Ingredient.create(quantity: 0.5, recipe_id: chicken_scampi.id, foodstuff_id: evoo.id)
+Ingredient.create(quantity: 0.25, recipe_id: chicken_scampi.id, foodstuff_id: green_onion.id)
+Ingredient.create(quantity: 2, recipe_id: chicken_scampi.id, foodstuff_id: garlic.id)
+Ingredient.create(quantity: 1, recipe_id: chicken_scampi.id, foodstuff_id: lemon.id)
+Ingredient.create(quantity: 0.5, recipe_id: chicken_scampi.id, foodstuff_id: parsley.id)
+Ingredient.create(quantity: 2, recipe_id: chicken_scampi.id, foodstuff_id: chicken_breast.id)
+Ingredient.create(quantity: 1, recipe_id: chicken_scampi.id, foodstuff_id: kosher_salt.id)
+Ingredient.create(quantity: 0.5, recipe_id: chicken_scampi.id, foodstuff_id: black_pepper.id)
+Ingredient.create(quantity: 0.25, recipe_id: chicken_scampi.id, foodstuff_id: tomato.id)
+Ingredient.create(quantity: 1, recipe_id: chicken_scampi.id, foodstuff_id: angel_hair_pasta.id)
 
 puts "👩‍🍳👨‍🍳 it's COOKIN' TIME 👩‍🍳👨‍🍳"
