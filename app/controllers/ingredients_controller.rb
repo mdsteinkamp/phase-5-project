@@ -16,16 +16,18 @@ class IngredientsController < ApplicationController
 
   def create
     # binding.break
-    params.each do |ingred|
+    # params.each do |ingred|
       ingredient = Ingredient.create!(ingredient_params)
       render json: ingredient, status: :created
-    end
+    # end
   end
   
   private
 
   def ingredient_params
-    params.permit(:quantity, :recipe_id, :foodstuff_id)
+    params.require(:_json).map do |param|
+      param.permit(:quantity, :recipe_id, :foodstuff_id)
+    end
   end
 
 
