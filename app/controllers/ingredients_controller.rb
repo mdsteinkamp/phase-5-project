@@ -15,8 +15,11 @@ class IngredientsController < ApplicationController
   end
 
   def create
-    ingredient = Ingredient.create!(ingredient_params)
-    render json: ingredient, status: :created
+    # binding.break
+    params.each do |ingred|
+      ingredient = Ingredient.create!(ingredient_params)
+      render json: ingredient, status: :created
+    end
   end
   
   private
