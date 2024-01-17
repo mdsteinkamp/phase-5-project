@@ -66,28 +66,38 @@ export default function AddRecipe() {
     }
 
   function handleSubmitIngredients(ingredients, newRecipe) {
-    Promise.all(ingredients.map(ingredient => {
-      const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
-      return fetch("/ingredients", {
+    console.log(ingredients, newRecipe.id)
+    const updatedIngredients = ingredients.map(i => ({...i, recipe_id: newRecipe.id}))
+    console.log(updatedIngredients)
+    // Promise.all(ingredients.map(ingredient => {
+      // const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
+      fetch("/ingredients", {
         method: "POST", 
         headers: {
           "Content-Type": "application/json", 
         },
-        body: JSON.stringify(updatedIngredient)
+        body: JSON.stringify(updatedIngredients),
       })
-    }))
-    .then(results => {
-      Promise.all(results.map((ingredient) => {
-        return ingredient.json().catch(e => console.log(e))
-      }))
-      .then(ingredients => {
-        const updatedRecipe = {...newRecipe, ingredients: ingredients}
-        setRecipes([...recipes, updatedRecipe])
-        setAddRecipe(true)
+      .then((resp) => {
+        if (resp.ok) {
+          resp.json().then((ingredients) => {
+            console.log(ingredients)
+          })
+        } else {
+          resp.json().then (e => {
+            setErrors(e.errors)
+            console.log(errors)
+          })
+        }
       })
-      .catch(e => console.log(e))
-    })
-  }
+    }
+    // .then(ingredients => {
+      // console.log(ingredients)
+      // const updatedRecipe = {...newRecipe, ingredients: ingredients}
+      // setRecipes([...recipes, updatedRecipe])
+      // setAddRecipe(true)
+    // })
+    // .catch(e => console.log(e))
 
   {if (renderAddIngredient === "name") {
     return (<AddRecipeName onHandleChangeRender={handleChangeNameRender} />)
