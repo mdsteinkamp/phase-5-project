@@ -81,7 +81,9 @@ export default function AddRecipe() {
       .then((resp) => {
         if (resp.ok) {
           resp.json().then((ingredients) => {
-            console.log(ingredients)
+            const updatedRecipe = {...newRecipe, ingredients: ingredients}
+            setRecipes([...recipes, updatedRecipe])
+            setAddRecipe(true)
           })
         } else {
           resp.json().then (e => {
