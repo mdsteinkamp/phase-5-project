@@ -70,29 +70,32 @@ export default function AddRecipe() {
     try {
     results = await Promise.all(ingredients.map(async (ingredient) => {
     const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
-    fetch("/ingredients", {
+    return fetch("/ingredients", {
       method: "POST", 
       headers: {
         "Content-Type": "application/json", 
       },
       body: JSON.stringify(updatedIngredient)
     })
-    return updatedIngredient
-    }))} catch(e) {
-      console.log(e)
-    }
-    console.log(results)
-    // .then(results => {
-    //   Promise.all(results.map((ingredient) => {
-    //     return ingredient.json().catch(e => console.log(e))
-    //   }))
-    //   .then(ingredients => {
-    //     const updatedRecipe = {...newRecipe, ingredients: ingredients}
-    //     setRecipes([...recipes, updatedRecipe])
-    //     setAddRecipe(true)
-    //   })
-    //   .catch(e => console.log(e))
-    // })
+  }))} catch(e) {
+    console.log(e)
+  }
+  console.log(results)
+  Promise.all(results.map(i => i.json()))
+  .then(ingredients => {
+    const updatedRecipe = {...newRecipe, ingredients: ingredients}
+    setRecipes([...recipes, updatedRecipe])
+    setAddRecipe(true)
+  })
+  }
+
+  function handleIngredientState(ingredients, newRecipe) {
+    const updatedRecipe = {...newRecipe, ingredients: ingredients}
+    console.log(updatedRecipe)
+    const newRecipes = [...recipes, updatedRecipe]
+    setRecipes(newRecipes)
+    console.log(recipes)
+    setAddRecipe(true) 
   }
 
   {if (renderAddIngredient === "name") {
