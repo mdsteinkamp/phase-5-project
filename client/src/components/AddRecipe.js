@@ -66,9 +66,9 @@ export default function AddRecipe() {
     }
 
   async function handleSubmitIngredients(ingredients, newRecipe) {
-    
-    // try {
-    const results = await Promise.all(ingredients.map(async (ingredient) => {
+    let results = []
+    try {
+    results = await Promise.all(ingredients.map(async (ingredient) => {
     const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
     fetch("/ingredients", {
       method: "POST", 
@@ -78,7 +78,9 @@ export default function AddRecipe() {
       body: JSON.stringify(updatedIngredient)
     })
     return updatedIngredient
-    }))
+    }))} catch(e) {
+      console.log(e)
+    }
     console.log(results)
     // .then(results => {
     //   Promise.all(results.map((ingredient) => {
