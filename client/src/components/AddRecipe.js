@@ -89,14 +89,14 @@ export default function AddRecipe() {
   })
   }
 
-  function handleIngredientState(ingredients, newRecipe) {
-    const updatedRecipe = {...newRecipe, ingredients: ingredients}
-    console.log(updatedRecipe)
-    const newRecipes = [...recipes, updatedRecipe]
-    setRecipes(newRecipes)
-    console.log(recipes)
-    setAddRecipe(true) 
-  }
+  // function handleIngredientState(ingredients, newRecipe) {
+  //   const updatedRecipe = {...newRecipe, ingredients: ingredients}
+  //   console.log(updatedRecipe)
+  //   const newRecipes = [...recipes, updatedRecipe]
+  //   setRecipes(newRecipes)
+  //   console.log(recipes)
+  //   setAddRecipe(true) 
+  // }
 
   {if (renderAddIngredient === "name") {
     return (<AddRecipeName onHandleChangeRender={handleChangeNameRender} />)
