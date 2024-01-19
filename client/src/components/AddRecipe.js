@@ -36,6 +36,7 @@ export default function AddRecipe() {
   }
 
   function handleSubmitRecipe(recipe) {
+    const start = performance.now()
     fetch("/recipes", {
       method: "POST",
       headers: {
@@ -49,7 +50,7 @@ export default function AddRecipe() {
           const newRecipes = [...recipes, newRecipe]
           setRecipes(newRecipes)
           setNewRecipe(newRecipe)
-          handleSubmitIngredients(ingredients, newRecipe)
+          handleSubmitIngredients(ingredients, newRecipe, start)
         })
         setRecipeFormData({
           name: "",
@@ -65,7 +66,7 @@ export default function AddRecipe() {
       }})
     }
 
-  async function handleSubmitIngredients(ingredients, newRecipe) {
+  async function handleSubmitIngredients(ingredients, newRecipe, start) {
     let results = []
     try {
     results = await Promise.all(ingredients.map(async (ingredient) => {
@@ -87,6 +88,8 @@ export default function AddRecipe() {
     setRecipes([...recipes, updatedRecipe])
     setAddRecipe(true)
   })
+  const end = performance.now()
+  console.log(`Execution time: ${end - start} ms`)
   }
 
   // function handleIngredientState(ingredients, newRecipe) {
