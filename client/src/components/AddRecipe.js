@@ -35,61 +35,78 @@ export default function AddRecipe() {
     setIngredients(ingredients)
   }
 
-  function handleSubmitRecipe(recipe) {
-    const start = performance.now()
-    fetch("/recipes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(recipe),
-    })
-    .then((resp) => {
-      if (resp.ok) {
-        resp.json().then(newRecipe => {
-          const newRecipes = [...recipes, newRecipe]
-          setRecipes(newRecipes)
-          setNewRecipe(newRecipe)
-          handleSubmitIngredients(ingredients, newRecipe, start)
-        })
-        setRecipeFormData({
-          name: "",
-          instructions: "",
-        })
-        setErrors([])
-      } else {  
-        resp.json().then(e => {
-          console.log(e.errors)
-          setErrors(e.errors)
-          return
-        })
-      }})
-    }
 
-  async function handleSubmitIngredients(ingredients, newRecipe, start) {
-    let results = []
-    try {
-    results = await Promise.all(ingredients.map(async (ingredient) => {
-    const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
-    return fetch("/ingredients", {
-      method: "POST", 
-      headers: {
-        "Content-Type": "application/json", 
-      },
-      body: JSON.stringify(updatedIngredient)
-    })
-  }))} catch(e) {
-    console.log(e)
-  }
-  console.log(results)
-  Promise.all(results.map(i => i.json()))
-  .then(ingredients => {
-    const updatedRecipe = {...newRecipe, ingredients: ingredients}
-    setRecipes([...recipes, updatedRecipe])
-    setAddRecipe(true)
-  })
-  const end = performance.now()
-  console.log(`Execution time: ${end - start} ms`)
+    function handleSubmitRecipe(recipe) {
+      const updatedNewRecipe = {...recipe, ingredients: ingredients}
+      fetch("/recipes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedNewRecipe),
+      })
+      .then((resp) => {
+        if (resp.ok) {
+          resp.json().then(newRecipe => {
+            console.log(newRecipe)
+            // const newRecipes = [...recipes, newRecipe]
+            setRecipes([...recipes, newRecipe])
+            console.log(recipes)
+            // setNewRecipe(newRecipe)
+            setAddRecipe(true)
+            // handleSubmitIngredients(ingredients, newRecipe)
+          })
+          setRecipeFormData({
+            name: "",
+            instructions: "",
+          })
+          setErrors([])
+        } else {  
+          resp.json().then(e => {
+            console.log(e.errors)
+            setErrors(e.errors)
+            return
+          })
+        }})
+      }
+
+    function handleSubmitIngredients(ingredients, newRecipe) {
+      console.log(ingredients, newRecipe.id)
+      const updatedIngredients = ingredients.map(i => ({...i, recipe_id: newRecipe.id}))
+      console.log(updatedIngredients)
+      // Promise.all(ingredients.map(ingredient => {
+        // const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
+        // fetch("/ingredients", {
+        //   method: "POST", 
+        //   headers: {
+        //     "Content-Type": "application/json", 
+        //   },
+        //   body: JSON.stringify(updatedIngredients),
+        // })
+        // .then((resp) => {
+        //   if (resp.ok) {
+        //     resp.json().then((ingredients) => {
+        //       const updatedRecipe = {...newRecipe, ingredients: ingredients}
+        //       setRecipes([...recipes, updatedRecipe])
+        //       setAddRecipe(true)
+        //     })
+        //   } else {
+        //     resp.json().then (e => {
+        //       setErrors(e.errors)
+        //       console.log(errors)
+        //     })
+        //   }
+        // })
+      // }
+  // console.log(results)
+  // Promise.all(results.map(i => i.json()))
+  // .then(ingredients => {
+  //   const updatedRecipe = {...newRecipe, ingredients: ingredients}
+  //   setRecipes([...recipes, updatedRecipe])
+  //   setAddRecipe(true)
+  // })
+  // const end = performance.now()
+  // console.log(`Execution time: ${end - start} ms`)
   }
 
   // function handleIngredientState(ingredients, newRecipe) {
