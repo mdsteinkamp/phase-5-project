@@ -36,6 +36,7 @@ export default function AddRecipe() {
   }
 
   function handleSubmitRecipe(recipe) {
+    const start = performance.now()
     fetch("/recipes", {
       method: "POST",
       headers: {
@@ -49,7 +50,7 @@ export default function AddRecipe() {
           const newRecipes = [...recipes, newRecipe]
           setRecipes(newRecipes)
           setNewRecipe(newRecipe)
-          handleSubmitIngredients(ingredients, newRecipe)
+          handleSubmitIngredients(ingredients, newRecipe, start)
         })
         setRecipeFormData({
           name: "",
@@ -65,7 +66,7 @@ export default function AddRecipe() {
       }})
     }
 
-  function handleSubmitIngredients(ingredients, newRecipe) {
+  function handleSubmitIngredients(ingredients, newRecipe, start) {
     Promise.all(ingredients.map(ingredient => {
       const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
       return fetch("/ingredients", {
@@ -87,6 +88,8 @@ export default function AddRecipe() {
       })
       .catch(e => console.log(e))
     })
+    const end = performance.now()
+    console.log(`Execution time: ${end - start} ms`)
   }
 
   {if (renderAddIngredient === "name") {
