@@ -37,7 +37,8 @@ export default function AddRecipe() {
 
 
     function handleSubmitRecipe(recipe) {
-      const updatedNewRecipe = {...recipe, ingredients: ingredients}
+      const updatedNewRecipe = {...recipe, ingredients_attributes: ingredients}
+      console.log(updatedNewRecipe)
       fetch("/recipes", {
         method: "POST",
         headers: {
@@ -70,10 +71,10 @@ export default function AddRecipe() {
         }})
       }
 
-    function handleSubmitIngredients(ingredients, newRecipe) {
-      console.log(ingredients, newRecipe.id)
-      const updatedIngredients = ingredients.map(i => ({...i, recipe_id: newRecipe.id}))
-      console.log(updatedIngredients)
+    // function handleSubmitIngredients(ingredients, newRecipe) {
+    //   console.log(ingredients, newRecipe.id)
+    //   const updatedIngredients = ingredients.map(i => ({...i, recipe_id: newRecipe.id}))
+    //   console.log(updatedIngredients)
       // Promise.all(ingredients.map(ingredient => {
         // const updatedIngredient = {...ingredient, recipe_id: newRecipe.id}
         // fetch("/ingredients", {
@@ -107,7 +108,7 @@ export default function AddRecipe() {
   // })
   // const end = performance.now()
   // console.log(`Execution time: ${end - start} ms`)
-  }
+  // }
 
   // function handleIngredientState(ingredients, newRecipe) {
   //   const updatedRecipe = {...newRecipe, ingredients: ingredients}
