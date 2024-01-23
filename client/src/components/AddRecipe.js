@@ -12,7 +12,7 @@ export default function AddRecipe() {
   const {user} = useContext(UserContext)
   const {recipes, setRecipes} = useContext(RecipesContext)
   const [recipe, setRecipe] = useState({})
-  const [newRecipe, setNewRecipe] = useState({})
+  // const [newRecipe, setNewRecipe] = useState({})
   const [ingredients, setIngredients] = useState([])
   const [errors, setErrors] = useState([])
   const [addRecipe, setAddRecipe] = useState(false)
@@ -51,8 +51,9 @@ export default function AddRecipe() {
         if (resp.ok) {
           resp.json().then(newRecipe => {
             console.log(newRecipe)
-            // const newRecipes = [...recipes, newRecipe]
-            setRecipes([...recipes, newRecipe])
+            const newRecipes = [...recipes, newRecipe]
+            console.log(newRecipes)
+            setRecipes(newRecipes)
             console.log(recipes)
             // setNewRecipe(newRecipe)
             setAddRecipe(true)
