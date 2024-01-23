@@ -37,6 +37,7 @@ export default function AddRecipe() {
 
 
     function handleSubmitRecipe(recipe) {
+      const start = performance.now()
       const updatedNewRecipe = {...recipe, ingredients_attributes: ingredients}
       console.log(updatedNewRecipe)
       fetch("/recipes", {
@@ -69,6 +70,8 @@ export default function AddRecipe() {
             return
           })
         }})
+        const end = performance.now()
+        console.log(`Execution time: ${end - start} ms`)
       }
 
     // function handleSubmitIngredients(ingredients, newRecipe) {
