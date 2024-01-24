@@ -1,15 +1,55 @@
 import { StyledAddFoodstuffOrPantryItem } from "./styles/AddFoodstuff.styled"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { FoodstuffsContext } from "./FoodstuffsContext"
+import Select from 'react-select'
+import AddFoodstuffUnits from "./AddFoodstuffUnits"
 
 export default function AddFoodstuff() {
   const {foodstuffs, setFoodstuffs} = useContext(FoodstuffsContext)
+  const [selectedCategoryOption, setSelectedCategoryOption] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState("")
+  const [unitOptions, setUnitOptions] = useState([])
+  const [selectedUnitOption, setSelectedUnitOption] = useState(null)
   const [formData, setFormData] = useState({
     name: "",
-    unit: "",
-    category: ""
+    category: "",
+    unit: ""
   })
   const [errors, setErrors] = useState([])
+
+  // if (!foodstuffs) return <h3>Loading...</h3>
+
+  console.log(selectedCategory)
+  console.log(formData)
+
+  const categoryOptions = ["Cooking Liquid", "Dairy", "Fruit",  "Grain", "Protein", "Spice", "Sugar", "Vegetable"].map(option => ({label: option, value: option}))
+
+  const foodstuffUnits = {
+    "cookingLiquid": ["Cups", "Oz", "Tbsp", "Tsp"],
+    "dairy": ["Cups", "Oz"],
+    "fruit": ["Cups", "Lbs", "Whole Item"], 
+    "grain": ["Cups", "Grams", "Whole Item"], 
+    "protein": ["Lbs", "Cups"], 
+    "spice": ["Tbsp", "Tsp", "Grams", "Cups"],
+    "sugar": ["Cups", "Grams", "Tbsp", "Tsp"],
+    "vegetable": ["Cups", "Lbs", "Whole Item"]
+  }
+
+  let availableUnits = []
+
+  function handleSelectCategoryOption(option) {
+    setSelectedCategoryOption(option)
+    availableUnits = Object.entries(foodstuffUnits).find(f => f[0].toLowerCase() === option.value.toLowerCase().replaceAll(" ", ""))
+    const updatedAvailableUnits = availableUnits[1].map(option => ({label: option, value: option}))
+    setUnitOptions([...unitOptions, updatedAvailableUnits])
+    setFormData({...formData,
+      category: option.value})
+  }
+
+  function handleSelectUnitOption(option) {
+    setFormData({...formData,
+      unit: option.value})
+  }
 
   function handleChange(e) {
     const name = e.target.name
@@ -37,8 +77,8 @@ export default function AddFoodstuff() {
         })
         setFormData({
           name: "",
-          unit: "",
-          category: ""
+          category: "",
+          unit: ""
         })
         setErrors([])
       } else {
@@ -47,7 +87,7 @@ export default function AddFoodstuff() {
           console.log(errors)
         })
       }
-    });
+    })
   }
 
   return (
@@ -70,25 +110,22 @@ export default function AddFoodstuff() {
               onChange={handleChange}
             />
             <br />
-            <h3>Units</h3>
-            <input
-              type="text"
-              name="unit"
-              placeholder="Unit"
-              value={formData.unit}
-              onChange={handleChange}
-            />
-            <br />
             <h3>Category</h3>
-            <input
-              type="text"
-              name="category"
+            <Select
+              value={selectedCategoryOption}
+              onChange={option => handleSelectCategoryOption(option)}
+              options={categoryOptions}
               placeholder="Category"
-              value={formData.category}
-              onChange={handleChange}
             />
             <br />
-            <div>
+            <h3>Units</h3>
+            <Select
+              value={selectedUnitOption}
+              onChange={option => handleSelectUnitOption(option)}
+              options={unitOptions[unitOptions.length -1]}
+              placeholder="Category"
+            />
+            <br />            <div>
               <button>Add Item</button>
             </div>
           </form>
