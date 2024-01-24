@@ -18,7 +18,7 @@ class RecipesController < ApplicationController
     #   # binding.break
     #   recipe.ingredients.create!(ingredient)
     # end
-    render json: recipe, include: ["ingredients", "ingredients.foodstuff"], status: :created
+    render json: recipe, include: ["ingredients.foodstuff"], status: :created
   end
 
   private
