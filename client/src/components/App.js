@@ -25,6 +25,7 @@ export default function App() {
 
 
   return (
+    
     <StyledAppContainer>
       <Header />
       {user ? <NavBar /> : null }
