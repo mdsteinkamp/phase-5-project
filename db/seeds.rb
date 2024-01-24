@@ -3,7 +3,7 @@ puts "seeding..."
 Recipe.destroy_all
 Foodstuff.destroy_all
 Ingredient.destroy_all
-PantryItem.destroy_all
+# PantryItem.destroy_all
 
 
 bolo = Recipe.create(name: "Bolognese", instructions: "
