@@ -23,7 +23,6 @@ export default function App() {
   const {user} = useContext(UserContext)
   const {recipes} = useContext(RecipesContext)
 
-
   return (
     
     <StyledAppContainer>

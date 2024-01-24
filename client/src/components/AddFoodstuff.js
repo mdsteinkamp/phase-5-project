@@ -1,6 +1,5 @@
 import { StyledAddFoodstuffOrPantryItem } from "./styles/AddFoodstuff.styled"
 import { useState, useContext } from "react"
-import { UserContext } from "./UserContext"
 import { FoodstuffsContext } from "./FoodstuffsContext"
 
 export default function AddFoodstuff() {
@@ -11,7 +10,6 @@ export default function AddFoodstuff() {
     category: ""
   })
   const [errors, setErrors] = useState([])
-  // const {user, setUser} = useContext(UserContext)
 
   function handleChange(e) {
     const name = e.target.name
