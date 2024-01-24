@@ -17,11 +17,6 @@ export default function AddFoodstuff() {
   })
   const [errors, setErrors] = useState([])
 
-  // if (!foodstuffs) return <h3>Loading...</h3>
-
-  console.log(selectedCategory)
-  console.log(formData)
-
   const categoryOptions = ["Cooking Liquid", "Dairy", "Fruit",  "Grain", "Protein", "Spice", "Sugar", "Vegetable"].map(option => ({label: option, value: option}))
 
   const foodstuffUnits = {
@@ -38,6 +33,7 @@ export default function AddFoodstuff() {
   let availableUnits = []
 
   function handleSelectCategoryOption(option) {
+    setSelectedUnitOption(null)
     setSelectedCategoryOption(option)
     availableUnits = Object.entries(foodstuffUnits).find(f => f[0].toLowerCase() === option.value.toLowerCase().replaceAll(" ", ""))
     const updatedAvailableUnits = availableUnits[1].map(option => ({label: option, value: option}))
@@ -47,6 +43,7 @@ export default function AddFoodstuff() {
   }
 
   function handleSelectUnitOption(option) {
+    setSelectedUnitOption(option)
     setFormData({...formData,
       unit: option.value})
   }
