@@ -50,7 +50,6 @@ export default function AddRecipe() {
       .then((resp) => {
         if (resp.ok) {
           resp.json().then(newRecipe => {
-            // const newRecipes = [...recipes, newRecipe]
             const recipeIndex = recipes.findIndex(r => r.name.localeCompare(newRecipe.name) === 1)
             const newRecipes = [
               ...recipes.slice(0, recipeIndex),
@@ -58,9 +57,7 @@ export default function AddRecipe() {
               ...recipes.slice(recipeIndex)
             ]
             setRecipes(newRecipes)
-            // setNewRecipe(newRecipe)
             setAddRecipe(true)
-            // handleSubmitIngredients(ingredients, newRecipe)
           })
           setRecipeFormData({
             name: "",

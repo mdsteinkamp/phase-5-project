@@ -12,12 +12,6 @@ class RecipesController < ApplicationController
 
   def create
     recipe = Recipe.create!(recipe_params)
-    # binding.break
-    # recipe.ingredients.create!(ingredient_params)
-    # recipe_params[:ingredients_attributes].each do |ingredient|
-    #   # binding.break
-    #   recipe.ingredients.create!(ingredient)
-    # end
     render json: recipe, include: ["ingredients.foodstuff"], status: :created
   end
 
