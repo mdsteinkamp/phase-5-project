@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { StyledUserPantry } from "./styles/UserPantry.styled"
+import { render } from "react-dom"
 
-export default function EditItemPage({ pantryItem, onUpdateItem }) {
+export default function EditItemPage({ pantryItem, onUpdateItem, renderItemUpdated }) {
   const [itemFormData, setItemFormData] = useState({
     foodstuff_id: pantryItem.foodstuff_id,
     id: pantryItem.id,
@@ -33,6 +34,7 @@ export default function EditItemPage({ pantryItem, onUpdateItem }) {
           />
           <button>Update</button>
         </form>
+        { !renderItemUpdated ? null : <h3>Item Updated</h3>}
       </div>
     </StyledUserPantry>
   )

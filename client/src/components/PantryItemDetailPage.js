@@ -9,6 +9,7 @@ export default function PantryItemDetailPage() {
   const {id} = useParams()
   const [editItem, setEditItem] = useState(false)
   const [errors, setErrors] = useState([])
+  const [renderItemUpdated, setRenderItemUpdated] = useState(false)
 
   if (!user) return <h1>loading data...</h1>
 
@@ -28,6 +29,7 @@ export default function PantryItemDetailPage() {
           const newPantryItems = user.pantry_items.map(item => item.id === newItem.id ? newItem : item)
           const updatedUser = {...user, pantry_items: newPantryItems}
           setUser(updatedUser)
+          setRenderItemUpdated(true)
           setErrors([])
         })
       } else {
@@ -45,7 +47,7 @@ export default function PantryItemDetailPage() {
       <h3>Quantity: {pantryItem.quantity}</h3> 
       <button className="change-quantity-button" onClick={() => setEditItem(!editItem)}>Change Quantity</button>
       <div>
-        {!editItem ? null : <EditItemPage pantryItem={pantryItem} onUpdateItem={handleUpdateItem}/>}
+        {!editItem ? null : <EditItemPage pantryItem={pantryItem} onUpdateItem={handleUpdateItem} renderItemUpdated={renderItemUpdated} />}
       </div>
       {errors.length > 0 && <ul>{errors.map(e => (
             <ul key={e}>
