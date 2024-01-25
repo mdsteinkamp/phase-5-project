@@ -39,32 +39,37 @@ export default function RecipeDetailPage() {
 
   function handleUpdateUserPantry() {
     const pantryItemsToUpdate = recipe.ingredients.map(ingredient => user.pantry_items.find(i => i.foodstuff.name === ingredient.foodstuff.name))
-
-    Promise.all(pantryItemsToUpdate.map(item => {
-      const updatedItem = {
-        ...item,
-        quantity: item.quantity - recipe.ingredients.find(ingredient => ingredient.foodstuff.name === item.foodstuff.name).quantity
-      }
-      return fetch(`/pantry_items/${item.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(updatedItem)
-      })
+    console.log(pantryItemsToUpdate)
+    const updatedItems = pantryItemsToUpdate.map(item => ({...item, quantity: item.quantity - recipe.ingredients.find(ingredient => ingredient.foodstuff.name === item.foodstuff.name).quantity
     }))
-    .then(results => {
-      Promise.all(results.map(pantryItem => {
-        return pantryItem.json()
-      }))
-      .then(pantryItems => {
-        const updatedUserPantryItems = [...user.pantry_items].map(item => pantryItems.find(i => i.id === item.id) || item)
-        const updatedUser = {...user, pantry_items: updatedUserPantryItems}
-        setUser(updatedUser)
-        setRenderPantryUpdated(true)
-      })
-      .catch(e => console.log(e))
-    })
+    console.log(updatedItems)
+    // console.log(updatedItems)
+
+    // Promise.all(pantryItemsToUpdate.map(item => {
+    //   const updatedItem = {
+    //     ...item,
+    //     quantity: item.quantity - recipe.ingredients.find(ingredient => ingredient.foodstuff.name === item.foodstuff.name).quantity
+    //   }
+    //   return fetch(`/pantry_items/${item.id}`, {
+    //     method: "PATCH",
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify(updatedItem)
+    //   })
+    // }))
+    // .then(results => {
+    //   Promise.all(results.map(pantryItem => {
+    //     return pantryItem.json()
+    //   }))
+    //   .then(pantryItems => {
+    //     const updatedUserPantryItems = [...user.pantry_items].map(item => pantryItems.find(i => i.id === item.id) || item)
+    //     const updatedUser = {...user, pantry_items: updatedUserPantryItems}
+    //     setUser(updatedUser)
+    //     setRenderPantryUpdated(true)
+    //   })
+    //   .catch(e => console.log(e))
+    // })
   }
 
   return (

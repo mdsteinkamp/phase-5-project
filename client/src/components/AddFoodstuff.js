@@ -69,7 +69,15 @@ export default function AddFoodstuff() {
     .then((resp) => {
       if (resp.ok) {
         resp.json().then((foodstuff) => {
-          const newFoodstuffs = [...foodstuffs, foodstuff]
+          const fIndex = foodstuffs.findIndex(f => f.name.localeCompare(foodstuff.name) === 1)
+          console.log(fIndex)
+          const newFoodstuffs = [
+            ...foodstuffs.slice(0, fIndex),
+            foodstuff,
+            ...foodstuffs.slice(fIndex)
+          ]
+          console.log(newFoodstuffs)
+
           setFoodstuffs(newFoodstuffs)
         })
         setFormData({
