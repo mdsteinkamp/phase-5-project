@@ -53,7 +53,7 @@ export default function AddFoodstuff() {
     const value = e.target.value
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value.charAt(0).toUpperCase() + value.slice(1)
     })
   }
 

@@ -19,7 +19,6 @@ export default function AddRecipeIngredients({ onHandleChangeRender }) {
     user_id: "",
     foodstuff_id: "",
   })
-  // const [renderAddIngredient, setRenderAddIngredient] = useState("name")
 
   if (!foodstuffs, !user) return <h1>Loading...</h1>
 

@@ -13,7 +13,7 @@ export default function AddRecipeName({ onHandleChangeRender }) {
     const value = e.target.value
     setRecipeFormData({
       ...recipeFormData,
-      [name]: value
+      [name]: value.charAt(0).toUpperCase() + value.slice(1)
     })
   }
 

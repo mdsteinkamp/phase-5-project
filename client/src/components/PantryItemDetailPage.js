@@ -39,7 +39,6 @@ export default function PantryItemDetailPage() {
     .catch(e => console.log(e))
   }
 
-
   return (
     <StyledUserPantry>
       <h1>{pantryItem.foodstuff.name}</h1>
