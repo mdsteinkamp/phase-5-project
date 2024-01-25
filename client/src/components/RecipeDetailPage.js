@@ -63,6 +63,7 @@ export default function RecipeDetailPage() {
         const updatedUserPantryItems = [...user.pantry_items].map(item => pantryItems.find(i => i.id === item.id) || item)
         const updatedUser = {...user, pantry_items: updatedUserPantryItems}
         setUser(updatedUser)
+        setRenderPantryUpdated(true)
       })
       .catch(e => console.log(e))
     })
