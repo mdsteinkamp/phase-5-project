@@ -12,6 +12,7 @@ export default function AddRecipe() {
   const {user} = useContext(UserContext)
   const {recipes, setRecipes} = useContext(RecipesContext)
   const [recipe, setRecipe] = useState({})
+  const [newRecipe, setNewRecipe] = useState({})
   const [ingredients, setIngredients] = useState([])
   const [errors, setErrors] = useState([])
   const [addRecipe, setAddRecipe] = useState(false)
@@ -34,45 +35,42 @@ export default function AddRecipe() {
     setIngredients(ingredients)
   }
 
-
-    function handleSubmitRecipe(recipe) {
-      const start = performance.now()
-      const updatedNewRecipe = {...recipe, ingredients_attributes: ingredients}
-      console.log(updatedNewRecipe)
-      fetch("/recipes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedNewRecipe),
-      })
-      .then((resp) => {
-        if (resp.ok) {
-          resp.json().then(newRecipe => {
-            const recipeIndex = recipes.findIndex(r => r.name.localeCompare(newRecipe.name) === 1)
-            const newRecipes = [
-              ...recipes.slice(0, recipeIndex),
-              newRecipe,
-              ...recipes.slice(recipeIndex)
-            ]
-            setRecipes(newRecipes)
-            setAddRecipe(true)
-          })
-          setRecipeFormData({
-            name: "",
-            instructions: "",
-          })
-          setErrors([])
-        } else {  
-          resp.json().then(e => {
-            console.log(e.errors)
-            setErrors(e.errors)
-            return
-          })
-        }})
-        const end = performance.now()
-        console.log(`Execution time: ${end - start} ms`)
-      }
+  function handleSubmitRecipe(recipe) {
+    const start = performance.now()
+    fetch("/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(recipe),
+    })
+    .then((resp) => {
+      if (resp.ok) {
+        resp.json().then(newRecipe => {
+          // const newRecipes = [...recipes, newRecipe]
+          const recipeIndex = recipes.findIndex(r => r.name.localeCompare(recipe.name) === 1)
+          const newRecipes = [
+            ...recipes.slice(0, recipeIndex),
+            recipe,
+            ...recipes.slice(recipeIndex)
+          ]
+          setRecipes(newRecipes)
+          setNewRecipe(newRecipe)
+          // handleSubmitIngredients(ingredients, newRecipe, start)
+        })
+        setRecipeFormData({
+          name: "",
+          instructions: "",
+        })
+        setErrors([])
+      } else {  
+        resp.json().then(e => {
+          console.log(e.errors)
+          setErrors(e.errors)
+          return
+        })
+      }})
+    }
 
   {if (renderAddIngredient === "name") {
     return (<AddRecipeName onHandleChangeRender={handleChangeNameRender} />)
