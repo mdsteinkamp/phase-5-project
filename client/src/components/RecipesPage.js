@@ -6,6 +6,7 @@ import { RecipesContext } from "./RecipesContext"
 
 export default function RecipesPage() {
   const {recipes} = useContext(RecipesContext)
+  console.log(recipes)
 
   if (!recipes) return (<h1>Loading data...</h1>)
 
