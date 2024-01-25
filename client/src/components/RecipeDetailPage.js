@@ -12,6 +12,7 @@ export default function RecipeDetailPage() {
   const [ingredientCheckResults, setIngredientCheckResults] = useState(null)
   const [missingIngredients, setMissingIngredients] = useState(null)
   const [renderIngredients, setRenderIngredients] = useState(false)
+  const [renderPantryUpdated, setRenderPantryUpdated] = useState(false)
 
   if (!recipes, !user) return(<h1>Loading data...</h1>)
 
@@ -60,6 +61,7 @@ export default function RecipeDetailPage() {
         const updatedUserPantryItems = [...user.pantry_items].map(item => pantryItems.find(i => i.id === item.id) || item)
         const updatedUser = {...user, pantry_items: updatedUserPantryItems}
         setUser(updatedUser)
+        setRenderPantryUpdated(true)
       })
       .catch(e => console.log(e))
     })
@@ -83,7 +85,7 @@ export default function RecipeDetailPage() {
       </div>
       <br />
       
-      {renderIngredients ? <RenderMissingIngredients missingIngredients={missingIngredients} onUpdateUserPantry={handleUpdateUserPantry}/> : null }
+      {renderIngredients ? <RenderMissingIngredients missingIngredients={missingIngredients} onUpdateUserPantry={handleUpdateUserPantry} renderPantryUpdated={renderPantryUpdated} /> : null }
 
     </StyledRecipeDetails>
   )

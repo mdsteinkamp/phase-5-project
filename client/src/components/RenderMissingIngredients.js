@@ -1,6 +1,6 @@
 import { StyledRecipeDetails } from "./styles/RecipeDetail.styled"
 
-export default function RenderMissingIngredients({ missingIngredients, onUpdateUserPantry }) {
+export default function RenderMissingIngredients({ missingIngredients, onUpdateUserPantry, renderPantryUpdated }) {
 
   function handleUpdateUserPantry() {
     onUpdateUserPantry()
@@ -11,6 +11,7 @@ export default function RenderMissingIngredients({ missingIngredients, onUpdateU
       <h2>Yes!</h2>
       <div>
       <button onClick={handleUpdateUserPantry}>Make & Update Pantry</button>
+      { renderPantryUpdated ? <h2>Your Pantry Has Been Updated!</h2> : null }
       </div>
     </StyledRecipeDetails>
     )
