@@ -36,7 +36,6 @@ export default function AddRecipe() {
   }
 
   function handleSubmitRecipe(recipe) {
-    const start = performance.now()
     fetch("/recipes", {
       method: "POST",
       headers: {
@@ -47,7 +46,6 @@ export default function AddRecipe() {
     .then((resp) => {
       if (resp.ok) {
         resp.json().then(newRecipe => {
-          // const newRecipes = [...recipes, newRecipe]
           const recipeIndex = recipes.findIndex(r => r.name.localeCompare(recipe.name) === 1)
           const newRecipes = [
             ...recipes.slice(0, recipeIndex),
@@ -56,7 +54,6 @@ export default function AddRecipe() {
           ]
           setRecipes(newRecipes)
           setNewRecipe(newRecipe)
-          // handleSubmitIngredients(ingredients, newRecipe, start)
         })
         setRecipeFormData({
           name: "",
