@@ -50,11 +50,14 @@ export default function AddRecipe() {
       .then((resp) => {
         if (resp.ok) {
           resp.json().then(newRecipe => {
-            console.log(newRecipe)
-            const newRecipes = [...recipes, newRecipe]
-            console.log(newRecipes)
+            // const newRecipes = [...recipes, newRecipe]
+            const recipeIndex = recipes.findIndex(r => r.name.localeCompare(newRecipe.name) === 1)
+            const newRecipes = [
+              ...recipes.slice(0, recipeIndex),
+              newRecipe,
+              ...recipes.slice(recipeIndex)
+            ]
             setRecipes(newRecipes)
-            console.log(recipes)
             // setNewRecipe(newRecipe)
             setAddRecipe(true)
             // handleSubmitIngredients(ingredients, newRecipe)
