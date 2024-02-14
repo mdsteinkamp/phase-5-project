@@ -1,6 +1,6 @@
 # Pantron 5000
 
-The primary objective of Pantron was to enable a user to track all food related items in their kitchen, while facilitating recipe ingredient requirements and a database of recipes. The app leverages the PostgreSQL database to deploy to Render, with a React JS front end client and Ruby on Rails back end. Users can register, log on/off and add Ingredients to their Pantry home page. From the Pantry page the User can navigate to a list of Recipes, each of which can be selected and the User's Pantry queried for sufficient Recipe Ingredients. If insufficient, the necessary Ingredient and amount missing from the Pantry will be rendered to the User. There is also a link on the main Pantry page to query the database of Recipes and return a list of Recipes that the User's Pantry can accomodate. If a User makes a Recipe the application will update their Pantry with their new Ingredient amounts. 
+The primary objective of Pantron was to enable a user to track all food related items in their kitchen, while facilitating recipe ingredient requirements and a database of recipes. The app leverages the PostgreSQL database to deploy to Render, with a React JS front end client and Ruby on Rails back end. React's `useContext` hook is used to manage front end state. Users can register, log on/off and add Ingredients to their Pantry home page. From the Pantry page the User can navigate to a list of Recipes, each of which can be selected and the User's Pantry queried for sufficient Recipe Ingredients. If insufficient, the necessary Ingredient and amount missing from the Pantry will be rendered to the User. There is also a link on the main Pantry page to query the database of Recipes and return a list of Recipes that the User's Pantry can accomodate. If a User makes a Recipe the application will update their Pantry with their new Ingredient amounts. 
 
 ## Getting Started
 
@@ -33,6 +33,12 @@ If on macOS
 ```
 $ brew install postgresql
 $ brew services start postgresql
+```
+
+Once everything is installed, start the Rails server and the React client
+```
+$ rails s
+$ npm start --prefix client
 ```
 
 ### Installing
